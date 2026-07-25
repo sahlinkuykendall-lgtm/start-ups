@@ -1,0 +1,1286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The LXXV Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Outfit:wght@300;400;500;600;700&family=Spline+Sans+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg0:#0A140F; --bg1:#0F1F17; --bg2:#14271D;
+  --glass:rgba(255,251,240,.045);
+  --glass2:rgba(255,251,240,.07);
+  --line:rgba(212,175,106,.16);
+  --line2:rgba(212,175,106,.32);
+  --gold:#D4AF6A; --gold2:#E8CD96; --golddim:#8F7A4E;
+  --ink:#F2EDE1; --soft:#A8B5A8; --mute:#6E7F72;
+  --open:#4BAE7E; --room:#7FA98C; --amber:#C9A24B; --coral:#DE6E52;
+  --r:20px; --r2:14px;
+}
+*{box-sizing:border-box;}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;}
+body{
+  margin:0;color:var(--ink);
+  font-family:"Outfit",system-ui,sans-serif;font-size:16px;line-height:1.6;font-weight:300;
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E") repeat,
+    radial-gradient(120% 90% at 85% -10%, rgba(212,175,106,.14), transparent 55%),
+    radial-gradient(140% 100% at -20% 30%, rgba(75,174,126,.10), transparent 60%),
+    radial-gradient(100% 80% at 50% 110%, rgba(212,175,106,.08), transparent 55%),
+    linear-gradient(165deg, var(--bg1), var(--bg0) 55%, #081009);
+  background-attachment:fixed;
+  background-blend-mode:soft-light,normal,normal,normal,normal;
+  min-height:100vh;
+}
+b,strong{font-weight:600;}
+::selection{background:rgba(212,175,106,.3);}
+
+/* ---- splash ---- */
+#splash{
+  position:fixed;inset:0;z-index:100;display:grid;place-items:center;
+  background:
+    radial-gradient(80% 60% at 50% 42%, rgba(212,175,106,.12), transparent 60%),
+    linear-gradient(160deg,#101F17,#080F0B);
+  transition:opacity .7s ease, visibility .7s;
+}
+#splash.gone{opacity:0;visibility:hidden;pointer-events:none;}
+.seal{text-align:center;animation:sealIn 1.1s cubic-bezier(.2,.7,.2,1) both;}
+.seal-ring{
+  width:118px;height:118px;margin:0 auto 18px;border-radius:50%;
+  border:1px solid var(--line2);display:grid;place-items:center;position:relative;
+  box-shadow:0 0 60px rgba(212,175,106,.15), inset 0 0 24px rgba(212,175,106,.08);
+}
+.seal-ring::after{content:"";position:absolute;inset:7px;border-radius:50%;border:1px solid var(--line);}
+.seal-mono{
+  font-family:"Fraunces",serif;font-weight:400;font-size:34px;letter-spacing:.14em;
+  color:var(--gold2);text-indent:.14em;
+  background:linear-gradient(115deg,#8F7134 0%,#F4E6BC 20%,#D4AF6A 38%,#FFFAEA 50%,#C9A24B 68%,#EEDCA8 88%,#A8843C 100%);
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+@supports not (background-clip:text){ .seal-mono{-webkit-text-fill-color:var(--gold2);} }
+.seal-word{
+  font-family:"Spline Sans Mono",monospace;font-size:10px;letter-spacing:.42em;text-indent:.42em;
+  text-transform:uppercase;color:var(--golddim);
+}
+@keyframes sealIn{from{opacity:0;transform:scale(.92) translateY(8px);}to{opacity:1;transform:none;}}
+
+/* ---- hero ---- */
+.hero{padding:60px 22px 34px;max-width:880px;margin:0 auto;}
+.hero-mono{display:flex;align-items:center;gap:12px;margin-bottom:26px;}
+.hero-mono .mini{
+  width:42px;height:42px;border-radius:50%;border:1px solid var(--line2);
+  display:grid;place-items:center;font-family:"Fraunces",serif;font-size:13px;
+  letter-spacing:.1em;text-indent:.1em;color:var(--gold2);
+  box-shadow:inset 0 0 12px rgba(212,175,106,.1);flex:0 0 auto;
+}
+.hero-mono span{font-family:"Spline Sans Mono",monospace;font-size:10px;letter-spacing:.34em;text-transform:uppercase;color:var(--golddim);}
+h1{
+  font-family:"Fraunces",serif;font-weight:300;font-size:clamp(34px,8.4vw,58px);
+  line-height:1.06;letter-spacing:-.01em;margin:0 0 18px;
+}
+h1 em{
+  font-style:italic;color:var(--gold);
+  background:linear-gradient(102deg,#A8843C 0%,#F2E2B0 22%,#D4AF6A 42%,#FFF6DC 52%,#C9A24B 72%,#EBD29B 100%);
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+@supports not (background-clip:text){ h1 em{-webkit-text-fill-color:var(--gold);} }
+.hero p{color:var(--soft);max-width:56ch;margin:0 0 26px;font-size:16px;}
+.stats{display:flex;flex-wrap:wrap;gap:10px;}
+.stat{
+  background:var(--glass);border:1px solid var(--line);border-radius:999px;
+  padding:9px 16px;display:flex;align-items:baseline;gap:8px;
+  backdrop-filter:blur(6px);
+}
+.stat b{font-family:"Fraunces",serif;font-weight:500;font-size:17px;color:var(--gold2);}
+.stat span{font-family:"Spline Sans Mono",monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute);}
+
+/* ---- nav ---- */
+nav{
+  position:sticky;top:0;z-index:40;
+  background:linear-gradient(180deg, rgba(10,20,15,.92), rgba(10,20,15,.78));
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line);
+}
+.nav-in{max-width:880px;margin:0 auto;display:flex;gap:6px;overflow-x:auto;padding:10px 18px;-webkit-overflow-scrolling:touch;scrollbar-width:none;}
+.nav-in::-webkit-scrollbar{display:none;}
+.tab{
+  flex:0 0 auto;text-decoration:none;color:var(--soft);
+  font-family:"Spline Sans Mono",monospace;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;
+  padding:8px 14px;border-radius:999px;border:1px solid transparent;transition:all .2s;
+}
+.tab:hover,.tab:focus-visible{color:var(--gold2);border-color:var(--line);}
+.tab.on{color:var(--gold2);background:var(--glass2);border-color:var(--line2);}
+
+/* ---- structure ---- */
+.wrap{max-width:880px;margin:0 auto;padding:14px 18px 90px;}
+section{margin-top:16px;}
+details.sec{
+  background:var(--glass);border:1px solid var(--line);border-radius:var(--r);
+  overflow:hidden;backdrop-filter:blur(8px);
+  transition:border-color .25s;
+}
+details.sec[open]{border-color:var(--line2);}
+details.sec>summary{
+  cursor:pointer;list-style:none;display:flex;align-items:center;justify-content:space-between;gap:14px;
+  padding:20px 22px;
+}
+details.sec>summary::-webkit-details-marker{display:none;}
+details.sec>summary h2{margin:0;border:0;padding:0;}
+h2{
+  font-family:"Fraunces",serif;font-weight:400;font-size:23px;letter-spacing:0;
+  margin:0;color:var(--ink);
+}
+h2 .num{display:none;}
+.tw{
+  flex:0 0 auto;width:30px;height:30px;border-radius:50%;
+  border:1px solid var(--line2);display:grid;place-items:center;
+  color:var(--gold);font-size:15px;font-weight:400;transition:transform .3s;
+}
+details[open]>summary .tw{transform:rotate(45deg);}
+.secbody{padding:2px 22px 22px;}
+.secbody>.lede:first-child{margin-top:0;}
+h3{
+  font-family:"Spline Sans Mono",monospace;font-weight:600;font-size:11px;
+  letter-spacing:.2em;text-transform:uppercase;color:var(--gold);
+  margin:28px 0 10px;display:flex;align-items:center;gap:12px;
+}
+h3::after{content:"";height:1px;flex:1;background:linear-gradient(90deg,var(--line2),transparent);}
+.lede{color:var(--soft);font-size:15px;margin:10px 0 18px;}
+
+/* content atoms */
+.rule{
+  background:var(--glass);border:1px solid var(--line);border-radius:var(--r2);
+  padding:15px 17px;margin-bottom:11px;
+}
+.rule b{display:block;font-size:15px;margin-bottom:4px;color:var(--ink);font-weight:500;}
+.rule p{margin:0;font-size:14.5px;color:var(--soft);}
+.rule.warn{border-color:rgba(222,110,82,.35);background:rgba(222,110,82,.05);}
+.rule.warn b{color:#EFA490;}
+.mathtable{width:100%;border-collapse:collapse;margin:6px 0 4px;font-size:14px;}
+.mathtable th{
+  text-align:left;font-family:"Spline Sans Mono",monospace;font-size:9.5px;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--mute);
+  border-bottom:1px solid var(--line2);padding:6px 8px 8px 0;font-weight:500;
+}
+.mathtable td{padding:10px 8px 10px 0;border-bottom:1px solid var(--line);vertical-align:top;color:var(--soft);}
+.mathtable td:first-child{color:var(--ink);font-weight:500;}
+.mathtable .n{font-family:"Spline Sans Mono",monospace;font-size:13px;white-space:nowrap;color:var(--gold2);}
+.flags{padding-left:20px;margin:0;}
+.flags li{margin-bottom:10px;font-size:14.5px;color:var(--soft);}
+.flags b{color:#EFA490;font-weight:500;}
+
+/* ---- list controls ---- */
+#listsec{margin-top:26px;}
+.list-head{padding:6px 2px 14px;}
+.list-head h2{font-size:27px;}
+.controls{position:sticky;top:52px;z-index:30;padding:10px 0;margin:0 -18px 14px;background:linear-gradient(180deg,rgba(10,20,15,.94) 70%,rgba(10,20,15,0));}
+.controls-in{padding:0 18px;}
+#q{
+  width:100%;padding:14px 18px;font-size:16px;color:var(--ink);
+  font-family:"Outfit",sans-serif;font-weight:300;
+  border:1px solid var(--line2);background:var(--glass2);border-radius:999px;
+  backdrop-filter:blur(10px);outline:none;transition:border-color .2s, box-shadow .2s;
+}
+#q::placeholder{color:var(--mute);}
+#q:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(212,175,106,.15);}
+.chips{display:flex;gap:6px;overflow-x:auto;padding:10px 0 2px;-webkit-overflow-scrolling:touch;scrollbar-width:none;}
+.chips::-webkit-scrollbar{display:none;}
+.chip{
+  flex:0 0 auto;cursor:pointer;font-family:"Spline Sans Mono",monospace;font-size:10px;
+  letter-spacing:.08em;text-transform:uppercase;padding:8px 13px;border-radius:999px;
+  border:1px solid var(--line);background:transparent;color:var(--soft);transition:all .2s;white-space:nowrap;
+}
+.chip:hover{border-color:var(--line2);color:var(--ink);}
+.chip[aria-pressed="true"]{background:var(--gold);color:#141F18;border-color:var(--gold);font-weight:600;}
+.chip.day[aria-pressed="true"]{background:var(--open);border-color:var(--open);color:#0A140F;}
+.chip.sat[aria-pressed="true"]{background:var(--gold2);border-color:var(--gold2);color:#141F18;}
+.chiprow2{border-top:1px solid var(--line);margin-top:2px;padding-top:10px;}
+.count{font-family:"Spline Sans Mono",monospace;font-size:10px;color:var(--mute);padding-top:8px;letter-spacing:.14em;text-transform:uppercase;}
+
+/* ---- cards ---- */
+.catlabel{
+  font-family:"Fraunces",serif;font-style:italic;font-weight:400;font-size:17px;
+  color:var(--gold);margin:32px 2px 12px;display:flex;align-items:center;gap:14px;
+}
+.catlabel::after{content:"";height:1px;flex:1;background:linear-gradient(90deg,var(--line2),transparent);}
+.card{
+  background:linear-gradient(150deg, var(--glass2), var(--glass));
+  border:1px solid var(--line);border-radius:var(--r);
+  padding:18px 18px 14px;margin-bottom:14px;
+  backdrop-filter:blur(8px);transition:border-color .25s, transform .25s, box-shadow .25s;
+}
+.card:hover{border-color:var(--line2);box-shadow:0 10px 40px rgba(0,0,0,.3);}
+.card-top{display:flex;align-items:center;gap:8px;margin-bottom:8px;flex-wrap:wrap;}
+.idx{font-family:"Spline Sans Mono",monospace;font-size:10px;color:var(--golddim);letter-spacing:.14em;}
+.sat-badge{
+  font-family:"Spline Sans Mono",monospace;font-size:8.5px;font-weight:600;
+  letter-spacing:.12em;text-transform:uppercase;padding:4px 10px;border-radius:999px;
+  border:1px solid;background:transparent;
+}
+.t-OPEN{color:#7BD8AA;border-color:rgba(75,174,126,.5);background:rgba(75,174,126,.08);}
+.t-ROOM{color:#A9C9B2;border-color:rgba(127,169,140,.45);background:rgba(127,169,140,.07);}
+.t-SOLOS{color:#E4C77E;border-color:rgba(201,162,75,.5);background:rgba(201,162,75,.08);}
+.t-PACKED{color:#F0937A;border-color:rgba(222,110,82,.5);background:rgba(222,110,82,.08);}
+.t-NODATA{color:var(--mute);border-color:var(--line);}
+.stamp{
+  font-family:"Spline Sans Mono",monospace;font-size:8.5px;font-weight:600;letter-spacing:.12em;
+  color:#0A140F;background:var(--open);padding:4px 10px;border-radius:999px;
+}
+.card h4{
+  margin:0 0 8px;font-family:"Fraunces",serif;font-weight:500;font-size:20px;line-height:1.25;color:var(--ink);
+}
+.note{font-size:14px;color:var(--soft);margin:0 0 14px;}
+.tl{margin:0 0 14px;}
+.tl-top{display:flex;justify-content:space-between;align-items:baseline;font-family:"Spline Sans Mono",monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);margin-bottom:6px;}
+.tl-top b{color:var(--gold2);font-weight:500;letter-spacing:.06em;}
+.tl-bar{height:6px;border-radius:999px;background:rgba(255,251,240,.07);position:relative;overflow:hidden;}
+.tl-fill{height:100%;border-radius:999px;}
+.f-fast{background:linear-gradient(90deg,#2E7D57,var(--open));}
+.f-mid{background:linear-gradient(90deg,#8F7A4E,var(--amber));}
+.f-slow{background:linear-gradient(90deg,#9C4B36,var(--coral));}
+.tl-ticks{display:flex;justify-content:space-between;font-family:"Spline Sans Mono",monospace;font-size:8.5px;color:var(--mute);margin-top:4px;letter-spacing:.06em;}
+.dg{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px;}
+.dg div{background:var(--glass);border:1px solid var(--line);border-radius:var(--r2);padding:10px 12px;}
+.dg span{display:block;font-family:"Spline Sans Mono",monospace;font-size:8.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--mute);margin-bottom:3px;}
+.dg b{font-size:13px;font-weight:500;line-height:1.4;display:block;color:var(--ink);}
+.dg .wide{grid-column:1/-1;}
+.dg .wide b{color:var(--gold2);}
+@media(min-width:620px){.dg{grid-template-columns:1fr 1fr 1fr;}.dg .wide{grid-column:1/-1;}}
+
+/* card accordions */
+details.fold{border:1px solid var(--line);border-radius:var(--r2);margin-top:8px;background:var(--glass);overflow:hidden;}
+details.fold[open]{border-color:var(--line2);}
+details.fold>summary{
+  cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;
+  padding:11px 14px;font-family:"Spline Sans Mono",monospace;font-size:9.5px;font-weight:600;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--gold);
+}
+details.fold>summary::-webkit-details-marker{display:none;}
+details.fold>summary .conf{margin-left:auto;margin-right:10px;}
+details.fold>summary::after{content:"+";color:var(--golddim);font-size:14px;font-family:"Outfit";transition:transform .25s;}
+details.fold[open]>summary::after{transform:rotate(45deg);}
+.conf{font-family:"Spline Sans Mono",monospace;font-size:8.5px;letter-spacing:.1em;padding:3px 8px;border-radius:999px;font-weight:500;}
+.c-HIGH{color:#7BD8AA;border:1px solid rgba(75,174,126,.4);}
+.c-MED,.c-MEDHIGH{color:#E4C77E;border:1px solid rgba(201,162,75,.4);}
+.c-LOW,.c-LOWMED,.c-NONE{color:var(--mute);border:1px solid var(--line);}
+.fold-body{padding:2px 14px 14px;}
+.frow{padding:9px 0;border-top:1px solid var(--line);}
+.frow:first-child{border-top:0;}
+.frow span{display:block;font-family:"Spline Sans Mono",monospace;font-size:8.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--mute);margin-bottom:3px;}
+.frow b{font-size:13.5px;font-weight:400;color:var(--ink);line-height:1.45;display:block;}
+.savenote{
+  margin:0 0 8px;font-family:"Spline Sans Mono",monospace;font-size:9.5px;
+  letter-spacing:.08em;color:#C79A8B;
+}
+.piles{display:flex;gap:6px;overflow-x:auto;padding:0 0 10px;scrollbar-width:none;}
+.piles::-webkit-scrollbar{display:none;}
+.pilebtn{
+  flex:0 0 auto;cursor:pointer;display:flex;align-items:center;gap:7px;
+  font-family:"Spline Sans Mono",monospace;font-size:10px;letter-spacing:.1em;
+  text-transform:uppercase;padding:9px 14px;border-radius:999px;
+  border:1px solid var(--line);background:transparent;color:var(--soft);transition:all .2s;
+}
+.pilebtn:hover{border-color:var(--line2);color:var(--ink);}
+.pilebtn b{font-family:"Fraunces",serif;font-size:13px;font-weight:500;letter-spacing:0;color:var(--gold2);}
+.pilebtn[aria-pressed="true"]{background:var(--glass2);border-color:var(--gold);color:var(--gold2);}
+.pilebtn[aria-pressed="true"] b{color:var(--gold);}
+.pilebtn.y[aria-pressed="true"]{border-color:var(--open);color:#7BD8AA;}
+.pilebtn.y[aria-pressed="true"] b{color:#7BD8AA;}
+.pilebtn.m[aria-pressed="true"]{border-color:var(--amber);color:#E4C77E;}
+.pilebtn.m[aria-pressed="true"] b{color:#E4C77E;}
+.pilebtn.n[aria-pressed="true"]{border-color:var(--coral);color:#F0937A;}
+.pilebtn.n[aria-pressed="true"] b{color:#F0937A;}
+
+/* decision buttons on each card */
+.decide{display:flex;gap:8px;margin-top:12px;}
+.dbtn{
+  flex:1;cursor:pointer;padding:12px 8px;border-radius:var(--r2);
+  font-family:"Spline Sans Mono",monospace;font-size:10.5px;font-weight:600;
+  letter-spacing:.12em;text-transform:uppercase;
+  border:1px solid var(--line);background:var(--glass);color:var(--soft);
+  transition:all .18s;
+}
+.dbtn:hover{border-color:var(--line2);color:var(--ink);}
+.dbtn.y:hover{border-color:var(--open);color:#7BD8AA;background:rgba(75,174,126,.08);}
+.dbtn.m:hover{border-color:var(--amber);color:#E4C77E;background:rgba(201,162,75,.08);}
+.dbtn.n:hover{border-color:var(--coral);color:#F0937A;background:rgba(222,110,82,.08);}
+.dbtn.on.y{border-color:var(--open);color:#0A140F;background:var(--open);}
+.dbtn.on.m{border-color:var(--amber);color:#141F18;background:var(--amber);}
+.dbtn.on.n{border-color:var(--coral);color:#141F18;background:var(--coral);}
+.card.filed{opacity:.62;}
+.card.leaving{opacity:0;transform:scale(.97);transition:opacity .28s ease,transform .28s ease;}
+.emptypile{
+  background:var(--glass);border:1px dashed var(--line2);border-radius:var(--r);
+  padding:26px 20px;text-align:center;
+}
+.emptypile b{display:block;font-family:"Fraunces",serif;font-size:19px;font-weight:400;color:var(--gold2);margin-bottom:6px;}
+.emptypile p{margin:0;font-size:14px;color:var(--soft);}
+.resetrow{margin-top:14px;text-align:center;}
+.resetbtn{
+  cursor:pointer;background:transparent;border:1px solid var(--line);border-radius:999px;
+  color:var(--mute);font-family:"Spline Sans Mono",monospace;font-size:9.5px;
+  letter-spacing:.14em;text-transform:uppercase;padding:8px 16px;transition:all .2s;
+}
+.resetbtn:hover{border-color:var(--coral);color:#F0937A;}
+.verdict{
+  font-size:15px;line-height:1.5;color:var(--ink);margin:4px 0 14px;font-weight:400;
+}
+.demand{display:flex;align-items:center;gap:10px;padding:10px 0;border-top:1px solid var(--line);}
+.demand>span{
+  font-family:"Spline Sans Mono",monospace;font-size:8.5px;letter-spacing:.13em;
+  text-transform:uppercase;color:var(--mute);flex:0 0 auto;
+}
+.pips{display:flex;gap:4px;flex:0 0 auto;}
+.pip{width:22px;height:5px;border-radius:99px;background:rgba(255,251,240,.10);display:block;}
+.pip.on.d1{background:#8A6A5E;}
+.pip.on.d2{background:var(--golddim);}
+.pip.on.d3{background:var(--amber);}
+.pip.on.d4{background:var(--open);}
+.demand b{font-family:"Spline Sans Mono",monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;}
+.demand b.d1{color:#C79A8B;}
+.demand b.d2{color:var(--golddim);}
+.demand b.d3{color:#E4C77E;}
+.demand b.d4{color:#7BD8AA;}
+.localck{
+  background:rgba(212,175,106,.07);border:1px solid var(--line2);border-radius:var(--r2);
+  padding:11px 13px;margin:10px 0;
+}
+.localck>span{
+  display:block;font-family:"Spline Sans Mono",monospace;font-size:8.5px;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:5px;
+}
+.localck b{display:block;font-size:14px;font-weight:500;color:var(--gold2);margin-bottom:5px;}
+.localck p{margin:0;font-size:13.5px;color:var(--soft);line-height:1.5;}
+.play ol{margin:6px 0 12px;padding-left:20px;}
+.play li{font-size:13.5px;margin-bottom:6px;color:var(--soft);}
+.play .first{
+  background:rgba(212,175,106,.07);border:1px solid var(--line2);border-radius:var(--r2);
+  padding:11px 13px;font-size:13.5px;color:var(--ink);
+}
+.play .first span{display:block;font-family:"Spline Sans Mono",monospace;font-size:8.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:4px;}
+
+/* shortlist */
+.short{counter-reset:s;padding:0;margin:0;}
+.short li{
+  list-style:none;background:var(--glass);border:1px solid var(--line);border-radius:var(--r2);
+  padding:14px 16px 14px 54px;margin-bottom:10px;position:relative;counter-increment:s;
+}
+.short li::before{
+  content:counter(s,decimal-leading-zero);position:absolute;left:16px;top:15px;
+  font-family:"Fraunces",serif;font-size:15px;color:var(--gold);
+}
+.short li b{display:block;font-size:15.5px;font-weight:500;color:var(--ink);margin-bottom:2px;}
+.short li span{font-size:13.5px;color:var(--soft);}
+
+footer{
+  margin-top:54px;padding:22px;max-width:880px;margin-left:auto;margin-right:auto;
+  border-top:1px solid var(--line);
+  font-family:"Spline Sans Mono",monospace;font-size:10.5px;color:var(--mute);line-height:1.8;
+}
+:focus-visible{outline:2px solid var(--gold);outline-offset:2px;border-radius:6px;}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important;}
+  html{scroll-behavior:auto;}
+}
+</style>
+</head>
+<body>
+
+<div id="splash" role="presentation">
+  <div class="seal">
+    <div class="seal-ring"><span class="seal-mono">LXXV</span></div>
+    <div class="seal-word">The 75K Portfolio</div>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="hero-mono"><span class="mini">LXXV</span><span>Private venture memorandum</span></div>
+  <h1>118 ventures.<br><em>One decision.</em></h1>
+  <p>118 businesses that start with cash you already have — no loan, no buying someone else's company. For each one: how long until a crew runs it, what staff cost against what the job bills, what a customer costs to land, and who you'd be up against.</p>
+  <div class="stats">
+    <div class="stat"><b>118</b><span>Ventures</span></div>
+    <div class="stat"><b>&le;$75K</b><span>Cash, no debt</span></div>
+    <div class="stat"><b>12</b><span>Wide open</span></div>
+    <div class="stat"><b>22</b><span>Packed &mdash; avoid</span></div>
+  </div>
+</header>
+
+<nav aria-label="Sections"><div class="nav-in">
+  <a class="tab" href="#sec1">Start</a>
+  <a class="tab" href="#sec3">The math</a>
+  <a class="tab" href="#sec5">Competition</a>
+  <a class="tab" href="#listsec">The 118</a>
+  <a class="tab" href="#sec7">Best bets</a>
+  <a class="tab" href="#sec9">Avoid</a>
+  <a class="tab" href="#sec10">Plan</a>
+</div></nav>
+
+<div class="wrap">
+<section id="sec1">
+<details class="sec" open>
+<summary><h2>Read this first</h2><span class="tw">+</span></summary>
+<div class="secbody">
+<p class="lede">Four things decide whether you own a business or a job. Miss one and you're stuck in the truck.</p>
+
+  <div class="rule"><b>Someone else can do the work</b><p>If you're the best technician, you can't leave. Hire and train delivery people from month one, and write the checklist for every recurring task. Undocumented work can't be delegated.</p></div>
+  <div class="rule"><b>The phone rings without you</b><p>Recurring contracts and route-based demand beat relationship selling. If customers buy because they know <em>you</em>, a manager can't replace you.</p></div>
+  <div class="rule warn"><b>The license isn't attached to your name</b><p>Many trades need a licensed "qualifying party." If that's you personally, you're chained to it. Pick work where the license rides with the technician, or hire a qualifier as a W-2 employee.</p></div>
+  <div class="rule warn"><b>The margin can carry a manager</b><p>This is the one that kills people. A general manager costs $70K–$95K all-in. At 8% net margin you need a million dollars in sales just to afford them.</p></div>
+
+  <h3>What revenue you need before you can leave</h3>
+  <table class="mathtable">
+    <tr><th>Business type</th><th>Net margin</th><th>Revenue to afford a GM</th></tr>
+    <tr><td>Recurring residential services, storage, compliance</td><td class="n">30–40%</td><td class="n">$350K–$600K</td></tr>
+    <tr><td>Commercial janitorial, most trades</td><td class="n">10–20%</td><td class="n">$700K–$1.2M</td></tr>
+  </table>
+  <p class="lede" style="margin-top:14px;">Pay a GM a real base ($60K–$80K) plus <b>5–8% of net profit</b>. Tie the bonus to margin, not just volume, or they'll buy revenue with your money. Add a 5% cut of the eventual sale price and they'll stay.</p>
+</div>
+</details>
+</section>
+
+<section id="sec2">
+<details class="sec">
+<summary><h2>What "day one" actually means</h2><span class="tw">+</span></summary>
+<div class="secbody">
+<p class="lede">Without a loan or an acquisition, there's exactly one way to have a business that's staffed from the start.</p>
+
+  <div class="rule"><b>The asset is the employee</b><p>ATMs, vending machines, micro-markets, storage lots, trailers, billboards. Nobody clocks in — you service them on a schedule. Eight of the ninety ideas here work this way. Income per unit is modest, so you win on unit count, but it's genuinely hands-off from week one.</p></div>
+  <div class="rule warn"><b>Everything else takes 12–36 months, and that's the honest answer</b><p>Year one you do the work. Year two you hire and train the lead. Year three you review numbers on Fridays. Buying a staffed business would have skipped straight to year three — building it yourself means you are the first employee. Budget for that.</p></div>
+  <div class="rule"><b>Pick the shortest ramp you can live with</b><p>Commercial janitorial, carpet cleaning, and pet waste hit 12–15 months because the work is simple to teach and the schedule is predictable. Mobile grooming and mobile welding take 28–30 because you have to hire a skill, not a body. The timeline bar on every card below is the real filter.</p></div>
+</div>
+</details>
+</section>
+
+<section id="sec3">
+<details class="sec">
+<summary><h2>The pay-vs-ticket spread</h2><span class="tw">+</span></summary>
+<div class="secbody">
+<p class="lede">Every card below shows what a worker costs and what the job bills. The gap between those two numbers is your entire business.</p>
+  <table class="mathtable">
+    <tr><th>Example</th><th>You pay</th><th>Job bills</th><th>Gross spread</th></tr>
+    <tr><td>Pressure washing a house</td><td class="n">$20/hr × 4 hrs = $80</td><td class="n">$450</td><td class="n">~$370</td></tr>
+    <tr><td>Home care visit</td><td class="n">$16/hr</td><td class="n">$34/hr</td><td class="n">~$18/hr</td></tr>
+    <tr><td>HVAC service call</td><td class="n">$30/hr × 2 hrs = $60</td><td class="n">$450</td><td class="n">~$390</td></tr>
+    <tr><td>Office cleaning, 3 hrs nightly</td><td class="n">$17/hr × 3 = $51</td><td class="n">$105</td><td class="n">~$54</td></tr>
+  </table>
+  <p class="lede" style="margin-top:14px;">Rule of thumb: labor should land at <b>25–35% of the billed ticket</b>. Above 45% and there's nothing left to pay a manager with. All wage figures are 2025 BLS-anchored ranges; tickets are typical market rates. Both swing hard by metro.</p>
+</div>
+</details>
+</section>
+
+<section id="sec4">
+<details class="sec">
+<summary><h2>What a customer costs</h2><span class="tw">+</span></summary>
+<div class="secbody">
+<p class="lede">Cost per click is a vanity number. These are the two that decide whether a business works.</p>
+
+  <div class="rule"><b>The formula</b><p>True cost per customer = lead cost ÷ your low-end close rate. Then: jobs to payback = that number ÷ (ticket × gross margin). Run every idea through this before you spend anything.</p></div>
+
+  <h3>Same $53 lead, three very different businesses</h3>
+  <table class="mathtable">
+    <tr><th>Channel</th><th>Cost/lead</th><th>Low close</th><th>True cost/customer</th></tr>
+    <tr><td>Google Local Services</td><td class="n">$53</td><td class="n">15%</td><td class="n">$353</td></tr>
+    <tr><td>Non-branded Google Ads</td><td class="n">$149</td><td class="n">15%</td><td class="n">$993</td></tr>
+    <tr><td>Angi / Thumbtack (shared)</td><td class="n">$50</td><td class="n">5%</td><td class="n">$1,000</td></tr>
+  </table>
+  <p class="lede" style="margin-top:14px;">At a $1,800 ticket and 25% margin you clear $450 a job — the LSA customer pays for himself immediately, the shared-lead customer never does. Cost per booked job in the real world: <b>LSA $168, Thumbtack $250, Angi $542.</b> Shared leads go to four or five contractors at once, which is why they close at 5–10% instead of 20–25%.</p>
+
+  <div class="rule warn"><b>Answer in five minutes or don't bother</b><p>The Oldroyd lead-response study found that answering within 5 minutes makes you 21× more likely to qualify a lead than waiting 30. Separate industry surveys put the share of customers who hire whoever responds first at around 78%. Both point the same direction: speed is cheaper than ad spend, and most of your competition is bad at it.</p></div>
+
+  <div class="rule"><b>Recurring lets you pay 10× more</b><p>A junk removal customer bills $400 once, so your cost to get him has to stay under about $200. A pest control customer bills $150 up front but $500 a year for three-plus years — a $233 acquisition cost pays back inside year one and returns 6:1 after that. Same trade, same city, completely different math.</p></div>
+
+  <h3>Your door hangers — the real numbers</h3>
+  <table class="mathtable">
+    <tr><th>Channel</th><th>Response</th><th>Cost per customer</th></tr>
+    <tr><td>Door hangers</td><td class="n">1–3% (5% elite)</td><td class="n">$60–$120</td></tr>
+    <tr><td>EDDM</td><td class="n">0.6–2.5%</td><td class="n">$80–$150</td></tr>
+    <tr><td>Mail to your own customer list</td><td class="n">2.7–4.4%</td><td class="n">Lowest of all</td></tr>
+  </table>
+  <p class="lede" style="margin-top:14px;">Hangers beat EDDM because you skip apartments and rentals — one lawn operator found nearly a third of his EDDM spend hit non-owner households. Three things move the number: <b>tight clustering</b> (route density cuts your fulfillment cost), <b>one offer with a deadline and a guarantee</b>, and <b>re-dropping the same streets 3–4 times a season</b>. A single pass underperforms badly.</p>
+
+  <div class="rule warn"><b>You’re paying in time instead of money</b><p>Buying a book of accounts would skip all of this. Since you’re building, every customer gets earned one at a time — so pick a category where the first ten come cheap. A $47 cleaning lead and a $149 non-branded HVAC lead are not the same starting line.</p></div>
+</div>
+</details>
+</section>
+
+<section id="sec5">
+<details class="sec">
+<summary><h2>Is it already too crowded?</h2><span class="tw">+</span></summary>
+<div class="secbody">
+<p class="lede">The raw number of competitors is the wrong thing to fear. What matters is whether they're one person with a truck or a company with forty employees.</p>
+
+  <div class="rule"><b>Why 692,777 lawn companies isn't the problem you think</b><p>Almost every one of them is a solo operator who can't answer the phone while he's mowing. You're not competing with 692,777 businesses — you're competing with 692,777 individuals, and none of them has a dispatcher. Meanwhile a category with only 15,000 garage door companies is far harder to enter, because private equity is buying them at 16&times; earnings and outspending you on every lead.</p></div>
+
+  <h3>What the four badges mean</h3>
+  <table class="mathtable">
+    <tr><th>Badge</th><th>What it tells you</th></tr>
+    <tr><td>Wide open</td><td>Few competitors, demand climbing, operators can't keep up</td></tr>
+    <tr><td>Room to enter</td><td>Real competition, but growing demand or a shrinking competitor count</td></tr>
+    <tr><td>Crowded with solos</td><td>Huge headcount, all tiny. Winnable if you hire and systematize</td></tr>
+    <tr><td>Packed &amp; consolidated</td><td>Big capitalized players or PE roll-ups. Don't fight this with cash</td></tr>
+  </table>
+
+  <h3>Open &ldquo;Can I get in?&rdquo; on any card</h3>
+  <p class="lede">Each one gives you a straight answer, a demand meter running Soft to Surging, and a search to run in your own town. That last part matters most &mdash; national numbers can't see your county. Ten minutes on Google Maps tells you more about your market than any statistic in this guide.</p>
+
+  <h3>Where the window is closing</h3>
+  <p class="lede">Private equity has already taken fire and life safety (129 acquisitions in 2023; one buyer closed 57 deals in 2025 alone) and is moving fast on garage doors (26 deals in 2025, one platform sold for over $800M). Self-storage belongs to the REITs. Vending is shrinking outright &mdash; operator count down 3.8% a year. These aren't markets you enter with $75K.</p>
+
+  <div class="rule"><b>The signal that a market is actually busy</b><p>Nobody publishes "weeks booked out." The closest honest proxies are a shrinking competitor count against rising revenue, and a documented shortage of people to do the work. Where both show up together &mdash; septic, chimney, mobile mechanics, ag drone spraying &mdash; the existing operators are turning work away.</p></div>
+
+  <div class="rule"><b>Two different ways to count competitors</b><p>Some counts here are Census figures for companies with actual payroll. Others are industry estimates that include every solo operator with a truck. That gap is enormous &mdash; janitorial is roughly 66,000 employer companies or well over a million businesses depending on which you use. Each card says which one it's showing, because the distinction is the whole difference between &ldquo;crowded&rdquo; and &ldquo;crowded with people who can't answer the phone.&rdquo;</p></div>
+
+  <div class="rule warn"><b>National numbers, local reality</b><p>These are US-wide figures. Pool service, RV storage, ag spraying and septic swing enormously by region &mdash; a category that reads "room to enter" nationally can be packed in your county, or wide open. Check your own market before committing.</p></div>
+</div>
+</details>
+</section>
+
+<section id="listsec">
+  <div class="list-head"><h2>The full roster</h2>
+  <p class="lede">Tap <b>Yes</b>, <b>Maybe</b> or <b>No</b> on any card and it moves out of the review pile into its own list. Your marks save automatically, so you can work through these across several sittings and pick up where you left off.</p></div>
+  <p class="lede">Search by name or category. Tap <b>Day-one crews</b> to see only the models that don't need you swinging the wrench.</p>
+
+  <div class="controls"><div class="controls-in">
+    <div class="piles" id="piles"></div>
+    <p class="savenote" id="savenote" style="display:none"></p>
+    <input id="q" type="search" placeholder="Search 118 ideas — try &ldquo;radon&rdquo; or &ldquo;fiber&rdquo;" aria-label="Search ideas">
+    <div class="chips" id="chips"></div>
+    <div class="chips chiprow2" id="chips2"></div>
+    <div class="count" id="count"></div>
+  </div></div>
+  <div id="list"></div>
+</section>
+
+<section id="sec7">
+<details class="sec">
+<summary><h2>The 15 best bets</h2><span class="tw">+</span></summary>
+<div class="secbody">
+<p class="lede">Best balance of low competition, real demand, and a short road to handing over the keys.</p>
+  <ol class="short" id="short"></ol>
+</div>
+</details>
+</section>
+
+<section id="sec8">
+<details class="sec">
+<summary><h2>Cheap customers vs. expensive ones</h2><span class="tw">+</span></summary>
+<div class="secbody">
+<p class="lede">Two businesses can have identical margins and opposite outcomes because of what a customer costs to land.</p>
+
+  <h3>Cheapest to acquire</h3>
+  <table class="mathtable">
+    <tr><th>Route</th><th>Why</th></tr>
+    <tr><td>Professional referral</td><td>60–80% below paid — home care, inspection, septic, boat storage</td></tr>
+    <tr><td>Door hangers, clustered</td><td>$60–$120 a customer when you re-drop the same streets</td></tr>
+    <tr><td>Local SEO / GBP</td><td>Free after setup and it compounds — storage, cleaning, junk removal</td></tr>
+    <tr><td>LSA in cheap trades</td><td>Electrical $39, handyman $34, window cleaning $6–$15</td></tr>
+    <tr><td>In-person placement</td><td>Vending pop-ins convert at 15–25%</td></tr>
+  </table>
+
+  <h3>Most expensive to acquire</h3>
+  <table class="mathtable">
+    <tr><th>Route</th><th>Damage</th></tr>
+    <tr><td>Angi / Thumbtack</td><td>$542 and $250 per booked job, 5–10% close</td></tr>
+    <tr><td>Home care lead sites</td><td>~$1,800 per client, and many can't afford care</td></tr>
+    <tr><td>Non-branded trade search</td><td>$149/lead, $804/customer — PE roll-ups bid it up</td></tr>
+    <tr><td>Roofing, foundation, construction</td><td>High CPL against 2.6–10% conversion, one-off revenue</td></tr>
+    <tr><td>Long-cycle B2B with a paid rep</td><td>167-day janitorial cycle burns payroll before revenue</td></tr>
+  </table>
+
+  <h3>Fastest payback</h3>
+  <p class="lede">Recurring home services (1–2 tickets, then it’s an annuity) → junk removal and high-margin one-offs (pay back on job one, but no cushion) → compliance routes (slow to sign, then permanent) → placement models (each machine pays back in 10–20 months). Slowest: subscription e-commerce, home care on paid leads, and any B2B where you’d pay a salaried rep before the first contract closes.</p>
+</div>
+</details>
+</section>
+
+<section id="sec9">
+<details class="sec">
+<summary><h2>Don't buy these</h2><span class="tw">+</span></summary>
+<div class="secbody">
+<p class="lede">Categories that get sold as passive and reliably aren't.</p>
+  <ul class="flags">
+    <li><b>Single-unit restaurants and QSR.</b> Margins too thin to carry a manager on one location. Constant owner presence.</li>
+    <li><b>Single-unit boutique fitness.</b> A $1.5M investment that can't cover management plus debt service. Only works multi-unit.</li>
+    <li><b>Solo-skill trades with no hiring pool.</b> Mobile grooming, high-end custom work. If you can't hire the skill, you can't leave.</li>
+    <li><b>Anything where you personally hold the license</b> and your state won't let an employee qualify it.</li>
+    <li><b>60%-in-one-quarter seasonal.</b> You'll be all hands at peak no matter who manages.</li>
+    <li><b>Agencies, brokerages, consulting.</b> You are the rainmaker. There's nothing to sell.</li>
+    <li><b>"Passive" franchise pitches.</b> Fully hands-off from day one is uncommon and carries extra risk. Read Item 19, then call ten franchisees.</li>
+    <li><b>Attended laundromats and wash-dry-fold add-ons.</b> Verify the actual labor model — WDF eats 25–35% of revenue in wages and kills the passivity.</li>
+  </ul>
+</div>
+</details>
+</section>
+
+<section id="sec10">
+<details class="sec">
+<summary><h2>Your next four moves</h2><span class="tw">+</span></summary>
+<div class="secbody">
+<p class="lede">All cash, no debt, no acquisition. That means revenue has to fund every step.</p>
+  <div class="rule"><b>Weeks 1–4 · Pick one and check the lead math</b><p>Choose from the fifteen above. Before spending anything, run the section 04 formula on your own metro: lead cost ÷ your low-end close rate. If a customer costs more than one job's gross profit and the work doesn't recur, pick something else.</p></div>
+  <div class="rule"><b>Months 1–6 · Sell before you spend</b><p>Get signed recurring contracts or a full route before buying the second truck. Hold back $15K–$20K of the $75K as working capital — with no credit line behind you, running out of cash is the failure mode, not running out of customers.</p></div>
+  <div class="rule warn"><b>Months 6–18 · Hire the technician, not the manager</b><p>Your first hire does the work so you can sell. A manager comes much later — you need $350K–$600K in revenue on a 30–40% margin before one is affordable. Trying to hire management early is how self-funded businesses stall out.</p></div>
+  <div class="rule"><b>Months 18–36 · Promote a lead and step back</b><p>Write the SOPs as you go, not at the end. Put in field-service software, hand the crew to a working lead on base plus 5–8% of net profit, and move yourself to a weekly numbers review.</p></div>
+</div>
+</details>
+</section>
+</div>
+
+<footer>
+FACT-CHECKED JULY 2026 against Census, BLS, EPA, FAA, SEIA, SEC filings and franchise disclosure documents. Corrections applied this pass: PFAS compliance deadline moved to a proposed 2031; aging-in-place figure corrected to AARP's 75%; pet-owning households updated to 94–95M; an unsourced rural-radon-coverage claim removed; solar soiling reframed as a worst case rather than typical; Tide Cleaners verified as an active P&G-backed brand. ESTIMATES ONLY. Wage ranges anchored to 2025 BLS occupational data; ticket prices are typical market rates and vary widely by metro. Franchise costs from published FDDs and shift annually — verify current Item 7 and Item 19 before acting. Market growth figures are analyst projections, not guarantees. Licensing for trades, pesticides, home care, waste hauling and inspections differs by state; confirm whether an employed qualifier can hold the license so you aren't personally trapped. This is not financial, legal or tax advice — run professional diligence before committing capital.
+</footer>
+<script>
+const CATS={
+ A:"Recurring home & commercial services",
+ B:"Specialty B2B / boring services",
+ C:"Skilled trades you can start solo",
+ D:"Equipment & asset rental",
+ E:"Vending, ATM & unattended retail",
+ F:"Real-estate-light semi-passive",
+ G:"Light manufacturing & fabrication",
+ H:"E-commerce with a moat",
+ I:"Pet, senior & demographic-driven",
+ J:"Compliance & inspection (recurring by law)",
+ K:"Waste, recycling & environmental",
+ L:"Ag, rural & industrial",
+ M:"Franchises under ~$100K",
+ N:"Home energy & electrification",
+ O:"Environmental-health testing & remediation",
+ P:"Water intrusion & structural repair",
+ Q:"Data & connectivity infrastructure",
+ R:"Skilled repair niches",
+ S:"Vegetation & exterior services",
+ T:"Property & workplace services",
+ U:"Demographic-driven services"
+};
+
+const D=[
+{c:"A",n:"Commercial janitorial / office cleaning",cost:"$10K–$50K",m:15,d:0,pay:"$16–$19/hr cleaner; $22–$26/hr supervisor",tk:"$500–$3,000/mo per account",sp:"3 hrs nightly costs ~$51, bills ~$105",note:"$19.4B market growing 7.5%/yr, and 78.5% of revenue is contractual. Night work means a working supervisor runs it while you sleep. Fastest cheap hand-off on this list."},
+{c:"A",n:"Residential recurring house cleaning",cost:"$10K–$40K",m:18,d:0,pay:"$15–$19/hr or $35–$50/house",tk:"$150–$250 per visit",sp:"2-person team ~$70 labor on a $190 job",note:"41% of households now on recurring plans. Nearly every competitor is a solo operator who never hires an office manager — that's the gap."},
+{c:"A",n:"Pressure washing / soft washing",cost:"$15K–$60K",m:24,d:0,pay:"$18–$23/hr tech",tk:"House $300–$600 · driveway $150–$300 · commercial $400–$2,000",sp:"4-hr house job: ~$80 labor, ~$450 billed",note:"Chase recurring HOA, property-manager and fleet contracts, not one-off driveways. Seasonal — pair with holiday lighting."},
+{c:"A",n:"Window cleaning (commercial route)",cost:"$10K–$35K",m:20,d:0,pay:"$18–$22/hr",tk:"Storefront route $30–$80/visit · residential $200–$400",sp:"20-stop route day: ~$150 labor, ~$900 billed",note:"Storefront routes are sticky and boring, which is why few operators build them properly. 5.6% projected growth."},
+{c:"A",n:"Gutter cleaning & guard installation",cost:"$10K–$30K",m:20,d:0,pay:"$18–$22/hr",tk:"$150–$350 clean · $1,200–$3,500 guards",sp:"2-hr clean: ~$40 labor, ~$250 billed",note:"Aging housing stock keeps demand steady. Height liability is real — insure properly. Best as an add-on to washing."},
+{c:"A",n:"Lawn care / landscape maintenance route",cost:"$30K–$70K",m:30,d:0,pay:"$17–$20/hr crew; $23–$27/hr lead",tk:"$50–$80 per cut · $200–$400/mo residential",sp:"3-man crew ~$170/hr costs, cuts 4–6 lawns/hr",note:"Crowded in residential. The opening is systematized commercial contracts with a crew lead — rare and defensible."},
+{c:"A",n:"Holiday & architectural lighting",cost:"$15K–$50K",m:20,d:0,pay:"$20–$25/hr seasonal installer",tk:"$1,000–$3,500 per install",sp:"2 techs × 6 hrs ≈ $270 labor on a $1,800 install",note:"Same customers every single year — retention is exceptional. Pure Q4, so bolt it onto a spring/summer base."},
+{c:"A",n:"Mosquito & pest control route",cost:"$30K–$70K",m:24,d:0,pay:"$20–$24/hr licensed applicator",tk:"$80–$120/treatment × 7–9 per season",sp:"45-min stop: ~$18 labor, ~$95 billed",note:"62–68% gross margins on stabilized routes, ~75% seasonal retention. State applicator license attaches to the tech, not you."},
+{c:"A",n:"Carpet & upholstery cleaning",cost:"$15K–$40K",m:15,d:0,pay:"$17–$21/hr tech",tk:"$200–$400 per job",sp:"2-hr job: ~$38 labor, ~$300 billed",note:"Portable equipment, home-based, and franchise options run a national call center so the owner never books a job."},
+{c:"A",n:"Pool cleaning & maintenance route",cost:"$20K–$50K",m:20,d:0,pay:"$18–$22/hr tech",tk:"$150–$250/mo per pool",sp:"30-min stop: ~$10 labor, ~$45 billed",note:"Warm-climate only, but route density makes it very profitable. Chemical handling licensing in some states."},
+{c:"A",n:"Air duct & dryer vent cleaning",cost:"$20K–$60K",m:22,d:0,pay:"$18–$23/hr",tk:"Duct $400–$900 · dryer vent $150–$250",sp:"3-hr duct job: ~$60 labor, ~$650 billed",note:"Fastest-growing janitorial equipment segment (~6.6%/yr). Fire-safety angle sells the dryer vent side. Under-marketed."},
+{c:"A",n:"Chimney sweep & inspection",cost:"$15K–$45K",m:24,d:0,pay:"$20–$25/hr certified sweep",tk:"$250–$500 sweep + inspection",sp:"90-min job: ~$33 labor, ~$350 billed",note:"Operators are aging out and nobody young is entering. Classic under-served niche. Certification rides with the tech."},
+{c:"A",n:"Handyman services (multi-tech dispatch)",cost:"$20K–$60K",m:26,d:0,pay:"$24–$30/hr skilled handyman",tk:"$250–$600 per job",sp:"3-hr job: ~$80 labor, ~$400 billed",note:"Everyone competes as a solo. The multi-tech dispatch model with a scheduler is genuinely rare. Needs an office manager to work."},
+{c:"B",n:"Commercial kitchen hood cleaning",cost:"$40K–$70K",m:22,d:0,pay:"$20–$26/hr night crew",tk:"$500–$1,500 per visit, monthly or quarterly",sp:"4-hr night job: 2 techs ≈ $190, bills ~$900",note:"Fire code forces the frequency — you don't sell it, the inspector does. Ugly, nocturnal, and therefore uncrowded."},
+{c:"B",n:"Parking lot striping & sealcoating",cost:"$30K–$70K",m:24,d:0,pay:"$19–$24/hr crew",tk:"$500–$4,000 per lot",sp:"Day crew ~$450, lot bills $1,800–$3,000",note:"ADA compliance drives re-striping every 1–3 years. Fragmented, recession-resilient, seasonal in cold states."},
+{c:"B",n:"Fleet & commercial pressure washing",cost:"$30K–$70K",m:22,d:0,pay:"$19–$24/hr",tk:"$15–$40 per truck × 20–60 trucks/night",sp:"Night crew ~$200, bills $600–$1,800",note:"Contract B2B, not one-off. Sticky. Watch water-reclamation rules — that compliance barrier is also your moat."},
+{c:"B",n:"Sign installation & maintenance",cost:"$30K–$70K",m:26,d:0,pay:"$22–$28/hr installer",tk:"$300–$1,200 per service call",sp:"3-hr call: ~$75 labor, ~$700 billed",note:"National retail chains need a local service vendor everywhere. Repeat work, almost no competition talking about it."},
+{c:"B",n:"Commercial refrigeration & appliance repair",cost:"$40K–$70K",m:28,d:0,pay:"$28–$36/hr EPA-certified tech",tk:"$400–$1,200 per call",sp:"2-hr call: ~$65 labor, ~$700 billed",note:"Severe tech shortage means real pricing power and service contracts. Hard part is hiring, not selling."},
+{c:"B",n:"Document shredding & records destruction",cost:"$50K–$75K",m:18,d:0,pay:"$20–$24/hr driver-operator",tk:"$75–$150 per stop, recurring",sp:"12-stop day: ~$180 labor, ~$1,200 billed",note:"HIPAA and privacy law create the schedule. Truck is the cost. Route runs itself once the accounts are signed."},
+{c:"B",n:"Portable toilet & restroom trailer rental",cost:"$40K–$75K",m:20,d:0,pay:"$20–$25/hr service driver",tk:"$125–$200/unit/mo · trailers $600–$2,500/event",sp:"Driver services 25–35 units/day",note:"Construction and events. Asset-heavy, low-skill labor, recurring monthly billing. Nobody wants to compete with you."},
+{c:"B",n:"Mobile notary & loan-signing agency",cost:"$5K–$25K",m:10,d:0,pay:"$50–$100 per signing to contractor",tk:"$75–$200 per signing",sp:"~$75 spread per appointment",note:"Cheapest entry here. You dispatch, contractors sign. Hands-off fast — but revenue tracks real-estate volume."},
+{c:"B",n:"Bookkeeping / back-office service",cost:"$10K–$40K",m:24,d:0,pay:"$22–$27/hr bookkeeper",tk:"$400–$1,500/mo per client",sp:"8 hrs/mo costs ~$200, bills ~$800",note:"Monthly retainers, huge SMB demand. Only works if you hire bookkeepers immediately — otherwise you've bought yourself a job."},
+{c:"B",n:"Commercial grounds maintenance contracts",cost:"$40K–$75K",m:28,d:0,pay:"$17–$21/hr crew; $25–$29/hr lead",tk:"$1,500–$8,000/mo per property",sp:"Crew day ~$450, covers $1,200–$2,000 of contract",note:"Distinct from residential mowing: annual contracts with property managers. A named PE roll-up target, so you can build to sell."},
+{c:"C",n:"Drain cleaning & hydro-jetting route",cost:"$40K–$70K",m:22,d:0,pay:"$24–$30/hr tech",tk:"$250–$600 · jetting $600–$1,500",sp:"90-min call: ~$40 labor, ~$400 billed",note:"Much lighter licensing than full plumbing, recurring commercial demand from restaurants and property managers."},
+{c:"C",n:"Septic pumping & inspection",cost:"$55K–$75K",d:0,m:22,pay:"$22–$28/hr driver-operator",tk:"$400–$700 pump · $300–$500 inspection",sp:"1-hr pump: ~$28 labor, ~$500 billed",note:"Every tank needs service every 3–5 years and an inspection at sale. Aging operators, almost no new entrants — a genuine moat."},
+{c:"C",n:"Garage door installation & repair",cost:"$30K–$60K",m:24,d:0,pay:"$24–$30/hr tech",tk:"Repair $250–$600 · install $1,200–$3,000",sp:"2-hr repair: ~$55 labor, ~$400 billed",note:"Replacement-cycle demand, two-tech model gets you out in about two years. PE interest is starting to appear here."},
+{c:"C",n:"Fence installation & repair",cost:"$30K–$70K",m:28,d:0,pay:"$19–$24/hr crew",tk:"$3,000–$10,000 per job",sp:"3-day crew ~$1,300 labor on a $7,000 job",note:"Storm damage creates spikes. Crew-run and teachable, but project-based revenue means lumpier cash flow."},
+{c:"C",n:"Epoxy & concrete floor coating",cost:"$30K–$70K",m:24,d:0,pay:"$20–$26/hr installer",tk:"$2,500–$6,000 per garage",sp:"2-day 2-man crew ~$700 on a $4,000 job",note:"Premium pricing, crew-installable, growing fast. Demand is marketing-driven — you have to buy the leads."},
+{c:"C",n:"Insulation & weatherization",cost:"$40K–$75K",m:26,d:0,pay:"$19–$24/hr installer",tk:"$2,000–$6,000 per home",sp:"1-day 2-man crew ~$350 on a $3,500 job",note:"Utility rebates and energy codes push demand. Work is deskillable — good for building a crew you can leave alone."},
+{c:"C",n:"Carpet & flooring installation",cost:"$20K–$50K",m:26,d:0,pay:"$3–$6 per sq yd, or 50–60% of labor billing to a sub crew",tk:"$450–$900 labor on a 1,000 sq ft home",sp:"111 sq yd job: ~$450 to the crew, ~$890 billed direct",note:"Flooring retailers and property managers already own the customer — you’re selling installed capacity, not marketing to homeowners. The installer workforce is aging out with few replacements, which hands you pricing power but makes hiring the hard part. Carpet alone keeps losing ground to luxury vinyl plank, so cross-train crews on both or you’ll run short of work."},
+{c:"D",n:"Dumpster / roll-off rental",cost:"$50K–$75K",m:14,d:0,pay:"$24–$29/hr CDL driver",tk:"$400–$650 per haul",sp:"8 hauls/day: ~$230 labor, ~$4,000 billed",note:"Asset plus a driver — almost no owner skill required. Fully absentee listings genuinely exist in this category. Watch landfill fees."},
+{c:"D",n:"Contractor equipment rental",cost:"$40K–$75K",m:18,d:0,pay:"$18–$23/hr counter/yard staff",tk:"$75–$400/day per unit",sp:"Equipment pays for itself in 8–14 rental months",note:"Recurring B2B, asset-based. Once counter staff are trained the owner is mostly buying inventory and reading reports."},
+{c:"D",n:"Party & event rental",cost:"$30K–$70K",m:20,d:0,pay:"$17–$21/hr delivery crew",tk:"$500–$2,500 per event",sp:"2-man delivery ~$150 on a $1,200 rental",note:"Repeat seasonal demand, warehouse-and-driver model. Storage space is the real constraint."},
+{c:"D",n:"Mobile storage container rental",cost:"$50K–$75K",m:16,d:0,pay:"$24–$29/hr driver",tk:"$150–$250/mo per container",sp:"Container pays back in 14–20 months, then near-pure margin",note:"Construction and residential moves. Drop it, bill monthly, pick it up. About as low-touch as service businesses get."},
+{c:"D",n:"Utility trailer rental fleet",cost:"$30K–$70K",m:12,d:0,pay:"$16–$20/hr yard attendant (or unattended keypad)",tk:"$50–$120/day",sp:"Trailer pays back in ~10 months",note:"Genuinely close to passive with keypad access and cameras. Small per-unit income, so scale matters."},
+{c:"D",n:"Apartment laundry equipment leasing",cost:"$40K–$75K",m:12,d:0,pay:"$20–$25/hr service tech (part-time to start)",tk:"$300–$800/mo per building",sp:"Collection + service ~2 hrs/building/mo",note:"Place machines in multifamily laundry rooms on multi-year contracts. Asset plus light service. Very sticky."},
+{c:"D",n:"Billboard & small-format ad leasing",cost:"$30K–$75K",m:8,d:0,pay:"Contracted install/vinyl crew, $400–$900 per change",tk:"$500–$3,000/mo per face",sp:"Near-zero ongoing labor once leased",note:"The permit is the business and the moat. Once it's up, it's rent. Hardest part is site control and zoning."},
+{c:"E",n:"ATM route ownership",cost:"$25K–$50K (5 machines)",m:0,d:1,pay:"$18–$22/hr loader, or you do 10-min reloads",tk:"$250–$450/machine/mo · up to $800 high-traffic",sp:"~10 min per machine per reload",note:"The closest thing here to true passive income. No license in most states. Cash logistics and security are the real work. Placement hunting never ends."},
+{c:"E",n:"Vending route (smart machines)",cost:"$20K–$70K",m:6,d:1,pay:"$19–$23/hr route driver",tk:"$200–$600/machine/mo",sp:"Driver services 12–20 machines/day",note:"$7.3B market growing 7.8%. Telemetry tells you what to restock so routes get efficient. Less passive than ATMs — someone has to carry the product."},
+{c:"E",n:"Micro-market / unattended office pantry",cost:"$30K–$70K",m:8,d:1,pay:"$19–$23/hr stocker",tk:"$1,500–$4,000/mo per location",sp:"3 hrs/wk per site to service",note:"Far more revenue per location than vending, and under-penetrated. Self-checkout kiosks handle payment. Needs decent office headcount to work."},
+{c:"E",n:"Specialty vending — ice, water, PPE, beauty",cost:"$20K–$70K",m:6,d:1,pay:"$18–$22/hr service tech",tk:"Ice $600–$1,500/machine/mo",sp:"Ice machines make product from water — tiny COGS",note:"Way less competition than snacks. Ice and water vending is close to semi-passive with the best margins in the category."},
+{c:"E",n:"Claw machine & amusement route",cost:"$15K–$50K",m:6,d:1,pay:"$17–$21/hr route service",tk:"$150–$400/machine/mo",sp:"Prize cost ~20–30% of collections",note:"Under-the-radar placement business in high-traffic retail. Small per-machine, so you win on unit count and location quality."},
+{c:"F",n:"Laundry pickup & delivery (wash-dry-fold)",cost:"$25K–$60K",m:18,d:0,pay:"$15–$18/hr attendant; $18–$22/hr driver",tk:"~$2.00/lb · $35–$60 average order",sp:"Labor runs 25–35% of WDF revenue",note:"Online laundry is growing 37%/yr. You don't need to own a store — rent off-peak machine time from an existing laundromat as a wholesale customer, or lease a small space with commercial machines. Labor eats 25–35% of revenue, so this one is never truly passive."},
+{c:"F",n:"RV & boat storage lot",cost:"$40K–$75K (leased land, gravel)",m:4,d:1,pay:"$16–$20/hr maintenance, few hrs/wk",tk:"$75–$250/space/mo",sp:"Essentially rent — gate, cameras, software",note:"The biggest supply gap on this list: ~25M owning households against under 1,800 dedicated facilities, with only ~70 projects underway when roughly 70 a month are needed. RV storage rents rose while traditional storage fell. Land and zoning are the whole game."},
+{c:"F",n:"Small automated self-storage",cost:"$50K–$75K or partner",m:6,d:1,pay:"Remote management, $200–$600/mo service",tk:"$80–$180/unit/mo",sp:"Kiosk + remote manager replaces staff entirely",note:"Mature in most metros — go where it isn't, or go RV/boat instead. Kiosks and remote management make it genuinely low-labor."},
+{c:"F",n:"Dry-stack boat storage",cost:"Partner / lease",m:6,d:1,pay:"$20–$25/hr forklift operator",tk:"$250–$600/slip/mo",sp:"One operator serves an entire facility",note:"Growing 12.2%/yr, wealthy customer base, badly under-served. Capital-intensive unless you lease into existing marina space."},
+{c:"G",n:"Stone & quartz countertop fabrication",cost:"$50K–$75K",d:0,m:26,pay:"$22–$28/hr fabricator; $20–$24/hr installer",tk:"$3,000–$8,000 per kitchen",sp:"~$700 labor on a $5,000 kitchen",note:"Steady remodeling demand, crew-run with good SOPs. Equipment is the barrier — which is also why it isn't crowded."},
+{c:"G",n:"Awards, trophies & engraving",cost:"$20K–$60K",m:14,d:0,pay:"$17–$21/hr production",tk:"$200–$1,500 per order",sp:"Laser runs unattended — labor is setup only",note:"Recurring institutional buyers: schools, leagues, corporate HR. Automated equipment does the work. Quietly profitable and nobody talks about it."},
+{c:"G",n:"Screen printing & embroidery",cost:"$30K–$70K",m:18,d:0,pay:"$17–$22/hr press operator",tk:"$500–$3,000 per order",sp:"~$150 labor on a $900 order",note:"Competitive in retail; win on recurring B2B and team contracts. Automatic presses make production staff-run."},
+{c:"G",n:"Water & ice delivery route",cost:"$40K–$75K",m:14,d:0,pay:"$20–$24/hr driver",tk:"$30–$60/mo per customer",sp:"Driver serves 40–70 stops/day",note:"Subscription revenue on a fixed route. Boring, sticky, and the truck plus driver is the entire operation."},
+{c:"G",n:"Small-batch food co-packing",cost:"$40K–$75K",m:26,d:0,pay:"$17–$22/hr production",tk:"$2,000–$20,000 per run",sp:"Labor 15–25% of run value",note:"You produce for other people's brands — B2B contracts, no marketing spend. Food-safety licensing is the barrier and the moat."},
+{c:"G",n:"Cabinet refacing & surface resurfacing",cost:"$20K–$60K",m:22,d:0,pay:"$20–$26/hr installer",tk:"$4,000–$12,000 per kitchen",sp:"3-day 2-man crew ~$1,000 on a $7,000 job",note:"Cheaper alternative to full remodels, so it sells in downturns too. Crew-installable with a documented process."},
+{c:"H",n:"Amazon FBA with real brand IP",cost:"$20K–$70K inventory",m:18,d:0,pay:"$8–$18/hr VA; 3PL handles fulfillment",tk:"$25–$120 per order",sp:"Target 25–35% net after fees and ads",note:"Only works with a moat — patent, exclusive supply, or a brand people ask for. Commodity resale is a race to zero. VA plus 3PL makes it remote-runnable."},
+{c:"H",n:"Subscription box, under-served vertical",cost:"$20K–$60K",m:20,d:0,pay:"$16–$20/hr packer or 3PL",tk:"$30–$60/mo per subscriber",sp:"COGS + fulfillment ~40–50% of price",note:"Recurring revenue is the prize. Moat comes from curation and supplier relationships. Churn will kill you if the box gets boring."},
+{c:"H",n:"B2B industrial e-commerce (niche parts)",cost:"$30K–$70K",m:16,d:0,pay:"$18–$24/hr order desk / VA",tk:"$150–$800 per order",sp:"Reorder rates beat consumer by a mile",note:"Businesses reorder the same SKUs forever and barely price-shop. Boring categories, high margins, far less competition than consumer."},
+{c:"H",n:"Specialty replacement parts store",cost:"$30K–$70K",m:16,d:0,pay:"$17–$22/hr fulfillment",tk:"$50–$400 per order",sp:"Long-tail SKUs carry 40–60% margins",note:"Nobody stocks the weird part. Find a category, own the long tail, let a fulfillment person run it."},
+{c:"H",n:"Print-on-demand niche brand",cost:"$5K–$30K",m:12,d:0,pay:"$8–$18/hr VA; supplier prints and ships",tk:"$25–$45 per order",sp:"$10–$18 net per order",note:"Lowest capital on the list and fully outsourceable. Moat is design IP or an audience you own — otherwise it's a hobby."},
+{c:"I",n:"Non-medical home care agency",cost:"$40K–$75K",m:20,d:0,pay:"$15–$18/hr caregiver",tk:"$30–$38/hr billed",sp:"~$18/hr gross spread per caregiver hour",note:"$8.7B market, 11,400 Americans turn 65 every day, aide jobs growing 17% through 2034. No medical license needed. Scales on headcount, not real estate. Caregiver turnover is the whole challenge."},
+{c:"I",n:"Pet waste removal route",cost:"$10K–$40K",m:12,d:0,pay:"$16–$20/hr tech",tk:"$15–$25/visit · $60–$100/mo",sp:"10-min stop: ~$3 labor, ~$20 billed",note:"7.2% growth, subscription billing, near-zero skill to train. Low barrier to entry cuts both ways — win with HOA and apartment contracts, growing 8.6%/yr."},
+{c:"I",n:"Mobile pet grooming",cost:"$50K–$75K",m:30,d:0,pay:"$18–$22/hr or 40–50% commission",tk:"$90–$150 per groom",sp:"Groomer keeps ~$55 of a $120 groom",note:"Growing 12.4%/yr and profitable — but the groomer IS the product and they're hard to hire. Hands-off requires multiple vans and employed groomers. Slowest path in this category."},
+{c:"I",n:"Dog walking & pet sitting (staffed)",cost:"$5K–$30K",m:14,d:0,pay:"$14–$18/hr or $15–$22 per walk",tk:"$22–$35 per walk",sp:"~$10–$14 spread per walk",note:"App-dispatched and cheap to start. You must hire walkers immediately or you've just made yourself a job with dogs."},
+{c:"I",n:"Senior relocation & estate cleanout",cost:"$20K–$50K",m:20,d:0,pay:"$18–$23/hr crew",tk:"$1,500–$4,000 per job",sp:"2-day 3-man crew ~$900 on a $3,000 job",note:"Rides the same demographic wave as home care, with referral flow from realtors and senior communities. Crew-run."},
+{c:"I",n:"Non-emergency medical transport",cost:"$40K–$75K",m:18,d:0,pay:"$18–$22/hr driver",tk:"$30–$60 ambulatory · $75–$150 wheelchair",sp:"Driver runs 8–14 trips/day",note:"Aging population plus Medicaid reimbursement. Recurring dialysis and appointment routes are the good business. Reimbursement rates set your ceiling."},
+{c:"I",n:"Aging-in-place home modification",cost:"$20K–$60K",m:20,d:0,pay:"$22–$28/hr installer",tk:"$500–$5,000 per project",sp:"4-hr grab-bar/ramp job: ~$100 labor, ~$900 billed",note:"AARP's 2024 survey found 75% of adults over 50 want to stay in their current home as they age. Grab bars, ramps, walk-in showers. Under-served and easy to teach."},
+{c:"J",n:"Backflow testing & certification",cost:"$15K–$40K",m:14,d:0,pay:"$24–$30/hr certified tester",tk:"$75–$150 per device, multiple devices per site",sp:"20-min test: ~$9 labor, ~$110 billed",note:"The law schedules your revenue — annual testing is mandatory. Certification rides with the tester. Highly recurring, badly under-served."},
+{c:"J",n:"Fire extinguisher & suppression inspection",cost:"$20K–$50K",m:16,d:0,pay:"$21–$27/hr certified tech",tk:"$10–$25/unit · $150–$600 per site visit",sp:"Tech covers 6–10 sites/day",note:"Annual code requirement, commercial route model, no selling required. Certification is tech-level, not owner-level."},
+{c:"J",n:"Fire sprinkler inspection, testing & maintenance",cost:"$30K–$70K",m:18,d:0,pay:"$26–$34/hr licensed tech",tk:"$400–$1,500 per inspection",sp:"3-hr inspection: ~$90 labor, ~$800 billed",note:"NFPA 25 mandates annual flow tests and 5-year internals. Deficiency repairs are the upsell. State license — hire a qualifier."},
+{c:"J",n:"Fire alarm testing & monitoring",cost:"$40K–$75K",m:20,d:0,pay:"$27–$35/hr tech",tk:"$500–$2,000 test + $35–$100/mo monitoring",sp:"Monitoring is ~90% margin recurring revenue",note:"Best of both: mandated inspections plus monthly recurring monitoring. That monitoring base is what makes the business sellable."},
+{c:"J",n:"Kitchen fire suppression (Ansul) service",cost:"$25K–$60K",m:16,d:0,pay:"$24–$30/hr certified tech",tk:"$150–$400 per semi-annual service",sp:"1-hr service: ~$27 labor, ~$275 billed",note:"Every restaurant in your city is required to do this twice a year. Route-dense, code-driven, and nobody's fighting you for it."},
+{c:"J",n:"Third-party elevator inspection",cost:"$30K–$70K",m:24,d:0,pay:"$35–$45/hr QEI inspector",tk:"$150–$400 per unit",sp:"Inspector covers 8–14 units/day",note:"Severe inspector shortage nationally. Licensing-heavy (QEI) which is the barrier — but recurring annual revenue by statute."},
+{c:"J",n:"Home inspection (multi-inspector)",cost:"$15K–$40K",m:18,d:0,pay:"$25–$32/hr or $150–$200 per inspection",tk:"$400–$600 per inspection",sp:"~$250 spread per inspection",note:"Hire inspectors so you aren't the one crawling attics. State license is tech-level. Revenue swings with real-estate volume."},
+{c:"J",n:"Mold, asbestos & environmental testing",cost:"$30K–$70K",m:20,d:0,pay:"$25–$32/hr certified tech",tk:"$400–$1,200 per assessment",sp:"3-hr assessment: ~$85 labor, ~$700 billed",note:"Regulation plus real-estate transactions drive volume. Certification is tech-level. Stay testing-only to avoid remediation liability."},
+{c:"J",n:"Commercial vehicle & DOT inspection",cost:"$30K–$70K",m:18,d:0,pay:"$26–$32/hr certified inspector",tk:"$75–$200 per vehicle",sp:"Inspector covers 10–16 vehicles/day",note:"Fleets must comply annually, so it's calendar-driven B2B. Sell the fleet, not the vehicle."},
+{c:"J",n:"Municipal cross-connection program management",cost:"$20K–$50K",m:16,d:0,pay:"$22–$28/hr admin + testers",tk:"$50K–$300K/yr per municipal contract",sp:"Contract revenue with predictable staffing cost",note:"You administer the whole city's backflow compliance program. Multi-year government contracts are the stickiest revenue that exists."},
+{c:"K",n:"Junk removal (multi-truck)",cost:"$30K–$70K",m:22,d:0,pay:"$18–$22/hr crew",tk:"$250–$600 per job",sp:"2-man crew, 90-min job: ~$60 labor, ~$400 billed",note:"Easy to start, which means easy for others too. Differentiate with commercial and property-management accounts, then add a dispatcher and step out."},
+{c:"K",n:"Electronics recycling & IT asset disposition",cost:"$30K–$70K",m:20,d:0,pay:"$18–$23/hr technician",tk:"$500–$5,000 per corporate pickup",sp:"Data-destruction certificates carry the margin",note:"Companies must destroy data, not just discard hardware. Recurring corporate contracts, and resale of refurbished gear is a second income line."},
+{c:"K",n:"Grease trap & used cooking oil collection",cost:"$50K–$75K",m:16,d:0,pay:"$22–$27/hr driver-operator",tk:"$150–$400 per service + oil resale",sp:"Restaurants pay you, then you sell the oil",note:"Two revenue streams from the same stop, and health code sets the schedule. Filthy work, sticky routes, almost no competition."},
+{c:"K",n:"Medical & sharps waste collection",cost:"$50K–$75K",m:20,d:0,pay:"$21–$26/hr driver",tk:"$75–$250 per pickup, recurring",sp:"Driver runs 15–25 stops/day",note:"Clinics, dentists and labs are legally required to use a licensed hauler. Licensing-heavy up front, then extremely sticky."},
+{c:"K",n:"Rural roll-off & recycling hauling",cost:"$50K–$75K",d:0,m:20,pay:"$23–$28/hr CDL driver",tk:"$350–$600 per haul",sp:"6–8 hauls/day per truck",note:"Rural markets are under-served and the operators are retiring. Less competition than metro, and customers have nowhere else to go."},
+{c:"K",n:"Compost & organics collection subscription",cost:"$20K–$50K",m:14,d:0,pay:"$18–$22/hr driver",tk:"$30–$45/mo residential · $150–$600/mo commercial",sp:"Driver covers 60–120 stops/day",note:"Municipal organics mandates are spreading fast. Subscription billing, fixed routes, and finished compost is a second product to sell."},
+{c:"K",n:"Bulk water hauling & rural delivery",cost:"$40K–$75K",m:14,d:0,pay:"$22–$27/hr driver",tk:"$150–$350 per delivery",sp:"5–8 deliveries/day per truck",note:"Cisterns, pools, construction and rural homes without wells. Recurring, essential, and virtually invisible as a category."},
+{c:"L",n:"Mobile farm & fleet equipment repair",cost:"$40K–$75K",m:26,d:0,pay:"$28–$36/hr mechanic",tk:"$500–$2,500 per call",sp:"4-hr call: ~$120 labor, ~$1,300 billed",note:"Severe rural mechanic shortage means you name your rate. Downtime costs farmers thousands a day, so they pay fast. Hiring is the bottleneck."},
+{c:"L",n:"Livestock & poultry facility cleaning",cost:"$30K–$70K",m:20,d:0,pay:"$19–$24/hr crew",tk:"$2,000–$8,000 per house",sp:"2-day crew ~$700 on a $5,000 job",note:"Biosecurity protocols require it on a schedule between flocks. Recurring B2B with integrators. Nobody's competing for this work."},
+{c:"L",n:"Agricultural drone spraying & scouting",cost:"$30K–$70K",m:20,d:0,pay:"$25–$32/hr licensed operator",tk:"$12–$25 per acre",sp:"Drone covers 40–80 acres/hr",note:"Emerging, labor-shortage driven, and the FAA Part 137 plus applicator licensing keeps the field small. Early enough to build a real position."},
+{c:"L",n:"Grain bin cleaning & industrial vacuum",cost:"$40K–$75K",m:20,d:0,pay:"$21–$27/hr crew",tk:"$1,500–$6,000 per job",sp:"2-day crew ~$800 on a $4,000 job",note:"Seasonal but concentrated and high-ticket. Confined-space certification is the barrier that keeps competitors out."},
+{c:"L",n:"Portable welding & mobile fabrication",cost:"$40K–$70K",m:28,d:0,pay:"$26–$34/hr welder",tk:"$95–$150/hr billed",sp:"~$70/hr gross spread per welder",note:"Trade shortage drives rates up. You must hire welders — if you're the one under the hood, this never becomes hands-off."},
+{c:"L",n:"Hydroseeding & erosion control",cost:"$40K–$75K",m:22,d:0,pay:"$19–$24/hr operator",tk:"$0.10–$0.25 per sq ft",sp:"Day crew ~$400, covers $2,000–$4,000 of work",note:"Stormwater regulations force builders to buy it. Ties to construction cycles and it's seasonal, but margins are strong."},
+{c:"L",n:"Right-of-way & fence-line vegetation management",cost:"$40K–$75K",m:24,d:0,pay:"$20–$26/hr operator",tk:"$1,500–$5,000 per mile",sp:"Crew clears 0.5–2 miles/day",note:"Utilities and municipalities contract this annually on multi-year terms. Predictable, sticky, and priced by the mile."},
+{c:"M",n:"Oxi Fresh Carpet Cleaning",cost:"$53,775–$83,830",m:12,d:0,pay:"$17–$21/hr tech",tk:"$200–$400 per job",sp:"2-hr job: ~$38 labor, ~$300 billed",note:"The cleanest true sub-$75K semi-absentee fit. Home-based, portable equipment, and a national call center books the jobs so you never answer the phone."},
+{c:"M",n:"Tide Cleaners (virtual store format)",cost:"$40,320–$124,050 virtual only",m:14,d:0,pay:"$15–$19/hr attendant",tk:"$25–$60 per order",sp:"Labor 20–30% of revenue",note:"Franchised by a Procter & Gamble subsidiary. Only the virtual store format fits your cash — drop stores start around $119K and plant stores run past $700K. The full system also wants roughly $2M net worth and $1M+ liquidity, so verify you qualify before getting attached to it."},
+{c:"M",n:"Jan-Pro (unit franchise)",cost:"~$4,920–$78,140",m:24,d:0,pay:"$16–$19/hr cleaner",tk:"$500–$3,000/mo per account",sp:"3 hrs nightly: ~$51 labor, ~$105 billed",note:"Cheapest entry on the list, but the franchisor does not permit absentee ownership and the brand settled a $30M worker-misclassification case in federal court in Northern California in 2024. Weakest semi-absentee fit here despite the price."},
+{c:"N",n:"Standby generator installation & maintenance",cost:"$25K–$70K",m:12,d:0,pay:"$30/hr electrician, ~$45/hr loaded",tk:"$5,000–$12,500 whole-home install",sp:"24 crew-hours: ~$1,080 labor + $4,500 equipment, ~$3,400 spread on a $9,000 job",note:"Deteriorating grid reliability and rising storm outages are building a permanent installed base that needs recurring maintenance for 20-30 years. Become an authorized Generac or Kohler dealer to inherit branded leads and financing tools."},
+{c:"N",n:"EV charging station installation & maintenance",cost:"$20K–$65K",m:12,d:0,pay:"$30/hr electrician, ~$45/hr loaded",tk:"$1,200–$2,500 residential Level 2 install",sp:"6-hr install: ~$270 labor + $700 hardware, ~$830 spread on an $1,800 job",note:"EEI's 2022 forecast called for 12.9 million charge ports by 2030, and its newer 2024 forecast runs higher still. Federal NEVI money was restructured and paused in 2025, so treat the demand as real but the timeline as uncertain. EVITP certification is the gate that keeps casual entrants out."},
+{c:"N",n:"Home battery / energy-storage installation",cost:"$25K–$70K",m:15,d:0,pay:"$30/hr electrician, ~$45/hr loaded",tk:"$10,000–$20,000+ before incentives",sp:"Hardware dominates the ticket; labor spread on a $15,000 job runs several thousand dollars",note:"Rising electricity rates, time-of-use billing, and a 30% federal storage tax credit make batteries the fastest-growing energy add-on. Subcontract for solar installers who don't want the electrical liability alone."},
+{c:"N",n:"Solar panel cleaning & O&M",cost:"$10K–$40K",m:6,d:0,pay:"$20–$25/hr field tech",tk:"$150–$400 residential clean",sp:"1.5-hr clean: ~$35 labor, ~$250 billed — high margin, wins on route density",note:"Typical soiling losses run low single digits, but climb past 30% in the dustiest arid conditions. The US installed solar base (236 GW at the end of 2024 and climbing every year) creates a permanent, recurring cleaning annuity nobody has systematized."},
+{c:"O",n:"Radon testing & mitigation",cost:"$8K–$30K",m:9,d:0,pay:"$20–$28/hr installer",tk:"$800–$2,500 mitigation system, $100–$250 test",sp:"4-hr install: ~$120 labor + $300 materials, ~$980 spread on a $1,400 job",note:"EPA estimates 1 in 15 US homes tests at or above the action level, and radon is the second-leading cause of lung cancer. That estimate rests on EPA's older national survey — some newer testing data suggests the true rate is higher."},
+{c:"O",n:"Water treatment, filtration & whole-home testing",cost:"$15K–$50K",m:9,d:0,pay:"$22–$30/hr install and service tech",tk:"$1,500–$6,000+ whole-home system",sp:"5-hr install: ~$150 labor + $1,200 equipment, ~$1,650 spread on a $3,000 job, before the recurring service tail",note:"EPA's 4-ppt PFAS limit for PFOA and PFOS still stands, though the compliance deadline moved from 2029 to a proposed 2031 and limits on four other PFAS are being rescinded. Combined with aging pipes and rural well reliance, the demand is real but the deadline pressure eased."},
+{c:"O",n:"Biohazard, trauma & hoarding cleanup",cost:"$25K–$65K",m:12,d:0,pay:"$20–$28/hr trained tech, hazard premium",tk:"$2,000–$10,000+, often insurance-paid",sp:"16 crew-hours: ~$450 labor + $600 disposal, ~$2,900 spread on a $4,000 job",note:"Deaths, crime, and hoarding are non-cyclical, and OSHA bloodborne-pathogen rules bar untrained cleanup — a certification gate that keeps casual competitors out entirely."},
+{c:"P",n:"Basement waterproofing & foundation repair",cost:"$30K–$70K",m:15,d:0,pay:"$22–$30/hr crew",tk:"$3,000–$15,000+, waterproofing to full foundation repair",sp:"24 crew-hours: ~$720 labor + $2,000 materials, ~$5,300 spread on an $8,000 job",note:"Aging housing stock, expansive-clay soils, and heavier rainfall are structural drivers — though a PE-backed consolidator is expanding nationally, so build local reputation and inspector relationships early."},
+{c:"P",n:"Water & fire damage restoration",cost:"$40K–$75K",m:15,d:0,pay:"$20–$28/hr IICRC-trained tech",tk:"$3,000–$15,000+, insurance-priced",sp:"Large per-job spread; profit comes from equipment utilization and insurance-billing competence, not the labor line alone",note:"Real demand from storms and aging plumbing, but this is the most consolidated pick in the batch — franchises and PE dominate insurer relationships. Enter only with a genuine adjuster-referral wedge."},
+{c:"Q",n:"Structured cabling & low-voltage data infrastructure",cost:"$15K–$50K",m:12,d:0,pay:"$21–$30/hr installer",tk:"$125–$300 per drop, or $15,000–$30,000 per office project",sp:"120 crew-hours on a 100-drop job: ~$3,600 labor + $4,000 materials, ~$12,000+ spread on a $20,000 project",note:"Every new or renovated commercial building and warehouse needs cabling, and the data-center buildout is accelerating refresh cycles. Subcontract for MSPs and AV integrators who need a reliable low-voltage crew."},
+{c:"Q",n:"Fiber / broadband installation subcontracting",cost:"$25K–$70K",m:12,d:0,pay:"$29–$31/hr telecom line installer",tk:"Paid per-foot, per-drop, or per-splice under prime contractor rates",sp:"Margin comes from crew productivity against negotiated unit rates, not a single job ticket",note:"$42.45B in federal BEAD money is the largest broadband investment ever, against a documented splicer shortage — but builds are largely a 2026-and-later event after 2025 rule changes. Register with primes now."},
+{c:"Q",n:"Security camera & smart-lock installation",cost:"$10K–$40K",m:9,d:0,pay:"$21–$30/hr low-voltage installer",tk:"$1,000–$3,000 residential multi-camera install",sp:"6-hr install: ~$180 labor + $500 hardware, ~$1,120 spread on an $1,800 job, plus recurring monitoring upside",note:"Falling hardware costs, IoT interoperability, and insurance discounts are driving a technology-shift expansion. Target small commercial — retail and restaurants are underserved next to the residential market everyone chases."},
+{c:"Q",n:"Commercial AV installation & integration",cost:"$15K–$55K",m:15,d:0,pay:"$25–$35/hr AV installer",tk:"$5,000–$50,000+ per project",sp:"80 crew-hours: ~$2,800 labor + $5,000 equipment, ~$7,000+ spread on a $15,000 job",note:"Hybrid work permanently raised conferencing-AV demand. Houses of worship are a referral-dense niche with recurring upgrade cycles that large integrators mostly ignore."},
+{c:"Q",n:"Managed IT services (MSP) for small business",cost:"$10K–$50K",m:20,d:0,pay:"$25–$40/hr support tech",tk:"$100–$400 per seat per month, most SMBs $150–$200",sp:"A 40-seat client at $175/seat is $7,000/mo recurring against a fraction of that in loaded support labor once at scale",note:"Verizon's 2025 DBIR found ransomware in 88% of small-business breaches versus 39% of large enterprises. Real demand, but the most consolidated pick here — enter through one regulated vertical, not general SMB."},
+{c:"R",n:"HVAC service & maintenance",cost:"$30K–$70K",m:15,d:0,pay:"BLS median $59,810/yr, ~$43/hr loaded",tk:"$150–$600 repair visit, $6,000–$15,000 system replacement",sp:"12 crew-hours: ~$520 labor + $4,500 equipment, ~$3,980 spread on a $9,000 replacement, plus maintenance-agreement revenue",note:"ACCA estimates a 110,000-technician shortage with 25,000 leaving the trade every year. Build a maintenance-agreement book first — every agreement is a guaranteed future call and replacement lead."},
+{c:"R",n:"Locksmith services (mobile / commercial)",cost:"$8K–$35K",m:9,d:0,pay:"$24–$27/hr, BLS mean $50,490/yr",tk:"$75–$200 lockout, hundreds to thousands for commercial rekey",sp:"1-hr rekey: ~$36 labor + $25 materials, ~$120 spread on a $180 job",note:"Census counts ~3,952 firms against 4,030 locations nationally — almost entirely solo operators, and the licensed labor pool is slightly shrinking. Land standing rekey contracts with property managers."},
+{c:"R",n:"Irrigation system installation & repair",cost:"$15K–$45K",m:9,d:0,pay:"$20–$28/hr tech",tk:"$3,000–$6,000 new system, $75–$200 seasonal visit",sp:"16 crew-hours: ~$480 labor + $1,500 materials, ~$2,520 spread on a $4,500 install, plus a recurring seasonal-service annuity",note:"Drought rules requiring smart controllers and mandatory backflow testing create regulation-supported recurring demand. Subcontract for landscapers who don't self-perform irrigation."},
+{c:"R",n:"Commercial door & hardware service",cost:"$20K–$55K",m:12,d:0,pay:"$25–$32/hr hardware tech",tk:"$300–$1,500 service call",sp:"Fire-door inspection contracts layer a high-margin recurring line on top of repair work",note:"NFPA 80/101 mandate annual fire-door inspections and ADA requires compliant automatic operators on aging commercial stock — a compliance niche generalist handymen mostly ignore."},
+{c:"R",n:"Mobile tire service for fleets",cost:"$35K–$70K",m:12,d:0,pay:"$18–$25/hr tire tech",tk:"$250–$600+ per roadside call",sp:"1.5-hr call: ~$40 labor plus tire markup — the value is avoided fleet downtime, not the labor line",note:"Freight and e-commerce volume plus expensive fleet downtime make on-site tire service a structural B2B necessity. Sign scheduled contracts before chasing roadside emergencies."},
+{c:"S",n:"Utility line-clearance / vegetation management",cost:"$40K–$75K",m:15,d:0,pay:"Arborist median $50,440/yr plus a premium for electrical qualification",tk:"Priced per-mile or per-hour on negotiated utility contracts",sp:"Margin comes from crew productivity against negotiated rates, not a single job ticket",note:"92% of green-industry firms report hiring difficulty, acute in wildfire and coastal regions, while grid-hardening spending keeps rising. Asplundh and Davey hold the prime contracts but sub out capacity."},
+{c:"S",n:"Wildlife removal & exclusion",cost:"$8K–$30K",m:9,d:0,pay:"$18–$26/hr tech",tk:"$300–$2,500, removal plus exclusion/repair",sp:"5-hr job: ~$110 labor + $150 materials, ~$640 spread on a $900 job",note:"Suburban sprawl into habitat and protected-species rules like the Migratory Bird Treaty Act create steady, regulation-touched demand. General pest-control firms don't want the vertebrate licensing hassle."},
+{c:"S",n:"Artificial turf installation",cost:"$15K–$50K",m:12,d:0,pay:"$20–$28/hr install crew",tk:"$8–$20/sq ft, $12,000–$18,000 for a 1,000 sq ft lawn",sp:"48 crew-hours: ~$1,400 labor + $5,000 materials, ~$7,600 spread on a $14,000 job",note:"Drought-driven water restrictions and municipal turf rebates in California and the Southwest subsidize customers directly, generating pre-qualified motivated buyers."},
+{c:"T",n:"Property preservation / REO field services",cost:"$10K–$40K",m:9,d:0,pay:"$18–$25/hr crew",tk:"Paid per-task under national network rate sheets",sp:"Margin comes from route density and volume across many low-ticket work orders, not one big job",note:"A permanent baseline of mortgage defaults and servicer compliance obligations makes this counter-cyclical — demand rises when the economy weakens, a useful hedge against the rest of a portfolio."},
+{c:"T",n:"Commercial furniture assembly & office reconfiguration",cost:"$8K–$35K",m:9,d:0,pay:"$18–$26/hr installer",tk:"$45–$75/hr billed per installer, or per-project for large installs",sp:"The model runs on the spread between ~$40/hr loaded labor and ~$60/hr billed, multiplied across a crew",note:"Hybrid-work-driven office reconfiguration and constant corporate churn keep furniture dealers dependent on outsourced install labor they don't want to carry in-house."},
+{c:"T",n:"Drone-based roof & property inspection",cost:"$5K–$25K",m:9,d:0,pay:"Part 107 pilot, about 1 hour on-site per job",tk:"$150–$500 per inspection",sp:"Minimal labor cost against a $150–$500 ticket makes gross margin very high; scale comes from volume contracts, not price",note:"Insurers increasingly mandate remote or aerial inspection to cut adjuster risk and cost as climate-driven claims rise. FAA Part 107 licensing is a modest but real barrier against casual competitors."},
+{c:"U",n:"Estate sale management & liquidation",cost:"$5K–$25K",m:12,d:0,pay:"$15–$22/hr part-time sale staff",tk:"Commission-based, typically 30–45% of gross proceeds",sp:"On a $15,000 sale at 35% commission, the operator nets ~$5,250 against modest staffing and marketing cost",note:"The aging Baby Boomer cohort downsizing and passing in rising numbers is a multi-decade demographic certainty, distinct from cleanout — this is the appraise-price-and-run-the-sale business."},
+{c:"U",n:"Pet cremation & end-of-life services",cost:"$15K–$50K",m:12,d:0,pay:"$16–$22/hr transport and operations staff",tk:"$150–$400+ per private cremation",sp:"Strong per-cremation margin once equipment is amortized or run through an outsourced partner model",note:"Pet humanization and roughly 94–95 million US pet-owning households (APPA) make end-of-life pet care large, growing, and recession-resistant. Vet clinics are the dominant referral channel."},
+];
+
+// [tier, demand 1-4, verdict, what to search locally, what the result means, national count, demand evidence, confidence]
+const SAT={
+"Commercial janitorial / office cleaning":["SOLOS",3,"Yes. You win by being organized, not by being first — nearly every competitor is a small crew with no dispatcher and no one answering the phone during the day.","commercial cleaning + your county","Count the ones with a real website and 20+ reviews. Under 15 means room. Look for anyone with a uniformed crew — that's your only real rival.","~66,471 employer firms (Census counts companies with payroll; solo operators are extra)","Sector output climbed from $75.6B to $93.6B in three years","HIGH"],
+"Residential recurring house cleaning":["SOLOS",3,"Yes, but you'll be one of many — the edge is recurring contracts and answering calls, not being the cheapest.","house cleaning + your town","Expect a lot of results. What matters is how many are companies versus individuals. Under 10 real companies means room.","~357,000 businesses, but that count includes solo operators","41% of households now use recurring plans","HIGH"],
+"Pressure washing / soft washing":["SOLOS",3,"Yes. Very crowded with one-man trailers, but almost nobody chases recurring commercial contracts — that's the open lane.","pressure washing + your town","You'll see many. Count how many mention commercial, fleet, or HOA work. If under 5, the commercial side is wide open.","34,186 businesses incl. solo operators, growing 6.2%/yr","Steady residential demand, but entry is easy so competitor count climbs with it","MED"],
+"Window cleaning (commercial route)":["SOLOS",3,"Yes on the commercial side. Storefront routes are boring and recurring, which is exactly why few operators build them properly.","window cleaning + your town","Under 8 with real websites means room. Check if any mention monthly storefront routes — usually none do.","No clean count — sits inside a broad services code","Storefront contracts are steady and rarely re-shopped","LOW"],
+"Gutter cleaning & guard installation":["SOLOS",2,"Yes, but rarely as a standalone — it works best bolted onto pressure washing or lawn care where you already have the customer.","gutter cleaning + your town","Most results will be roofers and handymen. Under 6 dedicated operators means room.","No standalone count exists","Aging housing stock keeps demand steady but flat","LOW"],
+"Lawn care / landscape maintenance route":["SOLOS",2,"Yes, but understand what you're entering — this is the most crowded category in the guide. Win on route density in one subdivision, not on coverage.","lawn care + your town","You'll find dozens. Count the ones with crews and trucks versus one guy and a trailer. Under 10 real companies means room.","692,777 businesses — the most crowded here, and nearly all are solo","Steady, but supply grows as fast as demand","HIGH"],
+"Holiday & architectural lighting":["ROOM",3,"Yes, and the first year is the only hard one — retention is near-total after that, so year one buys you an annuity.","Christmas light installation + your town","Under 5 means real room. This is seasonal so many won't have year-round listings.","No reliable count","Q4-only, so capacity is genuinely tight in season","LOW"],
+"Mosquito & pest control route":["ROOM",3,"Yes, but the national chains are well-funded and advertise heavily. Go after mosquito-only routes rather than general pest.","mosquito control + your town","Under 6 means room. Rollins and Rentokil brands will show — count only the independents.","18,490 firms, mostly employer companies rather than solos","Mosquito-only routes are the growing slice of a mature industry","MED-HIGH"],
+"Carpet & upholstery cleaning":["SOLOS",2,"Yes. Stanley Steemer is the biggest name and still holds under 5% — everyone else is small.","carpet cleaning + your town","Under 12 with real websites means room. Property-manager turnover work is usually uncontested.","39,715 businesses incl. solo operators","$6.9B and steady, not growing fast","HIGH"],
+"Pool cleaning & maintenance route":["ROOM",2,"Only if you're in a warm climate. Where pools are common, route density decides everything.","pool service + your town","Pull up satellite view and count pools within 3 miles. If there are 200+ and under 8 service companies, that's your opening.","No isolated count — strongly regional","Sun Belt only; meaningless in cold climates","LOW"],
+"Air duct & dryer vent cleaning":["SOLOS",3,"Yes. Under-marketed and most competitors are add-on services for carpet cleaners rather than specialists.","air duct cleaning + your town","Under 8 dedicated operators means room. Many results will be HVAC companies doing it as a sideline.","No clean count","Fire-safety angle drives the dryer vent side; fastest-growing janitorial equipment segment","LOW"],
+"Chimney sweep & inspection":["ROOM",3,"Yes, and this is a quiet one — operators are aging out and almost nobody young is entering.","chimney sweep + your town","Under 4 means real room. Check how old the websites look — dated sites signal retiring operators.","No clean count; small base","Supply is thinning as operators retire, while demand holds","LOW"],
+"Handyman services (multi-tech dispatch)":["SOLOS",3,"Yes. Everyone competes as a solo — a dispatched multi-tech operation is genuinely rare and that's the whole edge.","handyman + your town","You'll find many individuals. Count companies with 2+ techs and online booking. Under 5 means wide open.","No clean count","Cheap leads at $34 and a 13.45% conversion rate — top three in home services","MED"],
+"Commercial kitchen hood cleaning":["ROOM",3,"Yes. Ugly, nocturnal work that fire code makes mandatory — few operators, and restaurants must buy.","hood cleaning + your county","Under 4 means real room. Call one and ask their lead time — if it's weeks out, they're capacity-constrained.","No clean count","NFPA 96 forces the schedule; demand is legally mandated","LOW"],
+"Parking lot striping & sealcoating":["SOLOS",2,"Yes. Fragmented and unglamorous, with ADA compliance forcing a re-stripe cycle nobody markets against.","parking lot striping + your county","Under 6 means room. Drive commercial corridors and count faded lots — that's your actual prospect list.","No clean count","ADA compliance forces a re-stripe every 1-3 years","LOW"],
+"Fleet & commercial pressure washing":["ROOM",3,"Yes. Most washers chase driveways; almost none pursue fleet contracts, which are recurring and sticky.","fleet washing + your region","Under 4 means wide open. Count trucking yards and dealerships within 30 miles instead — those are the buyers.","No clean count","Fleet contracts recur monthly and rarely get re-bid","LOW"],
+"Sign installation & maintenance":["SOLOS",2,"Yes. National retail chains need a local service vendor in every market and struggle to find reliable ones.","sign repair + your county","Under 5 means room. Most results will be sign makers, not service companies — that distinction is your opening.","No clean count","National chains need local vendors everywhere","LOW"],
+"Commercial refrigeration & appliance repair":["PACKED",3,"Harder. National service networks and PE platforms hold the big accounts, though the tech shortage is real.","commercial refrigeration repair + your county","Under 5 independents means some room, but check whether they're already booked — most are.","No clean count","Severe tech shortage, but big accounts are locked up","MED"],
+"Document shredding & records destruction":["PACKED",2,"Harder. Two national players hold roughly 28% and own the compliance contracts you'd want.","document shredding + your county","If the results are mostly Iron Mountain and Shred-it franchises, that's your answer.","Sits inside catch-all codes","Compliance-driven, but the majors own the contracts","MED"],
+"Portable toilet & restroom trailer rental":["PACKED",3,"Only in the luxury trailer niche. United Site Services runs 350,000 standard units — don't fight that. Event and wedding trailers are wide open.","luxury restroom trailer rental + your region","Under 3 means the event niche is open. Standard porta-potty results don't matter — different business.","5,579 businesses incl. solo operators, growing 3.0%/yr","$11.2B. Standard units locked up; luxury event trailers uncontested","MED-HIGH"],
+"Mobile notary & loan-signing agency":["SOLOS",2,"Yes, but income tracks mortgage volume — it swings hard with interest rates.","mobile notary + your town","Near-zero barrier means many results. Signing services matter more than local competitors here.","No count — near-zero barrier","Tracks mortgage volume, so it swings hard","LOW"],
+"Bookkeeping / back-office service":["SOLOS",2,"Yes, but only with a vertical. Generic bookkeeping is saturated and AI is eating basic data entry.","bookkeeping + your town","Count how many name a specific industry. If none do, picking one is your edge.","Very large and fragmented","Steady SMB demand, but AI automation is a real headwind","MED"],
+"Commercial grounds maintenance contracts":["ROOM",3,"Yes. Different business from residential mowing — annual contracts with property managers, and far fewer competitors bid.","commercial landscaping + your county","Under 8 means room. Check which ones bid HOA and commercial property work versus residential only.","Inside the landscaping code","Annual contracts with property managers are the prize","MED"],
+"Drain cleaning & hydro-jetting route":["ROOM",3,"Yes. Lighter licensing than full plumbing, and restaurants need jetting on a recurring schedule.","drain cleaning + your town","Under 8 means room. Most results will be full plumbers — dedicated drain specialists are rarer.","7,338 businesses incl. solo operators, growing 3.0%/yr","Commercial recurring demand from restaurants and property managers","MED-HIGH"],
+"Septic pumping & inspection":["ROOM",3,"Yes, and this is one of the better ones. Top four operators hold just 11.4% and incumbents are retiring.","septic pumping + your county","Under 5 means real room. Rural counties often have 2-3 aging operators serving everyone.","Inside a 7,338-firm cluster","A fifth of US households are on septic; every home sale triggers an inspection","MED-HIGH"],
+"Garage door installation & repair":["PACKED",3,"No. Private equity closed 26 deals last year and one platform sold for over $800M. You'd be bidding leads against real capital.","garage door repair + your town","If you see consolidated brand names alongside locals, the roll-up already reached your market.","15,000+ independent operators, before counting the PE-owned platforms","$16B growing 4.9%/yr — but the window is closing fast","HIGH"],
+"Fence installation & repair":["SOLOS",2,"Yes. Fragmented and crew-run, with storm damage creating demand spikes.","fence installation + your town","Under 10 means room. Yard signs on completed jobs tell you who's actually busy.","No clean count","Storm damage creates spikes; otherwise steady","LOW"],
+"Epoxy & concrete floor coating":["ROOM",3,"Yes, but you have to create demand — nobody wakes up searching for garage floor coating.","epoxy garage floor + your town","Under 5 means room. Franchise names like Hello Garage signal the market is being developed.","US concrete coatings ~$472M, growing 4.9%/yr","Growing, but demand must be marketed into existence","MED"],
+"Insulation & weatherization":["ROOM",3,"Yes. Utility rebate programs feed you pre-qualified customers who've already decided to buy.","insulation contractor + your county","Check your utility's approved contractor list first — if it's short, that's your opening.","Inside the insulation contractor code","Utility rebates and energy codes push demand","LOW"],
+"Carpet & flooring installation":["SOLOS",3,"Yes. Retailers are chronically short of reliable crews and will hand you scheduled work.","flooring installation + your town","Skip the search — walk into flooring retailers and ask who installs for them. Short answers mean opportunity.","No clean count","Retailers are chronically short of reliable installers","LOW"],
+"Dumpster / roll-off rental":["ROOM",3,"Yes regionally. WM and Republic dominate nationally but hold under 30% of roll-off specifically.","dumpster rental + your county","Under 6 independents means room. Capital cost keeps casual entrants out.","232-351 pure-play firms; ~19,980 in waste collection overall","$83.1B sector growing 5.7%/yr","MED"],
+"Contractor equipment rental":["PACKED",2,"No. United Rentals and Sunbelt have fleet scale you can't match with $75K.","equipment rental + your county","If United Rentals or Sunbelt have a branch nearby, that's your answer.","Dominated nationally","Very capital-intensive to compete","MED"],
+"Party & event rental":["ROOM",3,"Yes. Fragmented and local, and venue relationships lock in repeat bookings.","party rental + your county","Under 6 means room. Ask five local venues who they recommend — if it's always the same name, that's your competition.","No clean count","Recovered strongly post-COVID; venue-relationship driven","LOW"],
+"Mobile storage container rental":["PACKED",2,"Harder. WillScot (which absorbed Mobile Mini) has national fleet scale.","portable storage container rental + your county","National brands dominating results means limited room.","Dominated nationally","Hard to compete on fleet scale","LOW"],
+"Utility trailer rental fleet":["PACKED",1,"No. U-Haul owns this and the per-unit income is too small to scale around them.","trailer rental + your town","U-Haul dealers everywhere means the market is spoken for.","U-Haul dominance","Low per-unit income unless you scale enormously","LOW"],
+"Apartment laundry equipment leasing":["PACKED",2,"Harder. CSC ServiceWorks holds most multifamily contracts on multi-year terms.","apartment laundry service + your region","Call three apartment complexes and ask who services their laundry room. Same answer each time tells you enough.","Dominated nationally","Displacing an incumbent at renewal is the only way in","LOW"],
+"Billboard & small-format ad leasing":["PACKED",2,"Harder, but the barrier is permitting rather than competition — and that same barrier protects you once you're in.","billboard advertising + your county","Check your county zoning office for new sign permits. If they've stopped issuing, existing inventory is the whole market.","Dominated nationally by three firms","Zoning limits new inventory — that's the barrier and the moat","LOW"],
+"ATM route ownership":["ROOM",1,"Yes, but demand is structurally declining as cash use falls. Fine as a side income, risky as your main bet.","ATM placement + your region","Location hunting matters more than competitor count. Count cash-heavy venues instead: bars, clubs, laundromats.","Fragmented independent operators","Cash use is structurally declining — that's the real risk","LOW"],
+"Vending route (smart machines)":["PACKED",1,"No. Operator count is shrinking 3.8% a year and the market itself is declining.","vending machine service + your county","Existing operators are exiting. That's not opportunity — that's the market telling you something.","14,801 operators, shrinking 3.8%/yr","$7.9B market declining 1.6%/yr — incumbents are leaving","HIGH"],
+"Micro-market / unattended office pantry":["OPEN",4,"Yes, and this is one of the best. Locations jumped 30% in a single year while traditional vending shrank.","micro market vending + your region","Under 3 operators means wide open. Better check: count offices with 50+ employees within 20 miles.","Locations jumped 42,900 to 55,770 in one year","Combined revenue up ~30% to ~$34B; spend runs 20-40% above vending","MED"],
+"Specialty vending — ice, water, PPE, beauty":["ROOM",3,"Yes. Far less competition than snack vending, and ice/water machines make product from a water line.","ice vending + your region","Under 4 means room. Drive high-traffic outdoor corridors and count existing machines.","No clean count","Ice and water are regional but carry the best margins in unattended retail","LOW"],
+"Claw machine & amusement route":["ROOM",2,"Yes, but it wins on placement quality rather than lack of competition. Small per-machine income.","amusement vending + your region","Competitor count matters less than venue access. Count bowling alleys, laundromats, and family restaurants.","No clean count","Placement-driven; small per-unit revenue","LOW"],
+"Laundry pickup & delivery (wash-dry-fold)":["ROOM",3,"Yes, and you don't need to own a store — rent off-peak machine time from a laundromat.","laundry pickup delivery + your town","Under 4 means room. Also call laundromats and ask if they're empty on weekday mornings.","Inside the laundry services code","Online laundry growing sharply; labor is 25-35% of revenue","LOW"],
+"RV & boat storage lot":["ROOM",4,"Yes. Demand exceeds supply in most markets — owners genuinely have nowhere to park.","RV storage + your county","Call the three nearest facilities and ask if they have openings. Waitlists mean build it.","No clean count — strongly regional","Trade groups estimate several times current supply is needed — advocacy-sourced, so verify with local waitlists","LOW"],
+"Small automated self-storage":["PACKED",2,"Harder. REITs own a quarter of facilities and land plus build cost gates entry anyway.","self storage + your town","If you see Public Storage or Extra Space nearby, the REITs already found your market.","~52,300 facilities (SEC filing figure); REITs hold ~23%","65% still locally owned, but land and build costs gate entry","HIGH"],
+"Dry-stack boat storage":["ROOM",3,"Yes if you're coastal, but capital-intensive unless you lease into an existing marina.","boat storage + your region","Call marinas and ask about dry-stack waitlists. Full facilities mean demand.","No clean count — coastal only","Growing, with wealthy customers and few operators","LOW"],
+"Stone & quartz countertop fabrication":["SOLOS",2,"Yes, though the market is flat and silica regulation is tightening.","countertop fabrication + your region","Under 5 means room. Big-box fabricator programs matter more than local competitor count.","5,967-9,000 firms depending on the source, flat at -0.1%/yr","Steady remodeling demand, but silica-exposure regulation is a growing headwind","MED"],
+"Awards, trophies & engraving":["SOLOS",2,"Yes. Owners are aging out and institutional buyers rarely re-shop once you have them.","trophy shop + your county","Under 3 means room. Dated storefronts signal retiring owners.","No clean count, declining","Institutional buyers are loyal and rarely re-shop","LOW"],
+"Screen printing & embroidery":["SOLOS",2,"Yes, but win on recurring B2B and team contracts rather than retail orders.","screen printing + your town","Many results. Count who offers online team stores — usually nobody, and that's the edge.","~4,736-5,261 firms (Census), flat","Team and corporate reorders are the recurring base","MED"],
+"Water & ice delivery route":["ROOM",2,"Yes. Route-based subscription revenue that recurs forever once signed.","water delivery service + your county","Under 4 independents means room. Primo dominates bottled water nationally but local ice is open.","No clean count","Subscription revenue on a fixed route","LOW"],
+"Small-batch food co-packing":["ROOM",3,"Yes. Few small-batch specialists, and food-safety licensing keeps casual entrants out.","co-packer + your state","Under 3 in your state means real room. Check your regional food incubator for demand signals.","Inside food manufacturing codes","Real demand from CPG startups; licensing gates entry","LOW"],
+"Cabinet refacing & surface resurfacing":["ROOM",3,"Yes. It sells in downturns as the cheap alternative to a full remodel — a useful hedge.","cabinet refacing + your town","Under 5 means room. Franchise names signal the category is being developed locally.","No clean count","Sells in downturns as the affordable remodel alternative","LOW"],
+"Amazon FBA with real brand IP":["PACKED",2,"No, not without a genuine moat. Millions of sellers and the platform holds all the power.","Search your product category on Amazon","If the first page is all similar listings under $30, you're entering a knife fight.","Hyper-saturated, near-zero barrier","High failure rate and total platform dependency","MED"],
+"Subscription box, under-served vertical":["PACKED",2,"No, unless you own an audience already. Churn kills most before acquisition cost pays back.","Search your niche + subscription box","If three or more established boxes exist in your niche, the window closed.","Near-zero barrier, churn-heavy","Churn kills most of these before CAC pays back","LOW"],
+"B2B industrial e-commerce (niche parts)":["ROOM",3,"Yes with real domain expertise. Businesses reorder the same SKUs forever and barely price-shop.","Search specific part numbers in your niche","If results are thin or the sites look dated, that's your opening.","Fragmented","B2B buyers reorder reliably and rarely comparison shop","LOW"],
+"Specialty replacement parts store":["ROOM",3,"Yes. Nobody stocks the weird part — find that category and own the long tail.","Search obscure part numbers in a category you know","Thin or missing results are exactly what you're looking for.","Fragmented long tail","Long-tail SKUs carry 40-60% margins","LOW"],
+"Print-on-demand niche brand":["PACKED",1,"No, unless you already have an audience. Without one it's a lottery ticket.","Search your design niche on Etsy","Thousands of similar listings means the niche is picked over.","Near-zero barrier","Saturated across every popular niche","LOW"],
+"Non-medical home care agency":["ROOM",4,"Yes. Demand is demographically guaranteed — 11,400 Americans turn 65 every single day.","home care agency + your county","Under 10 means room. Better check: call three and ask if they're accepting new clients. Waitlists mean demand exceeds supply.","483,071 providers incl. solo caregivers, growing 4.1%/yr","4.18M Americans turned 65 in 2025 — the highest ever recorded","MED-HIGH"],
+"Pet waste removal route":["ROOM",3,"Yes. Low barrier cuts both ways, so go after HOA and apartment contracts rather than one-off yards.","pooper scooper service + your town","Under 4 means room. Count apartment complexes and HOAs instead — those are the real accounts.","No reliable count; ~$270.7M market growing 5.0%/yr","Commercial HOA contracts growing faster than residential","MED"],
+"Mobile pet grooming":["ROOM",3,"Yes, but hiring groomers is the bottleneck, not finding customers.","mobile pet grooming + your town","Under 5 vans means room. Call two and ask their next opening — weeks out means capacity-constrained.","Subset of 162,802 grooming and boarding firms, growing 4.3%/yr","Mobile commands a 20-40% price premium over shop grooming","MED"],
+"Dog walking & pet sitting (staffed)":["SOLOS",2,"Yes, but only as a staffed agency. Solo walking is a job, not a business.","dog walking + your town","Rover dominates. Count actual companies with employees — usually very few.","Near-zero barrier","Steady, but app platforms capture most solo demand","LOW"],
+"Senior relocation & estate cleanout":["OPEN",4,"Yes. Very few scale players against a demographic wave that runs for decades.","senior move management + your region","Under 3 means wide open. Ask senior living communities who they refer — if they hesitate, there's your gap.","Few specialists; NASMM-affiliated","Rides the Peak-65 wave; referrals come free from realtors and communities","LOW"],
+"Non-emergency medical transport":["ROOM",4,"Yes. No firm holds above 5% share and demand is demographically locked in.","non emergency medical transport + your county","Under 6 means room. The real gate is getting credentialed with your state's Medicaid broker.","No firm above 5% share, growing 7-9.7%/yr","$9.8-11.8B and demographically guaranteed","MED-HIGH"],
+"Aging-in-place home modification":["OPEN",4,"Yes, and this is among the most open here. Almost no organized competition against the strongest tailwind available.","aging in place contractor + your county","Under 3 CAPS-certified contractors means wide open. Most counties have none.","Very few CAPS-certified specialists","AARP 2024 survey: 75% of adults 50+ want to stay in their current home, 73% in their community","LOW"],
+"Backflow testing & certification":["ROOM",4,"Yes. The law schedules your revenue and the water utility mails your marketing for you.","backflow testing + your county","Ask your water utility for their certified tester list. A short list is your answer.","No standalone count","Annual testing is legally mandated; utilities send the reminders","LOW"],
+"Fire extinguisher & suppression inspection":["PACKED",3,"Harder. Private equity logged 129 acquisitions in 2023 and one buyer closed 57 deals in 2025 alone.","fire extinguisher service + your county","Consolidated brand names in results means the roll-up reached you.","Inside 19,845 fire and life safety contractors, and PE is buying them fast","Mandated recurring revenue — exactly why PE wants it","HIGH"],
+"Fire sprinkler inspection, testing & maintenance":["PACKED",3,"Harder. APi Group is a $7B company and Pye-Barker operates in 45+ states.","fire sprinkler inspection + your county","If national names dominate, the buildings are already under contract.","Inside 19,845 fire and life safety contractors, and PE is buying them fast","NFPA 25 mandates the work, but majors hold the buildings","HIGH"],
+"Fire alarm testing & monitoring":["PACKED",3,"Harder. PE pays 30-50x monthly monitoring revenue, which is why they're buying everything.","fire alarm monitoring + your county","National names in results means the recurring accounts are locked.","Inside the same consolidating cluster","Recurring monitoring is the most valuable revenue in the trades","HIGH"],
+"Kitchen fire suppression (Ansul) service":["PACKED",3,"Possible in the restaurant niche specifically. PE owns the broader fire-safety space but restaurant route work stays local.","Ansul service + your county","Under 4 means room. Count restaurants within 20 miles instead — each needs service twice a year.","Inside the same cluster","Semi-annual code requirement at every commercial kitchen","MED"],
+"Third-party elevator inspection":["ROOM",4,"Yes. This is the one compliance niche private equity skipped, against a national inspector shortage.","QEI elevator inspector + your state","Check your state's approved inspector list. Short lists mean opportunity.","No clean count, not consolidated","National inspector shortage; QEI certification is the gate","MED"],
+"Home inspection (multi-inspector)":["SOLOS",2,"Careful here. Firm count is rising while revenue per firm falls — more people splitting less work.","home inspector + your county","Many results. That's the warning sign, not the opportunity.","33,873 businesses incl. solo inspectors, up 1.8% while revenue fell 2.3%/yr","Warning: more firms competing for shrinking transaction volume","MED-HIGH"],
+"Mold, asbestos & environmental testing":["ROOM",3,"Yes. Stay testing-only and take referrals from remediation companies — no conflict of interest is your selling point.","mold testing + your county","Under 6 testing-only firms means room. Most results will be remediation companies.","4,130 testing labs (Census); 5,171 remediation firms growing 3.9%/yr","Regulation and real-estate transactions drive volume","MED"],
+"Commercial vehicle & DOT inspection":["ROOM",3,"Yes. Fleets must comply annually, which makes it calendar-driven rather than sales-driven.","DOT inspection + your county","Under 5 means room. Count trucking companies within 30 miles instead.","No clean count","Annual compliance is mandatory; tied to fleet counts","LOW"],
+"Municipal cross-connection program management":["OPEN",3,"Yes, and it's the stickiest revenue in the guide — multi-year municipal contracts almost never turn over.","cross connection control program + your state","Watch municipal procurement portals. Few bidders on these RFPs.","Niche B2G with very few providers","Multi-year municipal contracts are the stickiest revenue available","LOW"],
+"Junk removal (multi-truck)":["ROOM",3,"Yes. Franchises hold 43% of the franchise segment, but a professional multi-truck operator beats the single-truck solos easily.","junk removal + your town","Under 8 means room. Count how many have multiple trucks — usually one or two.","~11,000-21,000 businesses depending on the source, growing 3.4%/yr","$10.4B and growing; real lead data available for this one","MED-HIGH"],
+"Electronics recycling & IT asset disposition":["ROOM",3,"Yes. Certification-driven and corporate demand is rising on data-security mandates.","electronics recycling + your region","Under 4 certified operators means room. R2 or NAID certification is the gate.","No clean count","Data-security and ESG mandates drive corporate demand","LOW"],
+"Grease trap & used cooking oil collection":["ROOM",3,"Yes. Restaurants pay you to haul it and you sell it again — two revenue lines from one stop.","grease trap cleaning + your county","Under 4 means room. Count restaurants within 15 miles — that's your route.","No clean count","Health code sets the schedule; dual revenue from fees and oil resale","LOW"],
+"Medical & sharps waste collection":["PACKED",3,"Harder. Stericycle and Waste Management dominate, though small clinics resent their pricing.","medical waste disposal + your county","National names dominating means you compete on price and service to small practices only.","Dominated nationally","Small clinics resent incumbent pricing — that's the only crack","MED"],
+"Rural roll-off & recycling hauling":["ROOM",3,"Yes in rural markets. Few competitors and customers have nowhere else to go.","dumpster rental + your rural county","Under 3 means real room. Rural counties often have one aging operator.","No clean count — regional","Rural markets have almost no alternatives","LOW"],
+"Compost & organics collection subscription":["OPEN",3,"Yes. Nascent with almost no competition, and state organics bans are creating mandated demand.","compost pickup service + your city","Under 2 means wide open. Check whether your state has an organics diversion mandate — that's the demand driver.","Very few operators","State organics bans are creating legally mandated demand","LOW"],
+"Bulk water hauling & rural delivery":["ROOM",2,"Yes in rural and agricultural areas. Fragmented and largely invisible as a category.","bulk water delivery + your county","Under 3 means room. Count pool companies and well drillers — they're your referral sources.","No clean count — regional","Rural, agricultural and construction demand","LOW"],
+"Mobile farm & fleet equipment repair":["OPEN",4,"Yes. Severe rural mechanic shortage means you set your rate, and downtime costs farmers thousands a day.","mobile farm equipment repair + your county","Under 3 means wide open. Ask at the co-op who they call — hesitation means opportunity.","No clean count — rural","Severe rural mechanic shortage; farmers pay fast to avoid downtime","LOW"],
+"Livestock & poultry facility cleaning":["OPEN",3,"Yes. Niche industrial work with almost no competition, and biosecurity protocols mandate it between flocks.","poultry house cleaning + your region","Under 2 means wide open. Contact integrator field reps directly — they tell growers who to use.","Very few specialists","Biosecurity protocols mandate cleaning between every flock","LOW"],
+"Agricultural drone spraying & scouting":["OPEN",4,"Yes, and fastest of anything here. Only 1,710 licensed operators nationally against 58% annual growth.","agricultural drone spraying + your state","Under 3 in your region means wide open. FAA Part 137 certification is the real barrier.","1,710 FAA Part 137 operators as of mid-2025, up 58.3% in a year","16.4M acres treated, up 58.7% — but price per acre fell 38% as supply grew","MED-HIGH"],
+"Grain bin cleaning & industrial vacuum":["OPEN",3,"Yes. Niche industrial with confined-space certification gating entry.","grain bin cleaning + your region","Under 2 means wide open. Call grain elevators in late summer before harvest.","Very few operators","Seasonal but high-ticket and concentrated","LOW"],
+"Portable welding & mobile fabrication":["SOLOS",3,"Yes. National welder shortage drives rates up, and mobile response is the differentiator.","mobile welding + your county","Under 6 means room. Being 20 minutes away when something breaks is the whole pitch.","No clean count","Trade shortage drives rates up","LOW"],
+"Hydroseeding & erosion control":["ROOM",3,"Yes. Stormwater regulations make it non-optional for builders, so demand tracks construction permits.","hydroseeding + your county","Under 4 means room. Check your county for active stormwater permits — those are your prospects.","No clean count","Stormwater regulations make it mandatory for developers","LOW"],
+"Right-of-way & fence-line vegetation management":["ROOM",3,"Yes as a subcontractor. Asplundh and Davey hold prime contracts but sub out capacity constantly.","right of way clearing contractor + your state","Competitor count matters less than prequalification. Contact utility primes directly.","No clean count","Multi-year contracts; prequalification is the barrier and the moat","LOW"],
+"Oxi Fresh Carpet Cleaning":["ROOM",2,"Yes, if territory is available. The national call center books jobs for you, which is the actual product.","Oxi Fresh + your state","Check the franchisor for open territories in your area — that's the only real constraint.","~493 units nationally, modestly growing","Item 19 shows ~$71,800 average per business — part-time scale","MED"],
+"Tide Cleaners (virtual store format)":["ROOM",2,"Only if you qualify financially. The brand is real and growing, but the system wants ~$2M net worth and $1M+ liquidity — the sub-$75K virtual format is the narrow door.","Tide Cleaners + your metro","Check the franchisor for open territory. Individual markets have closed even as the system grows, so ask why if yours is available.","~246–248 US units, net growing","Procter & Gamble-backed brand; combined Tide Cleaners and Laundromat passed 200 locations in 2024","MED"],
+"Jan-Pro (unit franchise)":["PACKED",2,"Careful. Two-tier system where developers sell thousands of low-cost unit franchises, and unit-level turnover runs high.","Jan-Pro + your region","Ask the regional developer exactly which accounts are guaranteed and at what billing level.","~113 regional developer franchises, flat","Unit-level turnover is characteristically high in this model","MED"],
+"Standby generator installation & maintenance":["ROOM",4,"Yes. Every storm creates buyers, and each install starts a 20-30 year maintenance relationship.","generator installation + your county","Under 6 means room. Better check: apply for authorized dealer status and see if your territory is open.","No installer-specific count","Residential standby generator market projected to $7.58B by 2030 at 8.3%/yr","MED"],
+"EV charging station installation & maintenance":["ROOM",3,"Yes, but pace is uncertain — federal funding was restructured in 2025. Demand is real, timing isn't.","EV charger installation + your county","Under 5 EVITP-certified installers means room. Certification is the gate.","No clean installer count","EEI's 2022 forecast: 12.9 million charge ports needed by 2030 (its 2024 forecast is higher), but NEVI funding was paused in 2025","MED"],
+"Home battery / energy-storage installation":["ROOM",3,"Yes, especially as a subcontractor to solar companies that avoid electrical liability.","battery storage installer + your county","Under 5 means room. Call solar installers and ask if they subcontract battery work.","No clean count","Rising rates and a 30% federal storage tax credit pull demand forward","LOW-MED"],
+"Solar panel cleaning & O&M":["OPEN",4,"Yes. The installed base grows every year and almost nobody services what they sell.","solar panel cleaning + your region","Under 3 means wide open. Count commercial solar arrays within 50 miles — those are your contracts.","No clean count","US installed solar hit 236 GW at end of 2024 and grows yearly; soiling costs a few percent typically, over 30% in worst-case arid conditions","MED"],
+"Radon testing & mitigation":["ROOM",4,"Yes, and this is among the best here. EPA says 1 in 15 homes tests at or above the action level, and rural coverage is genuinely thin.","radon mitigation + your county","Under 4 certified mitigators means real room. Rural counties frequently have none at all — check your state radon office's certified list.","No clean national count; fragmented certified network","EPA: 1 in 15 US homes at or above the action level (based on EPA's older national survey); second-leading cause of lung cancer at ~21,000 deaths a year","MED"],
+"Water treatment, filtration & whole-home testing":["ROOM",4,"Yes. The EPA PFAS limit still drives demand, though the compliance deadline slipped to a proposed 2031 — less urgency than it looked a year ago.","water treatment + your county","Under 6 means room. Check whether your area has PFAS advisories — that's immediate demand.","No clean installer count","EPA's 4-ppt PFOA/PFOS limit holds, but compliance moved to a proposed 2031 and four other PFAS limits are being rescinded","MED"],
+"Biohazard, trauma & hoarding cleanup":["ROOM",3,"Yes. OSHA rules bar untrained cleanup entirely, which is a certification gate keeping casual competitors out.","biohazard cleanup + your region","Under 3 means room. Introduce yourself to the county coroner — that's your referral source.","No reliable count; estimates range widely","Deaths, crime and hoarding are non-cyclical and legally cannot be DIY","LOW-MED"],
+"Basement waterproofing & foundation repair":["ROOM",3,"Yes, but a PE-backed consolidator is expanding nationally — build inspector relationships before they reach you.","basement waterproofing + your county","Under 6 means room. Watch for one brand suddenly appearing everywhere — that's the roll-up.","US foundation repair market ~$667.8M","Aging housing stock and heavier rainfall; consolidator reported demand up 20%+ in early 2026","MED"],
+"Water & fire damage restoration":["PACKED",3,"Harder. Franchises with 500+ locations and PE money own the insurer referral pipeline you'd need.","water damage restoration + your county","Heavy franchise presence means the adjuster relationships are already spoken for.","No clean count; US market projected over $7.5B by 2028","Real demand from storms and aging plumbing, but incumbents own the referrals","MED"],
+"Structured cabling & low-voltage data infrastructure":["ROOM",4,"Yes. Every new or renovated commercial building needs it, and skilled low-voltage labor is genuinely scarce.","structured cabling + your region","Under 5 means room. Better check: call MSPs and AV integrators and ask if they need a cabling crew.","No clean standalone count","Data-center buildout and warehouse automation against a scarce labor pool","LOW-MED"],
+"Fiber / broadband installation subcontracting":["ROOM",4,"Yes, but builds are largely a 2026-and-later event after 2025 rule changes. Register with primes now.","fiber optic contractor + your state","Competitor count matters less than prime relationships. Contact regional ISPs about subcontract crews.","No clean standalone count","$42.45B in federal BEAD money against a documented splicer shortage","MED"],
+"Security camera & smart-lock installation":["ROOM",3,"Yes, especially in small commercial. Everyone chases residential and ignores retail and restaurants.","security camera installation + your town","Under 8 means room. Count how many target small business versus homes.","No clean installer count","Home security camera market projected from $28.93B to $93.34B by 2035","LOW-MED"],
+"Commercial AV installation & integration":["ROOM",3,"Yes in the SMB and worship niches. Large integrators own enterprise but ignore everything below it.","AV integrator + your region","Under 5 means room. Count houses of worship within 30 miles — that's a referral-dense vertical.","No clean count","Hybrid work permanently raised conferencing demand; worship spaces refresh continually","LOW-MED"],
+"Managed IT services (MSP) for small business":["PACKED",3,"Harder. 88-94% of SMBs already have an MSP and PE roll-ups are aggressive. Only viable with a tight vertical.","managed IT services + your city","Many results means you need a vertical, not a general offering.","US managed services ~$69.55B, growing 10.8%/yr","Verizon found ransomware in 88% of small-business breaches — real demand, hard entry","MED"],
+"HVAC service & maintenance":["SOLOS",4,"Yes. The trade is short 110,000 technicians nationally — existing companies literally cannot serve everyone.","HVAC repair + your town","Many results. Better check: call three in July and ask how soon they can come. Days out means capacity-constrained.","BLS projects ~40,100 openings/yr through 2034","ACCA estimates a 110,000-technician shortage with 25,000 leaving yearly","HIGH"],
+"Locksmith services (mobile / commercial)":["SOLOS",3,"Yes. Census shows almost exactly one firm per location nationally — it is that solo-dominated.","locksmith + your town","Under 8 means room. Count who offers commercial access control — usually very few.","3,952 firms against 4,030 locations (Census) — essentially one shop each","Non-cyclical demand and a slightly shrinking licensed labor pool","HIGH"],
+"Irrigation system installation & repair":["SOLOS",3,"Yes. Drought rules and mandatory backflow testing create recurring seasonal work.","irrigation repair + your town","Under 8 means room. Ask landscapers if they subcontract irrigation — most do.","No clean count","Smart-controller mandates and backflow testing create recurring demand","LOW-MED"],
+"Commercial door & hardware service":["OPEN",3,"Yes. Fire-door compliance is mandatory and generalist handymen ignore it entirely.","commercial door repair + your county","Under 3 means wide open. Ask property managers when their fire doors were last inspected — most won't know.","No clean count","NFPA 80/101 mandate annual fire-door inspections on aging commercial stock","LOW"],
+"Mobile tire service for fleets":["SOLOS",3,"Yes. Fleet downtime is expensive enough that operators pay premium for on-site service.","mobile tire service + your county","Under 4 means room. Count trucking and construction yards within 30 miles.","No clean count — regional and local","Freight volume plus expensive downtime make on-site service structural","LOW-MED"],
+"Utility line-clearance / vegetation management":["ROOM",4,"Yes as a subcontractor. 92% of green-industry firms report hiring difficulty and primes are capacity-constrained.","utility line clearance contractor + your state","Competitor count matters less than qualification. Contact regional utility primes about crew availability.","No clean standalone count","92% of green-industry firms report hiring difficulty; grid-hardening spend rising","MED"],
+"Wildlife removal & exclusion":["SOLOS",3,"Yes. General pest companies refer this out because they don't want the vertebrate licensing.","wildlife removal + your town","Under 5 means room. Call pest control companies and ask if they handle raccoons — most don't.","No clean standalone count","Suburban sprawl into habitat plus protected-species rules","LOW-MED"],
+"Artificial turf installation":["ROOM",3,"Yes in drought states. Water-district rebates hand you pre-qualified customers directly.","artificial turf installation + your town","Under 5 means room. Check whether your water district offers turf rebates — that's the demand engine.","No clean installer count","North America market projected from ~$3.8B to ~$6.81B by 2035; water scarcity drives 52%","LOW-MED"],
+"Property preservation / REO field services":["ROOM",3,"Yes, and it's counter-cyclical — demand rises when the economy weakens. A useful hedge.","Skip the search — register with national order networks","Competitor count is irrelevant. Network approval is the only gate.","Directory self-reports 60,000+ vendors, not government-verified","Permanent baseline of defaults and servicer compliance obligations","LOW"],
+"Commercial furniture assembly & office reconfiguration":["OPEN",3,"Yes. Furniture dealers depend on outsourced install crews and lose sales when they can't guarantee timelines.","office furniture installation + your region","Under 3 means wide open. Better: visit furniture dealers and ask about install capacity.","No clean count","Hybrid-work office reconfiguration and constant corporate churn","LOW"],
+"Drone-based roof & property inspection":["ROOM",3,"Yes. Insurers increasingly mandate aerial inspection, and Part 107 licensing keeps casual competitors out.","drone roof inspection + your region","Under 4 means room. Call roofing companies and ask how they inspect — ladders mean opportunity.","No clean count — nascent and Part 107-gated","Insurers mandate remote inspection to cut adjuster risk as climate claims rise","LOW-MED"],
+"Estate sale management & liquidation":["ROOM",4,"Yes. Fragmented, reputation-driven, and riding a demographic wave that runs for decades.","estate sale company + your region","Under 4 means room. Ask elder-law attorneys who they refer — hesitation means a gap.","No reliable count","Aging Baby Boomer cohort downsizing is a multi-decade demographic certainty","LOW"],
+"Pet cremation & end-of-life services":["ROOM",4,"Yes. Vet clinics need a reliable partner, and roughly 94–95 million US households own pets.","pet cremation + your region","Under 3 means room. Better check: ask five vet clinics who handles their aftercare.","No clean count","Pet humanization and 94–95M pet-owning households (APPA 2024–26) make it recession-resistant","LOW"]
+};
+
+const ACQ={
+"Commercial janitorial / office cleaning":["No ad benchmark","Cold contact→opportunity 1–5%","$400–$1,500 in sales time","LOW","Cold email and calls to facility and property managers — 167-day average cycle","Property management companies: one relationship equals dozens of buildings","Municipal and school district bid lists","Build a verified list of 200 facility managers and run a four-touch sequence. Budget for a 167-day cycle and start calling long before you need the revenue."],
+"Residential recurring house cleaning":["$47 — cheapest home-services CPL","15%","~$313","HIGH","Google Ads — 17.65% conversion, the best in home services","GBP and reviews for the Map 3-pack","Door hangers in tight neighborhood clusters","Run Google Ads on 'house cleaning near me.' This vertical has both the cheapest leads and the highest conversion rate in home services."],
+"Pressure washing / soft washing":["$60–$90 Google · $6–$15 LSA","15–20%","$300–$600 Google · $40–$100 LSA","MED","Google LSA under the window-cleaning category — dramatically cheaper","Before-and-after photos on GBP and Nextdoor","Door hangers on the street you're already working","Get into LSA under window cleaning, then work one neighborhood at a time. The truck in the driveway sells the next three houses."],
+"Window cleaning (commercial route)":["$6–$15 LSA · $50–$75 Google","15–20%","$40–$100 LSA","MED","LSA — among the cheapest cost per lead of any trade","GBP for residential, storefront walk-ins for commercial","Cold-walking a downtown block for monthly routes","LSA for residential, then walk a downtown block and pitch every storefront on a monthly route. That's where the recurring money is."],
+"Gutter cleaning & guard installation":["$50–$90","15%","$330–$600","MED","LSA and seasonal Google — fall and spring spikes","Door hangers after storms","Bundle with pressure washing — same customer, same ladder","Run it alongside pressure washing. Whichever service brings the customer in, the second one costs nothing to sell on the same visit."],
+"Lawn care / landscape maintenance route":["$39 LSA","15%","~$260","HIGH","Door hangers with route density — this is the whole game","LSA and GBP","Yard signs in the subdivision you're already cutting","Pick one subdivision and hit it three to four times a season. Twenty lawns on one street beats forty spread across town."],
+"Holiday & architectural lighting":["No benchmark","—","$60–$150 via door hangers","LOW","September door hangers in high-income neighborhoods","Any warm list you can build — past customers, neighbors, referrals","Neighbor referral — one lit house sells the block","Year one you buy every customer cold with September door hangers. Retention is near-total after that, so year one is the only expensive one and the list becomes the asset."],
+"Mosquito & pest control route":["$50–$90","15%","$330–$600","HIGH","Door hangers with a hard offer and a written guarantee","LSA and GBP","Neighborhood density — treat the whole street, not one house","Hangers with a hard offer. One operator turned 10,000 door hangers into 128 quarterly plans and $19K in recurring revenue, then re-dropped the same streets the next season."],
+"Carpet & upholstery cleaning":["$50–$90","15%","$330–$600","MED","LSA and GBP","Property manager and realtor turnover accounts","Referral and repeat — annual reminders","Land three to five property management companies for turnover cleans. Recurring volume with no per-job ad spend."],
+"Pool cleaning & maintenance route":["$45 — one of the cheapest verticals","15%","~$300","MED","GBP and local SEO","Route-density door-knocking","Referral from your first cluster","Pull up satellite view, map every pool within three miles, and door-knock. You can see your entire market from the air."],
+"Air duct & dryer vent cleaning":["$60–$120","15%","$400–$800","MED","LSA and Google","HVAC company partnerships — pay them a referral spiff","Direct mail to homes 15 years and older","Partner with two or three HVAC companies. They're already in the house and duct cleaning isn't their core work."],
+"Chimney sweep & inspection":["No solid benchmark","—","—","LOW","GBP and seasonal Google Ads, September through December","Realtor and home inspector referral","Direct mail to older housing stock","Get on every home inspector's referral list. Chimney inspections are triggered by home sales."],
+"Handyman services (multi-tech dispatch)":["$34 LSA · $54 Google","15%","$227 LSA · $360 Google","HIGH","LSA at $34 — among the cheapest leads anywhere","GBP, and a 13.45% conversion rate — top three in home services","Property managers for recurring small repairs","LSA plus a same-day answer. Industry surveys consistently find most customers hire whoever responds first — speed is the entire edge here."],
+"Commercial kitchen hood cleaning":["No benchmark","—","Outbound","LOW-MED","Walk into restaurants — the fire marshal already told them they need it","Restaurant groups and franchise operators: one deal, many locations","Bundle with grease trap and cooking oil collection","Learn the local fire marshal's inspection cycle and visit restaurants that just got written up. The compliance notice does your selling."],
+"Parking lot striping & sealcoating":["No benchmark","—","Outbound","LOW","Cold outreach to property managers and retail chains","Municipal and school district bid lists","Drive-by prospecting — faded lots are visible from the road","Drive commercial corridors, photograph faded lots, and mail the owner the photo with a quote attached."],
+"Fleet & commercial pressure washing":["No benchmark","—","Outbound","LOW","Cold call trucking companies, dealerships and fleet yards","Municipal fleet contracts through bid lists","Referral inside the trucking community","Offer a free one-truck demo wash at a fleet yard. Nobody buys fleet washing off a phone call — they buy after seeing one clean truck."],
+"Sign installation & maintenance":["No benchmark","—","Outbound","LOW","National sign-program aggregators that subcontract locally","Property managers and retail chains","GC relationships on new builds","Register with national sign maintenance networks. They need a local vendor in your market and will hand you the work."],
+"Commercial refrigeration & appliance repair":["No benchmark","—","Relationship","LOW-MED","OEM authorized-servicer lists — the real gatekeeper","Restaurant groups, grocery and convenience chains","Warranty network enrollment","Get on OEM authorized-servicer lists. That listing is the lead source — manufacturers route warranty work straight to you."],
+"Document shredding & records destruction":["No benchmark","—","Outbound","LOW","NAID AAA certification gates compliance-sensitive clients","Cold outreach to law, medical and financial offices","Recurring routes plus one-time purge jobs","Get NAID AAA certified, then target law firms and medical offices. They're legally required to use a certified vendor."],
+"Portable toilet & restroom trailer rental":["No benchmark","—","Relationship","MED","General contractor relationships — construction is the recurring base","Event planners, festivals and municipal bid lists","Wedding and event venue preferred-vendor lists","Land two or three general contractors. Construction units rent for months at a time; events are the cherry, not the business."],
+"Mobile notary & loan-signing agency":["No benchmark","—","Near zero","LOW-MED","Signing services and title companies — Snapdocs, Notary Rotary","Realtor and attorney referral","Directory listings","Sign up with every signing service platform. They aggregate the demand and dispatch it to you at almost no acquisition cost."],
+"Bookkeeping / back-office service":["$103.54 — Business Services, expensive","10–15%","$700–$1,000+","MED","CPA and attorney referral partnerships","Niche vertical specialization — own one trade","LinkedIn outbound","Pick one industry and become its bookkeeper. Vertical specialization beats paid ads when leads cost $103 each."],
+"Commercial grounds maintenance contracts":["No benchmark","—","Bid process","MED","RFP and bid lists — HOAs, commercial property, municipalities","Cold outreach to property managers ahead of Q1 contract season","Referral between property managers","Get on every HOA and commercial property manager's bid list before Q1 contract season opens."],
+"Drain cleaning & hydro-jetting route":["$59 LSA","39.5% book — lowest of the trades","$233–$390","HIGH","LSA plus emergency-intent Google","Restaurant and property manager recurring contracts","Plumber overflow partnerships","Chase commercial recurring work. Restaurants need jetting on a schedule, and that's revenue you don't have to re-buy every month."],
+"Septic pumping & inspection":["$60–$120 by analogy — no direct benchmark","15%","$400–$800","LOW-MED","Realtor and home inspector referral — every rural sale triggers an inspection","GBP and local SEO in rural markets","County health department pumping records","Get on realtor referral lists. Every rural home sale triggers a septic inspection — a permanent lead stream you never pay for."],
+"Garage door installation & repair":["$60–$120","15%","$400–$800","MED","LSA and Google — a broken spring is emergency intent","GBP and reviews","Realtor and property manager referral","Emergency spring repair is the entry ticket. Sell the new door on the same visit."],
+"Fence installation & repair":["$71 LSA","15%","~$473","MED","LSA and Google","Yard signs on every completed job","Storm-response canvassing","Yard signs. Fence work is visible and neighbors buy — a $15 sign on a $7,000 job is the cheapest lead you'll ever generate."],
+"Epoxy & concrete floor coating":["No solid benchmark","—","—","LOW","Google Ads and Meta built on before-and-after visuals","Neighborhood canvassing right after a job","Builder and realtor partnerships","This is demand you have to create, so lead with photos. Meta outperforms search here because nobody wakes up searching for epoxy."],
+"Insulation & weatherization":["No benchmark","—","—","LOW","Utility rebate program contractor lists","Google Ads targeting energy-bill pain","HVAC partnership referrals","Get on your utility's approved rebate contractor list. The rebate does the selling and the utility sends you the customer."],
+"Carpet & flooring installation":["No clean benchmark — Home & Home Improvement runs $8.33 a click","—","Retailers and property managers supply the work, not ads","LOW-MED","Subcontract for independent flooring retailers and big-box installer networks — scheduled work at zero acquisition cost","Apartment and property management turnover contracts — one relationship, constant volume","Direct-to-homeowner through GBP and Google once you have crews to fill","Walk into every independent flooring store in the county and ask who installs for them. Retailers are chronically short of reliable crews, and that shortage is your fastest path to a full schedule."],
+"Dumpster / roll-off rental":["$25–$95 by junk-removal analogy","15–35%","$115–$400","MED","Google Ads and LSA — high commercial intent","GC and contractor standing accounts","Roofers, remodelers and property managers","Sign five contractors on standing accounts. One busy roofer can fill a truck's schedule by himself."],
+"Contractor equipment rental":["No benchmark","—","—","LOW-MED","Contractor relationships and jobsite presence","GBP and local SEO","Walk-in traffic if your yard is visible","Visit jobsites. Contractors rent from whoever showed up and left a card the last time a machine broke."],
+"Party & event rental":["No benchmark","—","—","MED","GBP and Google Ads — high seasonal intent","Event planner, venue and church relationships","Instagram and Facebook with event photography","Get on the preferred-vendor list at five local venues. They book the event and hand you the rental."],
+"Mobile storage container rental":["No benchmark","—","—","LOW-MED","Google Ads and GBP","Contractor and remodeler standing accounts","Moving and relocation partnerships","Target remodelers. Their clients need a container for the full duration of every job."],
+"Utility trailer rental fleet":["No benchmark","—","—","LOW","GBP — this is purely a 'near me' search business","Marketplace listings","Signage on the lot","Optimize GBP and park the trailers where passing drivers can see them. That's the entire marketing plan."],
+"Apartment laundry equipment leasing":["No benchmark","—","—","LOW-MED","Direct B2B sales to property owners and managers","HOA and multifamily association events","Displace the incumbent at contract renewal","Find out when the incumbent's contracts expire at local buildings and show up 90 days early with a better revenue share."],
+"Billboard & small-format ad leasing":["No benchmark","—","—","LOW","Two-sided: lease land from owners, then sell space to advertisers","Local business outbound for ad sales","Ad agency relationships","Lock the site and the permit first. The permit is the asset — advertisers are easy once you own inventory nobody else can build."],
+"ATM route ownership":["Not advertising-driven","~1% on cold calls","Placement legwork","MED","In-person pitch to bars, clubs, laundromats and convenience stores","Free machine plus a surcharge revenue share for the host","Cash-heavy venues open late — that's where the volume is","Walk in with a placement agreement and offer the owner a cut of the surcharge. Cash-heavy venues say yes fastest."],
+"Vending route (smart machines)":["Not advertising-driven","Pop-ins 15–25% · cold calls ~1% · email 2–5%","Legwork, not ad spend","MED-HIGH","In-person pop-ins — a 15–25% hit rate, 15 to 25 times better than cold calling","Referral from your first well-served locations","Start with 3–5 machines and reinvest collections into the next one","Walk into 30 qualified locations in person with a one-page leave-behind. Phone and email barely move the needle; showing up does."],
+"Micro-market / unattended office pantry":["Not advertising-driven","3–6 month corporate cycle","Legwork","MED","B2B sales to employers with 50 or more people on site","HR and office manager relationships","Employers frustrated with a machine too small for their headcount","Target offices with 50–200 people and a single sad vending machine. Bring a one-page mockup — the pitch is more selection and self-checkout at no cost to them."],
+"Specialty vending — ice, water, PPE, beauty":["Not advertising-driven","Pop-ins 15–25%","Legwork","LOW-MED","Location placement using the same pop-in mechanics as vending","Property and facility manager relationships","High-traffic outdoor sites for ice and water","Ice and water machines make product straight from a water line. Find high-traffic outdoor locations and negotiate a ground lease."],
+"Claw machine & amusement route":["Not advertising-driven","Pop-ins","Legwork","LOW","Retail, restaurant and mall placement","Revenue share with the host","Bowling alleys, laundromats and waiting areas","Offer the host 20–25% of collections. It's found money to them and costs no floor space they were actually using."],
+"Laundry pickup & delivery (wash-dry-fold)":["No benchmark","—","—","LOW-MED","Local Meta and Google inside a defined delivery radius","Apartment complex and gym partnerships","Wholesale agreement with a laundromat owner for off-peak machine time","Find a laundromat that's dead on weekday mornings and pay the owner for machine time. You get capacity with no lease and they get revenue on empty machines — then sell routes to apartments and gyms."],
+"RV & boat storage lot":["No benchmark","—","—","LOW-MED","GBP and local SEO — 'RV storage near me' is the whole funnel","Marina, RV dealer and boat dealer referral","Road signage","Partner with every RV and boat dealer in the county. They sell someone a 35-foot trailer and the buyer immediately needs somewhere to put it."],
+"Small automated self-storage":["No CPL benchmark; SEO-dominant","—","—","MED-HIGH","Local SEO and GBP — 67% of operators rank it their top channel, and 73% of decisions happen in the Map 3-pack","Google Ads for fast lease-up","Signage and referral","Optimize the Google Business Profile and win the Map 3-pack. Industry software vendors report optimized profiles roughly double customer interactions — vendor-sourced, but the mechanism is real."],
+"Dry-stack boat storage":["No benchmark","—","—","LOW","Marina and boat dealer relationships","GBP and boating community presence","Boat club and yacht club partnerships","Dealers control the customer at the exact moment of purchase. Get onto their referral sheet."],
+"Stone & quartz countertop fabrication":["No benchmark","—","—","LOW","Kitchen and bath dealer relationships","Big-box fabricator programs","Builder and designer referral","Get into a big-box fabricator program. Steady volume at lower margin that fills the shop between retail jobs."],
+"Awards, trophies & engraving":["No benchmark","—","—","LOW","Schools, sports leagues and corporate HR accounts","Local business repeat accounts","Online storefront for custom orders","Lock up school districts and youth sports leagues. Annual, recurring, and they almost never re-shop it."],
+"Screen printing & embroidery":["No benchmark","—","—","LOW","Local business, team and event accounts","Outbound to schools, churches and nonprofits","Free online team stores","Set up free online team stores. You print on demand, they do the selling, and it recurs every single season."],
+"Water & ice delivery route":["No benchmark","—","—","LOW","Office and retail account outbound","Route density along commercial corridors","Gyms, salons and waiting rooms","Cold-walk an office park. Water delivery is a five-minute yes and it recurs forever."],
+"Small-batch food co-packing":["No benchmark","—","—","LOW","Trade shows and CPG broker networks","Emerging brand referral","Food incubator and commercial kitchen partnerships","Get into your regional food incubator. Every brand graduating out of it needs a co-packer."],
+"Cabinet refacing & surface resurfacing":["No benchmark","—","—","LOW","Houzz and Meta with before-and-after galleries","Realtor and designer referral","Direct mail to homes 20 years and older","Houzz and visual social. This is a considered purchase sold on photographs, not on search intent."],
+"Amazon FBA with real brand IP":["Amazon PPC measured as ACoS — no reliable CAC benchmark","—","—","LOW","Amazon Sponsored Products","Organic rank plus review velocity","External traffic from Meta or TikTok to boost rank","Validate contribution margin on a small PPC test before scaling. If it doesn't work at $500 a day it won't work at $5,000."],
+"Subscription box, under-served vertical":["No reliable benchmark","—","—","LOW","Meta and TikTok paid social","Influencer seeding","Referral loops","Fix churn before scaling spend. Subscription CAC only works if lifetime value clears three times acquisition cost after month-three churn."],
+"B2B industrial e-commerce (niche parts)":["No benchmark","—","—","LOW","SEO on part numbers and long-tail SKUs","Google Shopping","Procurement outbound and distributor relationships","Own the part-number searches. B2B buyers search the exact SKU and barely price-shop."],
+"Specialty replacement parts store":["No benchmark","—","—","LOW","Long-tail SEO","Google Shopping","eBay and Amazon as secondary channels","Find a category where nobody stocks the weird part, then rank for every part number in it."],
+"Print-on-demand niche brand":["No benchmark","—","—","LOW","Etsy and Amazon marketplaces","Meta and TikTok, organic and paid","Niche audience communities","Sell into a niche you already belong to. Print-on-demand without an audience is a lottery ticket."],
+"Non-medical home care agency":["~$55 per lead on referral sites · ~$1,800 CAC","Low — leads often aren't affordability-qualified","$1,800 paid · 60–80% less via referral","MED-HIGH","Professional referral drives 56–70% of clients — discharge planners, case managers, social workers","GBP and reviews for the roughly 34% who search","Community education at senior centers","Build a weekly cadence with 10–15 hospital discharge planners and case managers. Paid lead sites run about $1,800 a client; referrals cost a fraction and churn far less."],
+"Pet waste removal route":["No benchmark","—","$60–$150 via door hangers","MED","Door hangers and Nextdoor in dog-heavy neighborhoods","GBP","HOA and apartment complex contracts","Sign HOA and apartment contracts. One property equals dozens of yards on a single stop, and that segment is growing 8.6% a year."],
+"Mobile pet grooming":["$31.82 — Animals & Pets, one of the cheapest verticals","15%","~$212","MED","Google Ads — cheap vertical","Vet office referral","Nextdoor and local social","Get on the referral list at every vet in your radius. They're asked 'who grooms?' every single day."],
+"Dog walking & pet sitting (staffed)":["$31.82 — Animals & Pets","15%","~$212","MED","Rover and Wag to fill the schedule initially","Nextdoor and neighborhood groups","Vet and apartment concierge referral","Start on Rover to fill the calendar, then move clients to direct booking so you stop paying the platform cut."],
+"Senior relocation & estate cleanout":["No benchmark","—","—","MED","Realtor, estate attorney and probate referral","Senior living community partnerships","NASMM certification and directory listing","Partner with senior living communities. Every move-in is a household that needs downsizing first."],
+"Non-emergency medical transport":["Not ad-driven — payer contracts are the business","—","—","MED","Medicaid broker contracts — ModivCare, MTM","Dialysis centers and hospital discharge planners","Assisted living facility contracts","Get credentialed with your state's Medicaid transportation broker. That contract is the business."],
+"Aging-in-place home modification":["No benchmark","—","—","LOW","Occupational therapist and discharge planner referral","Home care agency partnerships","CAPS certification and senior directories","Get CAPS certified and partner with home care agencies. They see the fall risk before anyone else does."],
+"Backflow testing & certification":["Not ad-driven — the utility list IS the lead source","—","—","MED","Get on every water utility's certified tester list — they mail annual notices to customers","Plumber and irrigation contractor partnerships","Third-party program administrators","Get ASSE certified and registered with every water authority in your area. Their annual notice mailing is your entire marketing budget."],
+"Fire extinguisher & suppression inspection":["No benchmark","—","—","LOW-MED","Cold-walk commercial corridors — every business needs annual service","Property manager and facility contracts","Fire marshal relationships","Walk a business park door to door. Every door needs annual service and most have a lapsed tag hanging on the wall."],
+"Fire sprinkler inspection, testing & maintenance":["No benchmark","—","—","LOW-MED","Property manager and building owner contracts","AHJ and fire marshal relationships","NICET certification for credibility","Target buildings with lapsed five-year internal inspections. The authority's records tell you exactly who's overdue."],
+"Fire alarm testing & monitoring":["No benchmark","—","—","LOW-MED","Commercial building contracts plus recurring monitoring revenue","Electrician and GC referral","AHJ approved-vendor lists","Sell the monitoring, not the inspection. Recurring monitoring at 90% margin is what makes this business sellable later."],
+"Kitchen fire suppression (Ansul) service":["No benchmark","—","—","LOW-MED","Direct restaurant outreach — semi-annual code requirement","Restaurant groups and franchisees","Bundle with hood cleaning","Bundle hood cleaning and Ansul service. Same visit, same customer, double the ticket."],
+"Third-party elevator inspection":["No benchmark","—","—","LOW","QEI certification and the state approved-inspector list","Building owner and property manager relationships","AHJ referral","Get QEI certified and onto the state's approved inspector list. The national shortage means work finds you."],
+"Home inspection (multi-inspector)":["$50–$100 estimated","15%","$330–$660","MED","Realtor referral — dominant by a wide margin","GBP and reviews","Google Ads as a supplement","Realtors control this market. Take twenty agents to coffee before you spend a dollar on advertising."],
+"Mold, asbestos & environmental testing":["No solid benchmark","—","—","LOW","Realtor, property manager and remediation contractor referral","Google Ads on 'mold testing near me'","Insurance adjuster relationships","Stay testing-only and take referrals from remediation companies. No conflict of interest is your entire selling point."],
+"Commercial vehicle & DOT inspection":["Not ad-driven","—","—","LOW","Fleet and trucking company relationships","Location-based walk-in near freight routes","Owner-operator communities","Set up near a truck stop or freight corridor and sign annual fleet agreements."],
+"Municipal cross-connection program management":["Not ad-driven — RFP process","—","—","MED","Municipal RFPs and procurement portals","Water utility director relationships","Existing tester credentials and track record","Watch every city and water district procurement portal in your region for cross-connection program RFPs."],
+"Junk removal (multi-truck)":["$25–$95 LSA","12–20% on aggregators · 35–50% on LSA","~$115 at $40 CPL and 35% close","HIGH","LSA and GBP — some operators close 60–70% on LSA leads","Property manager, realtor and estate accounts","Truck wrap and neighborhood presence","LSA, and answer inside five minutes — response speed is the single biggest lever on close rate. This is one-off revenue so it must pay back on job one; target CAC payback under 90 days."],
+"Electronics recycling & IT asset disposition":["No benchmark","—","—","LOW-MED","B2B outbound to IT departments","R2 and NAID certification gate enterprise clients","Managed service provider and IT reseller partnerships","Partner with managed service providers. They handle hardware refreshes and have nowhere to send the old gear."],
+"Grease trap & used cooking oil collection":["Not ad-driven","—","—","MED","Door-to-door restaurant outreach with a free locked bin and rebate offer","Route density — 25–40 accounts a day inside a 15-mile radius","Bundle with hood cleaning and trap cleaning","Offer a free locked collection bin plus a compliance manifest. Restaurants say yes because it solves a legal problem at zero cost to them."],
+"Medical & sharps waste collection":["No benchmark","—","—","LOW-MED","Outbound to clinics, dental, veterinary and tattoo shops","The compliance angle sells itself — DOT and OSHA","Undercut the national incumbent, whose pricing is widely resented","Call small dental and veterinary practices and quote against their current bill. Price and service are both easy wins in that segment."],
+"Rural roll-off & recycling hauling":["No benchmark","—","—","LOW","GBP and word of mouth in low-competition rural markets","Contractor standing accounts","County and municipal contracts","Rank in GBP for your county. Rural markets have so few competitors that basic local SEO wins outright."],
+"Compost & organics collection subscription":["No benchmark","—","—","LOW","Direct-to-consumer subscription through Meta and local channels","Commercial food-waste mandate compliance","Farmers market and co-op presence","Start commercial where mandates force compliance, then layer residential subscriptions onto the same routes."],
+"Bulk water hauling & rural delivery":["No benchmark","—","—","LOW","Construction, agriculture and pool company relationships","GBP for rural cistern delivery","Emergency and drought demand","Sign standing agreements with pool companies and well drillers. They need water hauled and don't own the trucks."],
+"Mobile farm & fleet equipment repair":["No benchmark","—","—","LOW","Direct farm relationships and word of mouth","Dealer overflow referral","Co-op and farm supply bulletin boards","Show up at the co-op during planting season. Downtime costs farmers thousands a day and they'll take your number on the spot."],
+"Livestock & poultry facility cleaning":["Not ad-driven","—","—","LOW","Direct contracts with integrators and their contract growers","Biosecurity credentials","Grower association networks","Get biosecurity certified and approach integrator field reps. They tell their growers who to use."],
+"Agricultural drone spraying & scouting":["No benchmark","—","—","LOW","Direct grower relationships","Co-op and ag retailer partnerships","FAA Part 137 certification as the credibility gate","Partner with an ag retailer or co-op. They already sell the chemical and need someone qualified to apply it."],
+"Grain bin cleaning & industrial vacuum":["No benchmark","—","—","LOW","Direct farm, elevator and co-op relationships","Confined-space certification","Seasonal timing — pre-harvest","Call every grain elevator within 50 miles in late summer, before harvest fills the bins."],
+"Portable welding & mobile fabrication":["No benchmark","—","—","LOW","Contractor and industrial relationships","GBP and truck presence at jobsites","Trailer and equipment repair as the bread and butter","Park where the work is. Mobile welding sells on being twenty minutes away when something breaks."],
+"Hydroseeding & erosion control":["No benchmark","—","—","LOW","GC and developer relationships","Stormwater and SWPPP compliance requirements","DOT and municipal bid lists","Target developers with active stormwater permits. Erosion control isn't optional for them."],
+"Right-of-way & fence-line vegetation management":["Not ad-driven — bid lists only","—","—","LOW","Utility, DOT, railroad and pipeline prequalification and bid lists","Multi-year contract cycles","Safety and insurance credentials","Get prequalified with your regional utility. These are multi-year contracts and the barrier to entry is exactly what makes them worth having."],
+"Oxi Fresh Carpet Cleaning":["$50–$90 by carpet-cleaning analogy","15%","$330–$600 — but the call center books for you","MED","Franchisor national call center handles all booking","Local GBP and reviews","Franchisor-run paid search","The call center is the actual product here. You're buying a booked calendar, not a brand."],
+"Tide Cleaners (virtual store format)":["No benchmark","—","—","LOW","Brand recognition drives walk-in traffic","GBP and local search","Apartment and office partnerships","You're buying the Tide name for the trust it carries. Site selection matters far more than ad spend — but confirm you clear the net-worth requirement first."],
+"Jan-Pro (unit franchise)":["Not ad-driven","Cold contact→opportunity 1–5%","—","LOW","Franchisor-provided accounts — that IS the model","Your own outbound to supplement","Property manager relationships","Understand exactly which accounts the franchisor guarantees and at what billing level before you sign. That guarantee is the entire deal."]
+,
+"Standby generator installation & maintenance":["No reliable paid-channel CPL benchmark found","—","Dealer and referral driven, not ad-driven","LOW","Become a factory-authorized Generac or Kohler dealer for co-op leads and financing tools","Electrician and retailer referral partnerships","Google LSA and storm-triggered search","Apply for authorized-dealer status with Generac or Kohler — it hands you branded co-op leads and financing tools most independents don't have."],
+"EV charging station installation & maintenance":["No reliable paid-channel CPL benchmark found","—","Certified-installer roster driven, not ad-driven","LOW","Get listed on charger-network certified-installer rosters that route homeowner and fleet leads","EV dealer and automaker installer referral programs","Commercial fleet outbound plus state grant bid lists","Get EVITP-certified and apply to certified-installer networks — that listing routes leads to you at zero ad spend."],
+"Home battery / energy-storage installation":["No reliable paid-channel CPL benchmark found","—","Manufacturer program and subcontract driven","LOW","Join manufacturer certified-installer lead programs","Subcontract battery adds for existing solar installers","LSA and search on outage-anxiety keywords","Subcontract battery installs for solar companies that don't want the electrical liability alone — instant access to their customer base."],
+"Solar panel cleaning & O&M":["No reliable paid-channel CPL benchmark found","—","B2B subcontract driven, not ad-driven","MED","Pursue O&M subcontracts from commercial solar installers that don't service what they sell","Property-manager and solar-owner referrals","LSA and search residentially","Approach local commercial solar installers directly and offer to be their O&M subcontractor — they already have the customer relationship, you just supply the route."],
+"Radon testing & mitigation":["No reliable paid-channel CPL benchmark found","—","Referral-driven, transaction-triggered","MED","Build relationships with home inspectors and realtors — radon tests are triggered by home sales","LSA and Google search","NRPP find-a-pro directory listing","Meet with ten local home inspectors and offer fast turnaround on mitigation for deals under contract — they need a partner they can recommend same-day."],
+"Water treatment, filtration & whole-home testing":["No reliable paid-channel CPL benchmark found","—","Dealer program and referral driven","MED","Join manufacturer independent-dealer programs","Plumber and well-service company referrals","Free water-test offers converting to LSA and search leads","Partner with local well-service companies to offer free water tests — most already field the 'is my water safe' question and have nowhere to send it."],
+"Biohazard, trauma & hoarding cleanup":["No reliable paid-channel CPL benchmark found","—","Gatekeeper referral driven, not ad-driven","LOW-MED","Build direct relationships with coroners, police, and EMS who are first on scene","Property-manager and funeral-home referrals","Insurance-adjuster and restoration-company referrals","Introduce yourself to your county coroner's office and local property managers — they're the first call when a cleanup is needed."],
+"Basement waterproofing & foundation repair":["No reliable paid-channel CPL benchmark found — high-ticket, LSA-viable","15% estimated by analogy to comparable high-ticket home trades","$400–$800 estimated by analogy","LOW-MED","LSA and Google search — high commercial intent for a high-ticket problem","Home-inspector and real-estate-agent referrals","Direct mail in older-housing ZIP codes","Partner with home inspectors who flag moisture and foundation issues pre-sale — a warm referral beats a cold search lead every time."],
+"Water & fire damage restoration":["No reliable independent CPL benchmark — insurer-referral dominated","—","Adjuster-relationship driven, not ad-driven","LOW-MED","Get listed on insurance-carrier and agent preferred-vendor programs","Plumber and property-manager referral relationships","LSA and search for direct emergency calls","Apply to insurer preferred-vendor programs early — most restoration revenue is insurer-referred, and you can't out-ad the franchise incumbents for that traffic."],
+"Structured cabling & low-voltage data infrastructure":["No reliable paid-channel CPL benchmark found — B2B subcontract driven","—","Subcontract-relationship driven, not ad-driven","LOW","Subcontract for MSPs and AV integrators who need a reliable low-voltage crew","Commercial GC and electrician subcontract relationships","Commercial property-manager relationships for tenant build-outs","Call every MSP and AV integrator within an hour of you and offer to be their cabling crew — they turn down jobs today because they have no one to send."],
+"Fiber / broadband installation subcontracting":["No reliable paid-channel CPL benchmark found — bid and subcontract driven","—","Prime-contractor subcontract driven, not ad-driven","MED","Register as a subcontractor with regional fiber-construction primes and ISPs actively hiring crews","Municipal and utility broadband RFPs","Staffing relationships with national fiber builders","Register directly with regional ISPs and fiber primes as an available subcontract crew — they're chronically short on qualified splicers and hire fast."],
+"Security camera & smart-lock installation":["No reliable paid-channel CPL benchmark found — analogous to low-voltage trades","15% estimated by analogy","$150–$400 estimated by analogy","LOW-MED","LSA and Google search for residential demand","Small-business and property-manager outbound for camera-plus-access bundles","Manufacturer and dealer referral programs","Cold-call 20 local retail and restaurant owners with a camera-plus-access-control bundle — small commercial is underserved next to the residential market everyone chases."],
+"Commercial AV installation & integration":["No reliable paid-channel CPL benchmark found — B2B relationship driven","—","Gatekeeper and vertical-referral driven, not ad-driven","LOW-MED","Specialize in houses of worship — a referral-dense, recurring-upgrade vertical","Commercial GC, architect, and IT/MSP referrals","Manufacturer certified-integrator programs","Pick houses of worship as your beachhead — one satisfied church leads to three more through denominational networks at zero ad cost."],
+"Managed IT services (MSP) for small business":["No reliable paid-channel CPL benchmark found — referral and vertical driven","—","Vertical-referral driven, not ad-driven","LOW","Pick one regulated vertical — dental, legal, medical — and win referrals through its trade association","Vendor and outbound referral relationships","vCIO and security-assessment lead magnets","Join one industry association as a vendor member and offer a free security assessment at their next conference — vertical trust beats generic IT marketing."],
+"HVAC service & maintenance":["No new benchmark in this pass — see the existing HVAC entry's LSA data","44% book rate by analogy to existing HVAC data","~$233 by analogy","MED","Google LSA — see the existing HVAC card for full benchmark detail","Build a maintenance-agreement base generating repeat visits and replacement leads","Real-estate and property-manager relationships","Build a maintenance-agreement book first — each agreement is a guaranteed future service call, so early growth doesn't depend on ad spend."],
+"Locksmith services (mobile / commercial)":["No reliable paid-channel CPL benchmark found","—","Emergency-intent LSA and referral driven","LOW-MED","LSA and Google search — high emergency purchase intent for lockouts","Recurring rekey contracts with property managers and realtors","Auto-dealer and roadside-assistance partnerships","Approach property managers about a standing rekey contract for every tenant turnover — recurring B2B beats one-off lockout calls."],
+"Irrigation system installation & repair":["No reliable paid-channel CPL benchmark found","—","Subcontract and seasonal-route driven","LOW","Subcontract irrigation installs for landscapers who don't self-perform the work","LSA and Google search for direct residential demand","HOA and property-manager seasonal service contracts","Call five local landscaping companies and offer to be their irrigation subcontractor — most turn down the work rather than carry the specialty tools and license."],
+"Commercial door & hardware service":["No reliable paid-channel CPL benchmark found","—","Compliance-inspection driven, not ad-driven","LOW","Offer NFPA 80 annual fire-door inspections to property managers — the inspection seeds the repair work","GC and contractor referrals","Facility-manager outbound","Cold-call ten local property managers offering a free fire-door compliance walkthrough — most buildings are overdue and don't know it."],
+"Mobile tire service for fleets":["No reliable paid-channel CPL benchmark found — B2B contract driven","—","Fleet-contract driven, not ad-driven","LOW","Sign scheduled-maintenance contracts directly with local trucking and construction fleets","National tire-account program participation","24/7 roadside referral networks","Visit five local trucking or construction companies and pitch a scheduled tire-check contract — recurring B2B beats waiting for roadside emergencies."],
+"Utility line-clearance / vegetation management":["No reliable paid-channel CPL benchmark found — bid and subcontract driven","—","Prime-contractor subcontract driven, not ad-driven","MED","Register as a qualified subcontractor with regional utility vegetation-management primes","Municipal and DOT right-of-way bid lists","Storm-response mutual-aid networks","Get OSHA line-clearance qualified and register with regional utility primes as an available crew — they're capacity-constrained and actively looking."],
+"Wildlife removal & exclusion":["No reliable paid-channel CPL benchmark found — analogous to pest-control trades","15% estimated by analogy","$300–$600 estimated by analogy","LOW-MED","LSA and Google search — high emergency purchase intent","Partner with general pest-control firms that refer out vertebrate wildlife work","Property-manager contracts for recurring exclusion work","Call five local pest-control companies and offer to take their wildlife referrals — most don't want the state-licensing hassle."],
+"Artificial turf installation":["No reliable paid-channel CPL benchmark found","—","Rebate-program and referral driven","LOW-MED","Register with local water-district turf-rebate programs, which generate pre-qualified leads directly","Landscaper and pool-builder referrals","LSA and Google search","Sign up for your water district's turf-rebate installer list — rebate-chasing homeowners are pre-qualified buyers who find you first."],
+"Property preservation / REO field services":["Not ad-driven — a closed order-network channel","—","Volume and route driven across many low-ticket orders","LOW","Register as a vendor with national field-service order networks, the dominant channel","NAMFS trade-association membership and relationships","HUD Field Service Manager subcontracts","Register as a vendor with three or four national field-service networks simultaneously — once approved, work orders flow without any selling."],
+"Commercial furniture assembly & office reconfiguration":["No reliable paid-channel CPL benchmark found — B2B subcontract driven","—","Dealer-subcontract driven, not ad-driven","LOW","Become the install subcontractor for local office-furniture dealers who sell but don't self-install","Commercial-mover and facilities-management partnerships","Corporate facilities outbound","Visit every office-furniture dealer within an hour of you and offer install-crew capacity — dealers lose sales when they can't guarantee install timelines."],
+"Drone-based roof & property inspection":["No reliable paid-channel CPL benchmark found — B2B contract driven","—","Contractor and adjuster relationship driven, not ad-driven","LOW-MED","Contract directly with local roofing companies needing fast, safe roof data","Independent insurance-adjuster relationships","Solar-installer partnerships for pre-install roof assessments","Offer five local roofing companies a free sample inspection report — once they see the speed and safety edge over a ladder crew, they become recurring clients."],
+"Estate sale management & liquidation":["No reliable paid-channel CPL benchmark found — referral driven","—","Gatekeeper referral driven, not ad-driven","LOW","Build referral relationships with senior-move managers and elder-law attorneys","Funeral-home and hospice relationships","Listing platforms for direct discovery","Meet with three local elder-law attorneys and senior-move firms — they encounter liquidation needs constantly and need a trusted partner to refer."],
+"Pet cremation & end-of-life services":["No reliable paid-channel CPL benchmark found — B2B contract driven","—","Veterinary-contract driven, not ad-driven","LOW","Sign recurring aftercare contracts directly with local veterinary clinics, the dominant channel","Emergency-vet and animal-shelter relationships","Direct-to-owner online presence for pre-need planning","Visit ten local vet clinics and offer a same-day pickup, respectful-process aftercare contract — clinics need a partner they can recommend without hesitation."]
+};
+
+const SHORT=[
+["Agricultural drone spraying","The least saturated category found anywhere: 1,710 licensed operators nationally, up 58% in a single year, and 69% of them run two aircraft or fewer. Part 137 certification keeps casual entrants out. Watch the price per acre \u2014 it already fell 38% as supply grew."],
+["Micro-markets / office pantry","Locations jumped from 42,900 to 55,770 in one year while traditional vending shrank 3.8%. Incumbents are retreating from the low-margin snack box exactly as the premium format takes off. Staffed from day one."],
+["Aging-in-place home modification","Almost no organized competition against the strongest demographic tailwind available \u2014 11,400 Americans turning 65 every day. Grab bars, ramps, walk-in showers. Easy to teach a crew."],
+["Non-emergency medical transport","Growing 7\u20139.7% a year with no firm above 5% share. The broker layer is concentrated but local transport is wide open, and a van or two fits the budget."],
+["Commercial janitorial","Cheapest start on this list at $10K and the fastest handoff. You're competing against tiny operators in a sector whose output climbed from $75.6B to $93.6B in three years."],
+["Senior relocation & estate cleanout","Very fragmented with almost no scale players, riding the same Peak-65 wave as home care. Referrals come free from realtors and senior communities."],
+["Backflow testing & certification","The law schedules your revenue and the water utility mails your marketing. Rarely specialized in \u2014 most firms bundle it as an afterthought."],
+["Compost & organics collection","Nascent with almost no competition, and state organics bans are creating mandated demand. Subscription billing on fixed routes."],
+["Mobile farm & fleet equipment repair","Severe rural mechanic shortage means you name your rate. Downtime costs farmers thousands a day so they pay fast. Hiring is the only bottleneck."],
+["Pet waste removal route","Growing 5% a year, no firm above 5% share, $10K to start. Chase HOA and apartment contracts so the low barrier works for you instead of against you."],
+["Septic pumping & inspection","Top four operators hold just 11.4% of the market and the incumbents are retiring. A fifth of US households are on septic and every home sale triggers an inspection."],
+["Kitchen fire suppression (Ansul)","Every restaurant is required to service it twice a year. Route-dense and code-driven \u2014 though note PE owns much of the broader fire-safety space, so stay in the restaurant niche."],
+["Grease trap & cooking oil collection","Restaurants pay you to haul it and you sell it again. Health code sets the schedule, and Darling only dominates rendering \u2014 local collection is open."],
+["Third-party elevator inspection","The one compliance niche private equity skipped. Fragmented regional independents against a national inspector shortage. QEI certification is the gate."],
+["Luxury restroom trailer rental","United Site Services owns 350,000 standard units \u2014 and filed Chapter 11 in December 2025. The event and wedding trailer slice they ignore is wide open."],
+["Radon testing & mitigation","EPA estimates 1 in 15 US homes has elevated radon, and a fifth of rural regions have no certified mitigator within 50 miles. Certification is the moat; home inspectors are the free lead source."],
+["Standby generator installation","Every major storm creates a wave of buyers, and each install starts a 20-30 year maintenance relationship. Become an authorized Generac or Kohler dealer and inherit their leads and financing."],
+["Structured cabling & low-voltage","The data-center and warehouse-automation buildout needs cabling in every new or renovated building, against a scarce skilled labor pool. Subcontract for MSPs and AV integrators who turn work away."],
+["Locksmith services","Census counts show almost exactly one firm per location nationally — the field is that solo-dominated. A standing rekey contract with a property manager beats chasing one-off lockouts."]
+];
+
+
+const TIER={OPEN:"Wide open",ROOM:"Room to enter",SOLOS:"Crowded with solos",PACKED:"Packed & consolidated",NODATA:"No data"};
+const list=document.getElementById('list'),
+      chips=document.getElementById('chips'),
+      q=document.getElementById('q'),
+      cnt=document.getElementById('count');
+let cat="ALL", dayOnly=false, tier="ALL", pile="todo";
+let decisions={};
+const SKEY='lxxv:decisions';
+const hasStore = typeof window!=='undefined' && window.storage && typeof window.storage.set==='function';
+let storeOK=null;   // null unknown, true saving, false not saving
+
+async function loadDecisions(){
+  if(!hasStore){ storeOK=false; return {}; }
+  try{
+    const r = await window.storage.get(SKEY, false);
+    storeOK = true;
+    return (r && r.value) ? JSON.parse(r.value) : {};
+  }catch(e){
+    // A missing key throws on first run, which is normal and not a failure.
+    return {};
+  }
+}
+
+let saveTimer=null;
+async function saveDecisions(){
+  if(!hasStore){ storeOK=false; noteSave(); return; }
+  clearTimeout(saveTimer);
+  saveTimer = setTimeout(async ()=>{
+    const payload = JSON.stringify(decisions);
+    for(let attempt=0; attempt<2; attempt++){
+      try{
+        await window.storage.set(SKEY, payload, false);
+        if(storeOK!==true){ storeOK=true; noteSave(); }
+        return;
+      }catch(e){
+        if(attempt===1){ storeOK=false; noteSave(); }
+      }
+    }
+  }, 250);
+}
+
+function noteSave(){
+  const el=document.getElementById('savenote'); if(!el)return;
+  if(storeOK===false){
+    el.textContent='Marks are kept for this session only \u2014 saving is unavailable here.';
+    el.style.display='block';
+  } else { el.style.display='none'; }
+}
+function pileCounts(){
+  const c={todo:0,yes:0,maybe:0,no:0};
+  D.forEach(x=>{ const v=decisions[x.n]; if(v&&c[v]!==undefined) c[v]++; else c.todo++; });
+  return c;
+}
+function renderPiles(){
+  const c=pileCounts();
+  const defs=[['todo','To review',c.todo,''],['yes','Yes',c.yes,'y'],['maybe','Maybe',c.maybe,'m'],['no','No',c.no,'n'],['all','All',D.length,'']];
+  document.getElementById('piles').innerHTML = defs.map(([k,l,n,cl])=>
+    '<button class="pilebtn '+cl+'" data-p="'+k+'" aria-pressed="'+(pile===k)+'">'+l+' <b>'+n+'</b></button>').join('');
+}
+function decide(name, val){
+  if(decisions[name]===val) delete decisions[name]; else decisions[name]=val;
+  saveDecisions();
+  renderPiles(); render();
+}
+
+function bucket(m,d){ if(d)return'f-fast'; if(m<=12)return'f-fast'; if(m<=24)return'f-mid'; return'f-slow'; }
+function label(m,d){ return d? "Staffed from day one" : m+" months to hands-off"; }
+
+function render(){
+  const term=q.value.trim().toLowerCase();
+  let rows=D.map((x,i)=>({...x,i:i+1}));
+  if(cat!=="ALL") rows=rows.filter(r=>r.c===cat);
+  if(dayOnly) rows=rows.filter(r=>r.d);
+  if(tier!=="ALL") rows=rows.filter(r=>SAT[r.n]&&SAT[r.n][0]===tier);
+  if(pile==="todo") rows=rows.filter(r=>!decisions[r.n]);
+  else if(pile!=="all") rows=rows.filter(r=>decisions[r.n]===pile);
+  if(term) rows=rows.filter(r=>(r.n+" "+r.note+" "+CATS[r.c]
+    +" "+(ACQ[r.n]?ACQ[r.n].join(" "):"")
+    +" "+(SAT[r.n]?SAT[r.n].join(" ")+" "+TIER[SAT[r.n][0]]:"")).toLowerCase().includes(term));
+
+  const pc=pileCounts();
+  cnt.textContent = pile==="todo" ? rows.length+" left to review"
+                  : pile==="all" ? rows.length+" of 118 shown"
+                  : rows.length+" in this pile";
+  if(!rows.length){
+    const term2=q.value.trim();
+    let msg;
+    if(term2||cat!=="ALL"||tier!=="ALL"||dayOnly) msg='<div class="rule"><b>Nothing matches that.</b><p>Clear the search or loosen a filter.</p></div>';
+    else if(pile==="todo") msg='<div class="emptypile"><b>You went through all 118.</b><p>'+pc.yes+' yes, '+pc.maybe+' maybe, '+pc.no+' no. Tap a pile above to review your picks.</p></div>';
+    else if(pile==="yes") msg='<div class="emptypile"><b>No yeses yet.</b><p>Work the review pile and tap Yes on anything worth a second look.</p></div>';
+    else if(pile==="maybe") msg='<div class="emptypile"><b>Nothing in maybe.</b><p>Use this for the ones you can\'t rule out but aren\'t sold on.</p></div>';
+    else msg='<div class="emptypile"><b>Nothing ruled out yet.</b><p>Tapping No clears it from the review pile so the list gets shorter.</p></div>';
+    list.innerHTML=msg;
+    return;
+  }
+
+  let html="", last="";
+  rows.forEach(r=>{
+    if(r.c!==last){ html+='<p class="catlabel">'+CATS[r.c]+'</p>'; last=r.c; }
+    const w=r.d?100:Math.max(6,Math.round(r.m/36*100));
+    const st=SAT[r.n], a=ACQ[r.n];
+    html+='<article class="card'+(decisions[r.n]?' filed':'')+'">'
+      +'<div class="card-top"><span class="idx">No. '+String(r.i).padStart(3,'0')+'</span>'
+      +(st?'<span class="sat-badge t-'+st[0]+'">'+TIER[st[0]]+'</span>':'')
+      +(r.d?'<span class="stamp">Day one</span>':'')
+      +'</div>'
+      +'<h4>'+r.n+'</h4>'
+      +'<p class="note">'+r.note+'</p>'
+      +'<div class="tl"><div class="tl-top"><b>'+label(r.m,r.d)+'</b><span>'+r.cost+'</span></div>'
+      +'<div class="tl-bar"><div class="tl-fill '+bucket(r.m,r.d)+'" style="width:'+w+'%"></div></div>'
+      +'<div class="tl-ticks"><span>launch</span><span>12mo</span><span>24mo</span><span>36mo</span></div></div>'
+      +'<div class="dg">'
+      +'<div><span>You pay staff</span><b>'+r.pay+'</b></div>'
+      +'<div><span>Job bills</span><b>'+r.tk+'</b></div>'
+      +'<div class="wide"><span>The spread</span><b>'+r.sp+'</b></div>'
+      +'</div>';
+    if(st){
+      const dl=['','Soft','Steady','Strong','Surging'][st[1]];
+      let pips=''; for(let k=1;k<=4;k++) pips+='<i class="pip'+(k<=st[1]?' on d'+st[1]:'')+'"></i>';
+      html+='<details class="fold"><summary>Can I get in?<span class="conf c-'+st[7].replace(/[^A-Z]/g,'')+'">'+st[7]+'</span></summary>'
+        +'<div class="fold-body">'
+        +'<p class="verdict">'+st[2]+'</p>'
+        +'<div class="demand"><span>Demand</span><div class="pips">'+pips+'</div><b class="d'+st[1]+'">'+dl+'</b></div>'
+        +'<div class="localck"><span>Check your own market</span>'
+        +'<b>Search &ldquo;'+st[3]+'&rdquo;</b><p>'+st[4]+'</p></div>'
+        +'<div class="frow"><span>Nationally</span><b>'+st[5]+'</b></div>'
+        +'<div class="frow"><span>Why demand holds</span><b>'+st[6]+'</b></div>'
+        +'</div></details>';
+    }
+    if(a){
+      html+='<details class="fold"><summary>Getting customers<span class="conf c-'+a[3].replace(/[^A-Z]/g,'')+'">'+a[3]+'</span></summary>'
+        +'<div class="fold-body">'
+        +'<div class="frow"><span>Cost per lead</span><b>'+a[0]+'</b></div>'
+        +'<div class="frow"><span>Low-end close rate</span><b>'+a[1]+'</b></div>'
+        +'<div class="frow"><span>True cost per customer</span><b>'+a[2]+'</b></div>'
+        +'<div class="play" style="margin-top:10px;"><ol>'
+        +'<li>'+a[4]+'</li><li>'+a[5]+'</li><li>'+a[6]+'</li></ol>'
+        +'<p class="first"><span>Start here</span>'+a[7]+'</p></div>'
+        +'</div></details>';
+    }
+    const dv=decisions[r.n]||'';
+    html+='<div class="decide">'
+      +'<button class="dbtn y'+(dv==='yes'?' on':'')+'" data-n="'+encodeURIComponent(r.n)+'" data-v="yes">Yes</button>'
+      +'<button class="dbtn m'+(dv==='maybe'?' on':'')+'" data-n="'+encodeURIComponent(r.n)+'" data-v="maybe">Maybe</button>'
+      +'<button class="dbtn n'+(dv==='no'?' on':'')+'" data-n="'+encodeURIComponent(r.n)+'" data-v="no">No</button>'
+      +'</div>';
+    html+='</article>';
+  });
+  const anyDecided=Object.keys(decisions).length>0;
+  list.innerHTML=html+(anyDecided?'<div class="resetrow"><button class="resetbtn">Clear all my marks</button></div>':'');
+}
+
+let ch='<button class="chip day" data-d="1" aria-pressed="false">Day-one crews</button>'
+  +'<button class="chip" data-c="ALL" aria-pressed="true">All</button>';
+Object.keys(CATS).forEach(k=>{ ch+='<button class="chip" data-c="'+k+'" aria-pressed="false">'+CATS[k]+'</button>'; });
+chips.innerHTML=ch;
+
+let ch2='<button class="chip sat" data-t="ALL" aria-pressed="true">Any competition</button>';
+[["OPEN","Wide open"],["ROOM","Room to enter"],["SOLOS","Crowded with solos"],["PACKED","Packed \u2014 avoid"]]
+ .forEach(([k,l])=>{ ch2+='<button class="chip sat" data-t="'+k+'" aria-pressed="false">'+l+'</button>'; });
+document.getElementById('chips2').innerHTML=ch2;
+
+document.getElementById('chips2').addEventListener('click',e=>{
+  const b=e.target.closest('.chip'); if(!b)return;
+  tier=b.dataset.t;
+  document.getElementById('chips2').querySelectorAll('.chip').forEach(x=>x.setAttribute('aria-pressed',x===b));
+  render();
+});
+chips.addEventListener('click',e=>{
+  const b=e.target.closest('.chip'); if(!b)return;
+  if(b.dataset.d){ dayOnly=!dayOnly; b.setAttribute('aria-pressed',dayOnly); }
+  else{
+    cat=b.dataset.c;
+    chips.querySelectorAll('.chip[data-c]').forEach(x=>x.setAttribute('aria-pressed',x===b));
+  }
+  render();
+});
+q.addEventListener('input',render);
+
+document.getElementById('piles').addEventListener('click',e=>{
+  const b=e.target.closest('.pilebtn'); if(!b)return;
+  pile=b.dataset.p; renderPiles(); render();
+  document.getElementById('listsec').scrollIntoView({block:'start'});
+});
+
+list.addEventListener('click',e=>{
+  const b=e.target.closest('.dbtn'); if(!b)return;
+  const name=decodeURIComponent(b.dataset.n), val=b.dataset.v;
+  const card=b.closest('.card');
+  const leaving = pile==='todo' && decisions[name]!==val;
+  if(leaving && !matchMedia('(prefers-reduced-motion: reduce)').matches){
+    card.classList.add('leaving');
+    setTimeout(()=>decide(name,val),240);
+  } else {
+    decide(name,val);
+  }
+});
+
+document.addEventListener('click',e=>{
+  if(!e.target.closest('.resetbtn'))return;
+  if(!confirm('Clear all your yes, maybe and no marks? This cannot be undone.'))return;
+  decisions={}; saveDecisions(); renderPiles(); render();
+});
+
+document.getElementById('short').innerHTML=SHORT.map(s=>
+  '<li><b>'+s[0]+'</b><span>'+s[1]+'</span></li>').join('');
+
+// splash
+const sp=document.getElementById('splash');
+const dismiss=()=>sp.classList.add('gone');
+sp.addEventListener('click',dismiss);
+if(matchMedia('(prefers-reduced-motion: reduce)').matches){ dismiss(); }
+else{ setTimeout(dismiss, 2000); }
+
+// nav highlight
+const tabs=[...document.querySelectorAll('.tab')];
+const targets=tabs.map(t=>document.querySelector(t.getAttribute('href')));
+const io=new IntersectionObserver(es=>{
+  es.forEach(e=>{ if(e.isIntersecting){
+    tabs.forEach(t=>t.classList.toggle('on', t.getAttribute('href')==='#'+e.target.id));
+  }});
+},{rootMargin:'-20% 0px -60% 0px'});
+targets.forEach(t=>t&&io.observe(t));
+
+(async ()=>{
+  decisions = await loadDecisions();
+  renderPiles();
+  render();
+  // Probe write so the user learns immediately whether marks will persist.
+  if(hasStore){
+    try{ await window.storage.set(SKEY, JSON.stringify(decisions), false); storeOK=true; }
+    catch(e){ storeOK=false; }
+  }
+  noteSave();
+})();
+</script>
+</body>
+</html>
