@@ -1202,33 +1202,45 @@ const list=document.getElementById('list'),
 let cat="ALL", dayOnly=false, tier="ALL", pile="todo";
 let decisions={};
 const SKEY='marks';
-const hasStore = typeof window!=='undefined' && window.storage && typeof window.storage.set==='function';
+let store=null;        // whichever backend actually round-trips
 let storeOK=null;      // null unknown, true saving, false not saving
-let sigIndex=null;     // which call signature this client accepts
 
-// The storage bridge behaves differently across clients, so probe the call
-// signatures at startup and keep whichever one round-trips successfully.
-const SIGS=[
-  { set:(k,v)=>window.storage.set(k,v),        get:(k)=>window.storage.get(k) },
-  { set:(k,v)=>window.storage.set(k,v,false),  get:(k)=>window.storage.get(k,false) },
-  { set:(k,v)=>window.storage.set(k,v,true),   get:(k)=>window.storage.get(k,true) }
-];
+// Storage behaves differently in every viewer, so try each backend in order and
+// keep the first that survives a real write-then-read. Every call is guarded so a
+// missing or broken API can never throw into the page.
+function buildBackends(){
+  const list=[];
+  const host = (typeof window!=='undefined' && window.storage && typeof window.storage.set==='function') ? window.storage : null;
+  if(host){
+    list.push({tag:'host',    set:(k,v)=>host.set(k,v),        get:k=>host.get(k)});
+    list.push({tag:'host-p',  set:(k,v)=>host.set(k,v,false),  get:k=>host.get(k,false)});
+    list.push({tag:'host-s',  set:(k,v)=>host.set(k,v,true),   get:k=>host.get(k,true)});
+  }
+  list.push({tag:'local',   set:async(k,v)=>{window.localStorage.setItem(k,v);},   get:async k=>window.localStorage.getItem(k)});
+  list.push({tag:'session', set:async(k,v)=>{window.sessionStorage.setItem(k,v);}, get:async k=>window.sessionStorage.getItem(k)});
+  return list;
+}
+
+function readValue(r){
+  if(r===null||r===undefined)return null;
+  if(typeof r==='string')return r;
+  if(typeof r==='object'&&typeof r.value==='string')return r.value;
+  return null;
+}
 
 async function probeStorage(){
-  if(!hasStore)return null;
-  for(let i=0;i<SIGS.length;i++){
+  const backends=buildBackends();
+  for(const b of backends){
     try{
-      await SIGS[i].set('probe','ok');
-      const r=await SIGS[i].get('probe');
-      if(r && r.value==='ok') return i;
-    }catch(e){ /* try the next signature */ }
+      await b.set('probe','ok');
+      const v=readValue(await b.get('probe'));
+      if(v==='ok')return b;
+    }catch(e){ /* try the next backend */ }
   }
   return null;
 }
 
 // Marks are stored as a compact pure-ASCII string of list indexes, e.g. "y0.3.7|m12|n1.2".
-// Business names contain slashes, ampersands and dashes, so keeping them out of
-// the payload removes any serialization risk.
 function encodeMarks(){
   const y=[],m=[],n=[];
   D.forEach((x,i)=>{
@@ -1254,38 +1266,38 @@ function decodeMarks(str){
 }
 
 async function loadDecisions(){
-  sigIndex = await probeStorage();
-  if(sigIndex===null){ storeOK=false; return {}; }
+  store = await probeStorage();
+  if(!store){ storeOK=false; return {}; }
   storeOK=true;
-  try{
-    const r = await SIGS[sigIndex].get(SKEY);
-    return decodeMarks(r && typeof r.value==='string' ? r.value : '');
-  }catch(e){
-    return {};   // no key yet on first run
-  }
+  try{ return decodeMarks(readValue(await store.get(SKEY))); }
+  catch(e){ return {}; }
 }
 
 let saveTimer=null;
 async function saveDecisions(){
-  if(sigIndex===null){ storeOK=false; noteSave(); return; }
+  if(!store){ storeOK=false; noteSave(); return; }
   clearTimeout(saveTimer);
   saveTimer=setTimeout(()=>writeMarks(),200);
 }
 
 async function writeMarks(){
-  if(sigIndex===null){ storeOK=false; noteSave(); return false; }
+  if(!store){ storeOK=false; noteSave(); return false; }
   const payload=encodeMarks();
   for(let attempt=0;attempt<3;attempt++){
     try{
-      await SIGS[sigIndex].set(SKEY,payload);
-      const back=await SIGS[sigIndex].get(SKEY);
-      if(back && back.value===payload){
+      await store.set(SKEY,payload);
+      if(readValue(await store.get(SKEY))===payload){
         if(storeOK!==true){ storeOK=true; noteSave(); }
         return true;
       }
       throw new Error('write did not verify');
     }catch(e){
-      if(attempt===2){ storeOK=false; noteSave(); return false; }
+      if(attempt===2){
+        // This backend died mid-session. Re-probe once before giving up.
+        store=await probeStorage();
+        if(store){ try{ await store.set(SKEY,payload); return true; }catch(e2){} }
+        storeOK=false; noteSave(); return false;
+      }
       await new Promise(r=>setTimeout(r,150*(attempt+1)));
     }
   }
