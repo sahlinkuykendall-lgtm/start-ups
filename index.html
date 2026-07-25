@@ -1203,11 +1203,32 @@ let cat="ALL", dayOnly=false, tier="ALL", pile="todo";
 let decisions={};
 const SKEY='marks';
 const hasStore = typeof window!=='undefined' && window.storage && typeof window.storage.set==='function';
-let storeOK=null;   // null unknown, true saving, false not saving
+let storeOK=null;      // null unknown, true saving, false not saving
+let sigIndex=null;     // which call signature this client accepts
+
+// The storage bridge behaves differently across clients, so probe the call
+// signatures at startup and keep whichever one round-trips successfully.
+const SIGS=[
+  { set:(k,v)=>window.storage.set(k,v),        get:(k)=>window.storage.get(k) },
+  { set:(k,v)=>window.storage.set(k,v,false),  get:(k)=>window.storage.get(k,false) },
+  { set:(k,v)=>window.storage.set(k,v,true),   get:(k)=>window.storage.get(k,true) }
+];
+
+async function probeStorage(){
+  if(!hasStore)return null;
+  for(let i=0;i<SIGS.length;i++){
+    try{
+      await SIGS[i].set('probe','ok');
+      const r=await SIGS[i].get('probe');
+      if(r && r.value==='ok') return i;
+    }catch(e){ /* try the next signature */ }
+  }
+  return null;
+}
 
 // Marks are stored as a compact pure-ASCII string of list indexes, e.g. "y0.3.7|m12|n1.2".
-// Business names contain slashes, ampersands and dashes, so keeping them out of the
-// payload entirely removes any serialization risk.
+// Business names contain slashes, ampersands and dashes, so keeping them out of
+// the payload removes any serialization risk.
 function encodeMarks(){
   const y=[],m=[],n=[];
   D.forEach((x,i)=>{
@@ -1233,33 +1254,31 @@ function decodeMarks(str){
 }
 
 async function loadDecisions(){
-  if(!hasStore){ storeOK=false; return {}; }
+  sigIndex = await probeStorage();
+  if(sigIndex===null){ storeOK=false; return {}; }
+  storeOK=true;
   try{
-    const r = await window.storage.get(SKEY, false);
-    const val = r && typeof r.value==='string' ? r.value : '';
-    storeOK = true;
-    return decodeMarks(val);
+    const r = await SIGS[sigIndex].get(SKEY);
+    return decodeMarks(r && typeof r.value==='string' ? r.value : '');
   }catch(e){
-    // A missing key throws on first run, which is normal, not a failure.
-    return {};
+    return {};   // no key yet on first run
   }
 }
 
 let saveTimer=null;
 async function saveDecisions(){
-  if(!hasStore){ storeOK=false; noteSave(); return; }
+  if(sigIndex===null){ storeOK=false; noteSave(); return; }
   clearTimeout(saveTimer);
-  saveTimer = setTimeout(()=>writeMarks(), 200);
+  saveTimer=setTimeout(()=>writeMarks(),200);
 }
 
 async function writeMarks(){
-  const payload = encodeMarks();
-  for(let attempt=0; attempt<3; attempt++){
+  if(sigIndex===null){ storeOK=false; noteSave(); return false; }
+  const payload=encodeMarks();
+  for(let attempt=0;attempt<3;attempt++){
     try{
-      await window.storage.set(SKEY, payload, false);
-      // Read it back. A write that "succeeds" but doesn't persist is the
-      // failure mode that silently loses work, so verify rather than assume.
-      const back = await window.storage.get(SKEY, false);
+      await SIGS[sigIndex].set(SKEY,payload);
+      const back=await SIGS[sigIndex].get(SKEY);
       if(back && back.value===payload){
         if(storeOK!==true){ storeOK=true; noteSave(); }
         return true;
@@ -1276,8 +1295,8 @@ async function writeMarks(){
 function noteSave(){
   const el=document.getElementById('savenote'); if(!el)return;
   if(storeOK===false){
-    el.innerHTML='Saving is unavailable here \u2014 marks stay for this session only. '
-      +'<button class="linkbtn" id="backupbtn">Back up my marks</button>';
+    el.innerHTML='This viewer won\u2019t let the page save. Your marks work normally but reset when you close it \u2014 '
+      +'<button class="linkbtn" id="backupbtn">keep a backup code</button>';
     el.style.display='block';
   } else {
     el.innerHTML='<button class="linkbtn" id="backupbtn">Back up or restore marks</button>';
@@ -1286,20 +1305,38 @@ function noteSave(){
 }
 
 function openBackup(){
-  const code=encodeMarks();
   const box=document.getElementById('backupbox');
-  box.innerHTML='<p>Copy this code somewhere safe. Paste it back here anytime to restore your marks.</p>'
-    +'<textarea id="backupcode" rows="3" spellcheck="false"></textarea>'
-    +'<div class="backuprow"><button class="resetbtn" id="restorebtn">Restore from code</button>'
+  box.innerHTML='<p>Copy this and paste it back anytime to restore every mark.</p>'
+    +'<textarea id="backupcode" rows="2" spellcheck="false"></textarea>'
+    +'<div class="backuprow">'
+    +'<button class="resetbtn" id="copybtn">Copy</button>'
+    +'<button class="resetbtn" id="restorebtn">Restore</button>'
     +'<span id="backupmsg"></span></div>';
   box.style.display='block';
   const ta=document.getElementById('backupcode');
-  ta.value=code; ta.focus(); ta.select();
+  ta.value=encodeMarks();
+
+  document.getElementById('copybtn').onclick=()=>{
+    const t=document.getElementById('backupcode');
+    t.select(); t.setSelectionRange(0,99999);
+    const done=()=>{ document.getElementById('backupmsg').textContent='Copied.'; };
+    if(navigator.clipboard&&navigator.clipboard.writeText){
+      navigator.clipboard.writeText(t.value).then(done).catch(()=>{
+        try{ document.execCommand('copy'); done(); }catch(e){
+          document.getElementById('backupmsg').textContent='Select it and copy manually.';
+        }
+      });
+    } else {
+      try{ document.execCommand('copy'); done(); }
+      catch(e){ document.getElementById('backupmsg').textContent='Select it and copy manually.'; }
+    }
+  };
+
   document.getElementById('restorebtn').onclick=()=>{
     const v=document.getElementById('backupcode').value.trim();
     const parsed=decodeMarks(v);
-    if(!Object.keys(parsed).length && v!=='y|m|n'){
-      document.getElementById('backupmsg').textContent='That code didn\'t read.';
+    if(!Object.keys(parsed).length && v.indexOf('y')!==0){
+      document.getElementById('backupmsg').textContent='That code didn\u2019t read.';
       return;
     }
     decisions=parsed; saveDecisions(); renderPiles(); render();
@@ -1497,11 +1534,6 @@ targets.forEach(t=>t&&io.observe(t));
   decisions = await loadDecisions();
   renderPiles();
   render();
-  // Probe write so the user learns immediately whether marks will persist.
-  if(hasStore){
-    try{ await window.storage.set(SKEY, JSON.stringify(decisions), false); storeOK=true; }
-    catch(e){ storeOK=false; }
-  }
   noteSave();
 })();
 </script>
