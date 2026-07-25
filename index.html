@@ -272,6 +272,23 @@ details.fold[open]>summary::after{transform:rotate(45deg);}
 .frow:first-child{border-top:0;}
 .frow span{display:block;font-family:"Spline Sans Mono",monospace;font-size:8.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--mute);margin-bottom:3px;}
 .frow b{font-size:13.5px;font-weight:400;color:var(--ink);line-height:1.45;display:block;}
+.linkbtn{
+  background:none;border:0;padding:0;cursor:pointer;color:var(--gold);
+  font-family:"Spline Sans Mono",monospace;font-size:9.5px;letter-spacing:.08em;
+  text-transform:uppercase;text-decoration:underline;text-underline-offset:3px;
+}
+.backupbox{
+  background:var(--glass);border:1px solid var(--line2);border-radius:var(--r2);
+  padding:13px;margin:0 0 10px;
+}
+.backupbox p{margin:0 0 8px;font-size:12.5px;color:var(--soft);}
+.backupbox textarea{
+  width:100%;background:rgba(0,0,0,.25);border:1px solid var(--line);border-radius:8px;
+  color:var(--gold2);font-family:"Spline Sans Mono",monospace;font-size:11px;
+  padding:9px;resize:vertical;
+}
+.backuprow{display:flex;align-items:center;gap:10px;margin-top:8px;}
+.backuprow span{font-family:"Spline Sans Mono",monospace;font-size:9.5px;color:#7BD8AA;}
 .savenote{
   margin:0 0 8px;font-family:"Spline Sans Mono",monospace;font-size:9.5px;
   letter-spacing:.08em;color:#C79A8B;
@@ -355,6 +372,15 @@ details.fold[open]>summary::after{transform:rotate(45deg);}
 }
 .localck b{display:block;font-size:14px;font-weight:500;color:var(--gold2);margin-bottom:5px;}
 .localck p{margin:0;font-size:13.5px;color:var(--soft);line-height:1.5;}
+.passrow{
+  background:rgba(75,174,126,.09);border:1px solid rgba(75,174,126,.35);
+  border-radius:var(--r2);padding:10px 12px;margin:9px 0;
+}
+.passrow span{
+  display:block;font-family:"Spline Sans Mono",monospace;font-size:8.5px;
+  letter-spacing:.13em;text-transform:uppercase;color:#7BD8AA;margin-bottom:3px;
+}
+.passrow b{font-size:13.5px;font-weight:500;color:var(--ink);line-height:1.45;display:block;}
 .play ol{margin:6px 0 12px;padding-left:20px;}
 .play li{font-size:13.5px;margin-bottom:6px;color:var(--soft);}
 .play .first{
@@ -547,6 +573,7 @@ footer{
   <div class="controls"><div class="controls-in">
     <div class="piles" id="piles"></div>
     <p class="savenote" id="savenote" style="display:none"></p>
+    <div class="backupbox" id="backupbox" style="display:none"></div>
     <input id="q" type="search" placeholder="Search 118 ideas — try &ldquo;radon&rdquo; or &ldquo;fiber&rdquo;" aria-label="Search ideas">
     <div class="chips" id="chips"></div>
     <div class="chips chiprow2" id="chips2"></div>
@@ -901,6 +928,127 @@ const SAT={
 "Pet cremation & end-of-life services":["ROOM",4,"Yes. Vet clinics need a reliable partner, and roughly 94–95 million US households own pets.","pet cremation + your region","Under 3 means room. Better check: ask five vet clinics who handles their aftercare.","No clean count","Pet humanization and 94–95M pet-owning households (APPA 2024–26) make it recession-resistant","LOW"]
 };
 
+// [test type, cost, what to do, what passing looks like, what failing tells you]
+const TEST={
+"Commercial janitorial / office cleaning":["Cold outbound","Free · 2 weeks","Build a list of 60 facility and property managers in your county. Call every one. Pitch a free walkthrough and a bid, not a contract.","6 or more let you walk their building.","Under 6 and either your pitch is wrong or incumbents have the market locked. Try a different vertical \u2014 medical or schools \u2014 before writing it off."],
+"Residential recurring house cleaning":["Ad smoke test","$200 · 2 weeks","Check Keyword Planner for 'house cleaning' in your metro, then run $200 of Google Ads to a one-page site with a booking form.","30+ local searches a month and leads landing under $60.","Leads over $60 in a $47-national-average vertical means your metro is unusually competitive. Check who's bidding."],
+"Pressure washing / soft washing":["Ad smoke test","$200 · 2 weeks","Run $200 of Local Services Ads. Track cost per lead and how many turn into booked jobs.","Leads under $90 and at least one booked job.","No bookings off 3+ leads means your pricing or response speed is the problem, not demand."],
+"Window cleaning (commercial route)":["Cold outbound","Free · 1 week","Walk one downtown block. Pitch every storefront on monthly service at a flat rate.","4 or more want a quote off 30 doors.","Under 4 means the block is already served. Try a newer retail corridor before quitting."],
+"Gutter cleaning & guard installation":["Ad smoke test","$150 · 2 weeks","Run $150 of ads in early fall, when intent peaks. Track cost per lead.","Leads under $90 and one booked job.","Off-season testing gives a false negative here. Only trust a fall or spring result."],
+"Lawn care / landscape maintenance route":["Door hangers","$150 · 3 weeks","Print 1,000 hangers with one offer and a deadline. Hit one subdivision three times over three weeks.","10 or more calls, which is a 1% response.","Under 1% means the offer is weak or the neighborhood already has a provider on every street."],
+"Holiday & architectural lighting":["Door hangers","$200 · 3 weeks","Drop 1,000 hangers in high-income neighborhoods in September and October. Nothing else works off-season.","8 or more quote requests.","Testing this outside Q4 tells you nothing. Wait for the season."],
+"Mosquito & pest control route":["Door hangers","$200 · 3 weeks","Drop 1,000 hangers in spring with a hard offer and a written guarantee. Re-drop the same streets twice.","12 or more calls, and 3 converting to a season plan.","Under that in spring means the national brands already own the neighborhood."],
+"Carpet & upholstery cleaning":["Ad smoke test","$200 · 2 weeks","Run $200 of ads while separately calling 10 property managers about turnover cleans.","Leads under $90, or 2 property managers wanting pricing.","If ads fail but property managers bite, the commercial route is your business \u2014 not residential."],
+"Pool cleaning & maintenance route":["Route density check","Free · 3 days","Pull satellite view. Count pools within a 3-mile radius. Then call 5 local pool companies posing as a customer and ask their next opening.","200+ pools nearby and companies booked a week out.","Immediate availability everywhere means the market is served. Check a different radius."],
+"Air duct & dryer vent cleaning":["Partner test","Free · 1 week","Call 8 HVAC companies. Ask if they'd refer duct work for a cut.","3 or more say yes.","Under 3 usually means they already do it in-house. Pivot to dryer vents and apartment complexes."],
+"Chimney sweep & inspection":["Partner test","Free · 1 week","Call every home inspector in your county. Ask who they refer chimney work to and whether that person answers the phone.","3 or more say their current guy is slow or retiring.","If they all name a responsive incumbent, the referral pipeline is closed."],
+"Handyman services (multi-tech dispatch)":["Ad smoke test","$200 · 2 weeks","Run $200 of Local Services Ads. Answer every lead within 5 minutes and track your booking rate.","Leads under $60 and a booking rate over 30%.","High lead cost with low bookings means you're competing against faster responders, not cheaper ones."],
+"Commercial kitchen hood cleaning":["Cold outbound","Free · 2 weeks","Visit 30 restaurants in person. Ask when their hood was last certified and who did it.","5 or more are overdue or unhappy with their vendor.","If everyone has a current tag and a vendor they like, route density won't save you."],
+"Parking lot striping & sealcoating":["Cold outbound","Free · 1 week","Drive commercial corridors and photograph 25 faded lots. Mail each owner the photo with a quote.","3 or more call back.","Under 3 off 25 targeted photos means budgets are frozen or someone's already bidding it."],
+"Fleet & commercial pressure washing":["Cold outbound","$50 · 2 weeks","Visit 15 fleet yards and dealerships. Offer one free truck wash as a demo.","4 or more accept the demo, 2 ask for pricing after.","Nobody buys this off a phone call. If in-person demos don't convert, the market's served."],
+"Sign installation & maintenance":["Network registration","Free · 2 weeks","Register with 5 national sign-maintenance networks that subcontract locally. Call 10 property managers about service.","One network activates you, or 2 property managers want pricing.","Networks going quiet usually means your market already has a subcontractor."],
+"Commercial refrigeration & appliance repair":["Cold outbound","Free · 2 weeks","Call 20 restaurants and small grocers. Ask their current service response time.","5 or more report waits over 24 hours.","Fast incumbent response means you'd compete on price alone \u2014 the worst position in this trade."],
+"Document shredding & records destruction":["Cold outbound","Free · 2 weeks","Call 30 law, medical and financial offices. Ask what they pay for shredding now.","6 or more are unhappy with cost or scheduling.","Satisfied clients on national contracts are nearly impossible to move."],
+"Portable toilet & restroom trailer rental":["Cold outbound","Free · 2 weeks","Call 20 general contractors and 10 event venues. Ask about unit availability during their busy season.","5 or more report shortages at peak.","No shortages means the incumbent has capacity and you'd be fighting on price."],
+"Mobile notary & loan-signing agency":["Platform test","Free · 2 weeks","Sign up with every signing service platform. Track how many assignments come through.","5 or more assignments in two weeks.","Low volume means your market is saturated with notaries or real-estate activity is soft."],
+"Bookkeeping / back-office service":["Partner test","Free · 2 weeks","Meet 8 CPAs and attorneys. Ask if they have clients needing monthly bookkeeping they don't want to do.","3 or more have referrals waiting.","Generic bookkeeping is saturated. If nobody bites, pick one industry and try again."],
+"Commercial grounds maintenance contracts":["Bid list","Free · 2 weeks","Get on the bid list for 15 HOAs and commercial properties. Ask when their contracts renew.","5 or more have contracts expiring within 6 months.","Contracts locked for years means you're waiting, not selling. Time your entry."],
+"Drain cleaning & hydro-jetting route":["Ad smoke test","$200 · 2 weeks","Run $200 of Local Services Ads on emergency intent, and separately call 15 restaurants about scheduled jetting.","Leads under $80, or 3 restaurants wanting a schedule.","Restaurant contracts matter more than emergency calls here \u2014 weight that result heavier."],
+"Septic pumping & inspection":["Partner test","Free · 2 weeks","Call every realtor office in your rural county. Ask who they use for point-of-sale septic inspections and their turnaround.","3 or more report waits over a week.","Fast incumbent turnaround in a small market is hard to beat. Check an adjacent county."],
+"Garage door installation & repair":["Ad smoke test","$250 · 2 weeks","Run $250 of ads on 'garage door repair.' Watch what a lead actually costs you.","Leads under $120.","If PE-backed competitors have bid your metro past $120, the economics are already broken for a startup."],
+"Fence installation & repair":["Ad smoke test","$200 · 2 weeks","Run $200 of ads and track quote requests.","Leads under $90 and one quote over $4,000.","Small quote sizes mean you're attracting repair work, not installs. Different business."],
+"Epoxy & concrete floor coating":["Meta ad test","$200 · 2 weeks","Run $200 on Meta with before-and-after photos, not search ads. Nobody searches for this.","10 or more quote requests.","This is created demand. If good photos don't generate interest, the market isn't ready."],
+"Insulation & weatherization":["Program check","Free · 1 week","Call your utility. Ask how to get on the approved rebate contractor list and how many are on it now.","Under 10 contractors on the list, and an open application.","A long list or a closed program means the rebate pipeline is already crowded."],
+"Carpet & flooring installation":["Subcontract test","Free · 1 week","Walk into every independent flooring retailer in the county. Ask who installs for them and whether they need more crews.","3 or more say they're short on reliable installers.","If everyone has enough crews, you'd be starting with no pipeline."],
+"Dumpster / roll-off rental":["Cold outbound","Free · 2 weeks","Call 20 contractors, roofers and property managers. Ask their current dumpster wait time.","5 or more report waits over 2 days.","No waits means capacity exists and you'd buy a truck to compete on price."],
+"Contractor equipment rental":["Jobsite test","Free · 1 week","Visit 15 jobsites. Ask what equipment they rent and where from.","5 or more name a supplier more than 20 minutes away.","If United Rentals is close and stocked, don't fight it."],
+"Party & event rental":["Partner test","Free · 1 week","Call 10 venues and 5 event planners. Ask who they recommend and whether availability is ever a problem.","4 or more report shortages during peak season.","Same name every time with no shortages means the market is served."],
+"Mobile storage container rental":["Cold outbound","Free · 2 weeks","Call 15 remodelers and contractors. Ask if they use on-site storage and what it costs them.","4 or more express interest in local availability.","National providers with local yards are hard to undercut."],
+"Utility trailer rental fleet":["Demand check","Free · 3 days","Count U-Haul and rental locations within 10 miles. Call 3 and ask trailer availability this weekend.","Sold out at 2 or more.","Availability everywhere means there's no unmet demand to capture."],
+"Apartment laundry equipment leasing":["Contract timing","Free · 2 weeks","Call 15 apartment complexes. Ask who services their laundry room and when the contract ends.","4 or more have contracts expiring within a year.","Long incumbent contracts mean years of waiting before you can bid."],
+"Billboard & small-format ad leasing":["Permit check","Free · 1 week","Call your county zoning office. Ask whether new sign permits are being issued and what the setback rules are.","Permits available on qualifying parcels.","A moratorium means existing inventory is the entire market and you can't enter."],
+"ATM route ownership":["Placement test","Free · 1 week","Walk into 20 bars, clubs, laundromats and convenience stores with a placement agreement in hand.","3 or more say yes.","Under 3 out of 20 means your area is saturated or the venues are too small to justify a machine."],
+"Vending route (smart machines)":["Placement test","Free · 1 week","Do 30 in-person pop-ins at offices, gyms and warehouses. Phone and email barely work here.","5 or more want a machine.","Under 5 from 30 in-person visits is a clear no. This is the highest-signal test in the guide."],
+"Micro-market / unattended office pantry":["Placement test","Free · 2 weeks","Visit 20 offices with 50+ employees. Bring a one-page mockup showing selection and self-checkout.","3 or more want a proposal.","Under 3 means your area lacks the office density this format needs."],
+"Specialty vending \u2014 ice, water, PPE, beauty":["Placement test","Free · 1 week","Scout 15 high-traffic outdoor sites for ice and water. Ask about ground lease terms.","2 or more landowners open to a lease.","No sites means the good corners are taken. Check adjacent towns."],
+"Claw machine & amusement route":["Placement test","Free · 1 week","Visit 20 bowling alleys, laundromats and family restaurants. Offer 20\u201325% of collections.","4 or more accept.","Low acceptance usually means an existing operator has the venues locked."],
+"Laundry pickup & delivery (wash-dry-fold)":["Capacity test","Free · 1 week","Call 8 laundromats. Ask if they're empty on weekday mornings and whether they'd sell you machine time wholesale.","2 or more open to a wholesale deal.","No wholesale partner means you need your own lease, which changes the capital math entirely."],
+"RV & boat storage lot":["Waitlist check","Free · 3 days","Call the 5 nearest RV and boat storage facilities posing as a customer. Ask about openings.","3 or more have waitlists or are full.","Open spots everywhere means demand is already met in your radius."],
+"Small automated self-storage":["Occupancy check","Free · 3 days","Call 6 self-storage facilities. Ask about unit availability and current rates.","4 or more are above 90% full.","Vacancy and discounting means the market is oversupplied. The REITs already found it."],
+"Dry-stack boat storage":["Waitlist check","Free · 1 week","Call every marina within an hour. Ask about dry-stack waitlists and rack rates.","2 or more have waitlists.","Empty racks mean the boating base is too small to support another facility."],
+"Stone & quartz countertop fabrication":["Subcontract test","Free · 2 weeks","Visit 10 kitchen and bath dealers. Ask who fabricates for them and their current lead time.","4 or more report lead times over 3 weeks.","Short lead times mean fabricators have capacity you'd be competing against."],
+"Awards, trophies & engraving":["Cold outbound","Free · 2 weeks","Call 15 school athletic directors and youth league organizers. Ask their current supplier and turnaround.","4 or more are unhappy or their supplier retired.","Institutional buyers are loyal. If they're satisfied, you're waiting for someone to retire."],
+"Screen printing & embroidery":["Cold outbound","Free · 2 weeks","Offer 12 local teams and businesses a free online team store where you print on demand.","4 or more set one up.","No interest means local shops already cover it. Try a niche \u2014 trades uniforms or church groups."],
+"Water & ice delivery route":["Route density","Free · 1 week","Cold-walk 25 offices in one commercial corridor. Water delivery is a five-minute yes or no.","6 or more want pricing.","Under 6 in a dense corridor means an incumbent route already serves the area."],
+"Small-batch food co-packing":["Partner test","Free · 2 weeks","Contact your regional food incubator and 8 emerging local brands. Ask where they co-pack now.","3 or more are traveling out of region to produce.","Local capacity already existing means you'd start with no pipeline."],
+"Cabinet refacing & surface resurfacing":["Meta ad test","$200 · 2 weeks","Run $200 on Meta and Houzz with before-and-after galleries.","8 or more quote requests.","This sells on photographs. Weak response with good photos means the market isn't there."],
+"Amazon FBA with real brand IP":["Listing research","Free · 1 week","Search your category on Amazon. Count listings under $30 with 500+ reviews and check whether any have real brand differentiation.","Thin competition and a defensible angle you actually own.","A first page of near-identical listings means you'd be entering a price war you can't win."],
+"Subscription box, under-served vertical":["Landing page test","$150 · 2 weeks","Build a one-page site with real pricing and a waitlist signup. Run $150 of targeted social ads.","20 or more signups, and 3 willing to prepay.","Signups without prepay commitment is the classic false positive here. Weight prepay heavily."],
+"B2B industrial e-commerce (niche parts)":["Search research","Free · 1 week","Search 20 specific part numbers in your niche. Note how thin or dated the results look.","Half or more return weak results.","Strong existing suppliers on every part number means no gap to fill."],
+"Specialty replacement parts store":["Search research","Free · 1 week","Search 25 obscure part numbers in a category you know. Look for the ones nobody stocks.","10 or more with no good source.","If everything's easily available, there's no long tail left to own."],
+"Print-on-demand niche brand":["Marketplace check","Free · 3 days","Search your design niche on Etsy. Count listings and check whether the top sellers have an audience you'd be competing against.","Under 500 listings and no dominant seller.","Thousands of listings means you'd need an audience you don't have yet."],
+"Non-medical home care agency":["Referral test","Free · 2 weeks","Meet 12 hospital discharge planners and case managers. Ask if their current agencies have caregiver availability.","4 or more report placement delays.","Agencies with immediate availability means capacity exists. Ask instead about specialty needs \u2014 dementia or overnight."],
+"Pet waste removal route":["Route density","$100 · 2 weeks","Drop 500 door hangers in dog-heavy neighborhoods, and separately call 10 HOAs and apartment complexes.","8 or more residential calls, or 2 HOAs wanting pricing.","The commercial result matters more. One HOA beats twenty scattered yards."],
+"Mobile pet grooming":["Availability check","Free · 1 week","Call 6 mobile groomers as a customer. Ask their next available appointment.","4 or more are booked 2+ weeks out.","Same-week availability means capacity exists. Also test whether you can hire a groomer \u2014 that's the real constraint."],
+"Dog walking & pet sitting (staffed)":["Platform check","Free · 1 week","Check Rover for your zip. Count active walkers and their availability.","Under 15 walkers, several fully booked.","A crowded platform means you'd need a staffed agency model to differentiate at all."],
+"Senior relocation & estate cleanout":["Referral test","Free · 2 weeks","Meet 10 senior living community directors and estate attorneys. Ask who they refer downsizing work to.","4 or more hesitate or name nobody.","Confident referrals to an established provider means the pipeline is closed."],
+"Non-emergency medical transport":["Credentialing check","Free · 2 weeks","Contact your state's Medicaid transportation broker. Ask whether they're accepting new providers in your county.","Open enrollment and unmet trip volume.","A closed panel means you can't get the contract that makes this business work."],
+"Aging-in-place home modification":["Referral test","Free · 2 weeks","Meet 10 occupational therapists and home care agency owners. Ask who installs grab bars and ramps for their clients.","5 or more name nobody specific.","This one usually passes \u2014 most counties have no CAPS-certified specialist at all."],
+"Backflow testing & certification":["List check","Free · 1 week","Get the certified tester list from every water authority in your area. Count names. Call 4 and ask their scheduling backlog.","Under 8 testers, and backlogs over a week.","A long list with immediate availability means annual testing demand is already covered."],
+"Fire extinguisher & suppression inspection":["Cold outbound","Free · 2 weeks","Walk a business park. Check tags on 25 extinguishers for expired inspection dates.","8 or more expired or missing.","Current tags everywhere means the buildings are under contract with someone."],
+"Fire sprinkler inspection, testing & maintenance":["Records check","Free · 2 weeks","Ask your fire marshal's office which buildings are overdue on five-year internals. Call 10 property managers.","5 or more overdue or unsure who their vendor is.","PE-backed regionals hold most of this. Confirm before investing in licensing."],
+"Fire alarm testing & monitoring":["Cold outbound","Free · 2 weeks","Call 20 commercial property managers. Ask who monitors their alarms and what they pay monthly.","5 or more paying above $75 a month or unhappy.","National monitoring contracts are sticky and cheap to renew. Hard to displace."],
+"Kitchen fire suppression (Ansul) service":["Cold outbound","Free · 2 weeks","Visit 25 restaurants. Ask when their suppression system was last serviced \u2014 it's required twice a year.","8 or more are overdue or can't name their vendor.","If national fire companies have them all, focus on new restaurant openings instead."],
+"Third-party elevator inspection":["List check","Free · 1 week","Get your state's approved QEI inspector list. Count names. Call 3 building owners about inspection wait times.","Under 10 inspectors statewide and reported delays.","This usually passes \u2014 the national inspector shortage is real."],
+"Home inspection (multi-inspector)":["Referral test","Free · 2 weeks","Meet 15 realtors. Ask who they use and whether that inspector can ever fit them in same-week.","5 or more report scheduling problems.","Note the warning sign: firm counts are rising while revenue per firm falls. Weight a weak result heavily."],
+"Mold, asbestos & environmental testing":["Partner test","Free · 2 weeks","Call 10 remediation companies. Ask who does their third-party testing and whether they want an independent option.","4 or more interested in a testing-only partner.","Remediation firms testing in-house is a conflict buyers increasingly avoid \u2014 that's your angle."],
+"Commercial vehicle & DOT inspection":["Cold outbound","Free · 2 weeks","Call 20 trucking and construction fleets. Ask where they get annual inspections and how far they drive.","6 or more drive over 30 minutes.","Convenient existing options mean no gap worth filling."],
+"Municipal cross-connection program management":["RFP watch","Free · 2 weeks","Check procurement portals for every city and water district in your region. Count active and upcoming cross-connection RFPs.","2 or more coming up for bid within a year.","No RFPs means contracts are locked long-term. Set a calendar reminder and revisit."],
+"Junk removal (multi-truck)":["Ad smoke test","$200 · 2 weeks","Run $200 of Local Services Ads. Answer inside 5 minutes. Track cost per booked job.","Booked jobs under $150 each.","This is one-off revenue \u2014 it must pay back on the first job. Over $150 and the model breaks."],
+"Electronics recycling & IT asset disposition":["Partner test","Free · 2 weeks","Call 12 managed service providers. Ask what they do with client hardware during refreshes.","4 or more have no good disposal partner.","MSPs with an existing ITAD vendor are hard to switch on price alone."],
+"Grease trap & used cooking oil collection":["Route density","Free · 2 weeks","Map every restaurant within 15 miles. Visit 25 offering a free locked bin and compliance manifests.","8 or more interested \u2014 that's a viable route.","Under 8 and drive time eats the margin. Try a denser corridor."],
+"Medical & sharps waste collection":["Cold outbound","Free · 2 weeks","Call 25 dental, veterinary and small medical practices. Ask what they pay Stericycle now.","8 or more complaining about price or contract terms.","Small practices resenting incumbent pricing is the only real crack here. If they're content, skip it."],
+"Rural roll-off & recycling hauling":["Availability check","Free · 1 week","Call the 3 nearest haulers in your rural county. Ask for a dumpster next week.","2 or more can't deliver within a week.","Immediate availability in a rural market means the incumbent has capacity to spare."],
+"Compost & organics collection subscription":["Mandate check","Free · 1 week","Check whether your state or city has an organics diversion mandate. Call 10 restaurants about compliance.","An active mandate and 4 or more restaurants unsure how to comply.","No mandate means you're selling a nice-to-have, which is a much harder sell."],
+"Bulk water hauling & rural delivery":["Cold outbound","Free · 1 week","Call 10 pool companies, 5 well drillers and 5 contractors. Ask who hauls water for them.","5 or more have no reliable hauler.","An established hauler serving everyone means no room without undercutting."],
+"Mobile farm & fleet equipment repair":["Co-op test","Free · 1 week","Spend a morning at the co-op during planting season. Ask 10 farmers who they call when equipment breaks in the field.","5 or more hesitate or complain about wait times.","This usually passes \u2014 the rural mechanic shortage is severe and well documented."],
+"Livestock & poultry facility cleaning":["Integrator test","Free · 2 weeks","Contact field reps at the poultry or livestock integrators in your region. Ask who cleans houses between flocks.","2 or more say growers struggle to find crews.","Integrators dictate vendors. Without their nod you have no path in."],
+"Agricultural drone spraying & scouting":["Grower test","Free · 2 weeks","Call 12 growers and 3 ag retailers. Ask whether anyone offers drone application locally and what they pay per acre.","No local provider, and growers paying over $15 an acre.","Note prices fell 38% in a year as supply grew. Verify current rates before buying equipment."],
+"Grain bin cleaning & industrial vacuum":["Cold outbound","Free · 1 week","Call every grain elevator within 50 miles in late summer, before harvest.","4 or more need pre-harvest cleaning and have no regular vendor.","This is tightly seasonal. Testing off-season gives a false negative."],
+"Portable welding & mobile fabrication":["Cold outbound","Free · 1 week","Call 20 contractors, farms and trailer shops. Ask who they call for on-site welding.","6 or more report long waits or no one local.","Available welders nearby means you compete on response time alone."],
+"Hydroseeding & erosion control":["Permit check","Free · 1 week","Check your county for active stormwater permits. Call 8 developers on that list.","5 or more active permits and 2 developers wanting bids.","No active permits means construction is slow and this follows construction exactly."],
+"Right-of-way & fence-line vegetation management":["Prequalification","Free · 2 weeks","Contact your regional utility's vegetation management prime. Ask about subcontractor prequalification.","They're accepting subs and report capacity shortages.","Closed prequalification means you can't bid regardless of price. That's the whole gate."],
+"Oxi Fresh Carpet Cleaning":["Territory check","Free · 1 week","Ask the franchisor which territories are open near you, then call 3 existing franchisees about their actual revenue.","Open territory and franchisees reporting steady bookings.","Item 19 shows ~$71,800 average per business \u2014 part-time scale. Confirm that matches your income needs."],
+"Tide Cleaners (virtual store format)":["Qualification check","Free · 1 week","Ask the franchisor for the current FDD and confirm the net worth and liquidity requirements against your position.","You clear the financial bar and territory is open.","The system wants roughly $2M net worth. If you don't clear it, stop here before investing more time."],
+"Jan-Pro (unit franchise)":["Contract review","Free · 1 week","Ask the regional developer exactly which accounts are guaranteed, at what monthly billing, and what happens if an account cancels.","Written guarantees at billing levels that cover your costs.","Vague guarantees are the known failure mode here. Get it in writing or walk."],
+"Standby generator installation & maintenance":["Dealer application","Free · 2 weeks","Apply for authorized dealer status with Generac or Kohler. Ask how many dealers already serve your county.","Application accepted and under 5 dealers locally.","A saturated dealer network means you'd fight for the same co-op leads as everyone else."],
+"EV charging station installation & maintenance":["Roster check","Free · 2 weeks","Get EVITP certified or confirm you can, then apply to charger-network installer rosters. Count certified installers in your metro.","Under 5 certified installers and open roster spots.","Federal funding was restructured in 2025. Verify current program status before buying equipment."],
+"Home battery / energy-storage installation":["Subcontract test","Free · 1 week","Call 10 solar installers. Ask whether they subcontract battery work or avoid it over electrical liability.","4 or more want a battery subcontractor.","Solar companies doing it in-house means no pipeline for you."],
+"Solar panel cleaning & O&M":["Subcontract test","Free · 2 weeks","Count commercial solar arrays within 50 miles. Call 8 installers and ask who services what they install.","5 or more don't offer O&M at all.","This usually passes \u2014 most installers sell and walk away."],
+"Radon testing & mitigation":["List check","Free · 1 week","Get your state radon office's certified mitigator list. Count names in your region. Call 3 home inspectors about turnaround times.","Under 4 mitigators nearby, and inspectors reporting delays.","A long certified list with fast availability means demand is already covered."],
+"Water treatment, filtration & whole-home testing":["Advisory check","Free · 1 week","Check whether your county has PFAS or lead advisories, then call 10 well owners about their water quality.","An active advisory, or 4 or more untested wells.","No advisory means you're selling on general health concern, which converts far slower."],
+"Biohazard, trauma & hoarding cleanup":["Gatekeeper test","Free · 2 weeks","Introduce yourself to the county coroner's office, 5 property managers and 3 funeral homes. Ask who they call.","3 or more have no reliable local provider.","Established relationships with an existing company are very hard to break into."],
+"Basement waterproofing & foundation repair":["Ad smoke test","$250 · 2 weeks","Run $250 of ads, and separately ask 8 home inspectors how often they flag foundation issues.","Leads under $150, or inspectors flagging weekly.","Watch for one brand suddenly everywhere \u2014 that's the PE roll-up arriving in your market."],
+"Water & fire damage restoration":["Vendor list check","Free · 2 weeks","Call 10 insurance agents and adjusters. Ask how to get on their preferred vendor list.","3 or more say the list is open.","Closed lists dominated by franchises is the expected answer. That's why this one is hard."],
+"Structured cabling & low-voltage data infrastructure":["Subcontract test","Free · 1 week","Call every MSP and AV integrator within an hour. Ask if they need a reliable cabling crew.","4 or more say yes.","This usually passes \u2014 integrators routinely turn down work for lack of crews."],
+"Fiber / broadband installation subcontracting":["Prime registration","Free · 2 weeks","Register as a subcontractor with regional ISPs and fiber primes. Ask about crew needs and start timing.","2 or more actively hiring crews.","BEAD builds are largely 2026 and later. Confirm real near-term work exists before buying trucks."],
+"Security camera & smart-lock installation":["Cold outbound","$150 · 2 weeks","Call 20 small retail and restaurant owners about camera and access bundles, plus $150 of residential ads.","4 or more commercial prospects want quotes.","Weight the commercial result heavier. Residential is crowded; small business isn't."],
+"Commercial AV installation & integration":["Niche test","Free · 2 weeks","Visit 10 houses of worship. Ask about their sound and video systems and when they last upgraded.","4 or more have systems over 7 years old.","Recent upgrades everywhere means you're waiting on a refresh cycle."],
+"Managed IT services (MSP) for small business":["Vertical test","Free · 2 weeks","Pick one regulated vertical \u2014 dental or legal. Call 15 practices. Ask about their current IT support responsiveness.","5 or more unhappy or using a generalist.","Generic SMB IT is saturated. If your vertical is well served, pick another before quitting."],
+"HVAC service & maintenance":["Availability check","$200 · 2 weeks","Call 5 HVAC companies in July asking for a service appointment. Then run $200 of Local Services Ads.","Companies booked days out, and leads under $80.","Same-day availability in peak season means capacity exists and you'd compete on price."],
+"Locksmith services (mobile / commercial)":["Cold outbound","$150 · 2 weeks","Call 15 property managers about standing rekey contracts, plus $150 of emergency-intent ads.","4 or more property managers want pricing.","Recurring turnover contracts matter more than lockout calls. Weight that result heavier."],
+"Irrigation system installation & repair":["Subcontract test","Free · 1 week","Call 10 landscaping companies. Ask whether they self-perform irrigation or sub it out.","5 or more sub it out.","Landscapers doing it in-house means no subcontract pipeline. Test direct-to-homeowner instead."],
+"Commercial door & hardware service":["Compliance test","Free · 2 weeks","Call 15 property managers. Ask when their fire doors were last inspected \u2014 it's required annually.","8 or more don't know or are overdue.","This usually passes \u2014 most buildings are overdue and nobody's selling them on it."],
+"Mobile tire service for fleets":["Cold outbound","Free · 2 weeks","Visit 15 trucking and construction yards. Ask what a flat costs them in downtime.","5 or more want a scheduled service contract.","Fleets with existing on-site providers are hard to move without a price advantage."],
+"Utility line-clearance / vegetation management":["Prequalification","Free · 2 weeks","Contact regional utility vegetation primes about crew subcontracting and qualification requirements.","2 or more report crew shortages.","This usually passes \u2014 92% of green-industry firms report hiring difficulty."],
+"Wildlife removal & exclusion":["Partner test","$150 · 2 weeks","Call 8 pest control companies asking if they handle raccoons and bats, plus $150 of ads.","5 or more refer wildlife out.","Pest companies handling it in-house means less referral flow, though direct ads may still work."],
+"Artificial turf installation":["Rebate check","Free · 1 week","Check whether your water district offers turf replacement rebates and how many installers are on their list.","An active rebate program with under 6 listed installers.","No rebate program removes the main demand driver. Verify before committing."],
+"Property preservation / REO field services":["Network registration","Free · 2 weeks","Register as a vendor with 4 national field service networks. Track how many work orders come through.","One network activates you with steady orders.","No activation means networks have coverage in your area. Try adjacent rural counties."],
+"Commercial furniture assembly & office reconfiguration":["Dealer test","Free · 1 week","Visit every office furniture dealer within an hour. Ask whether install capacity ever costs them a sale.","3 or more say yes.","Dealers with reliable install crews means no gap. This usually passes though."],
+"Drone-based roof & property inspection":["Contractor test","Free · 2 weeks","Offer 8 roofing companies a free sample inspection with a measured report.","4 or more want ongoing work after seeing the report.","Roofers happy with ladders means slower adoption. Try insurance adjusters instead."],
+"Estate sale management & liquidation":["Referral test","Free · 2 weeks","Meet 8 elder-law attorneys and senior move managers. Ask who they refer liquidation to.","4 or more hesitate or name nobody.","Confident referrals to an established company means a closed pipeline."],
+"Pet cremation & end-of-life services":["Vet test","Free · 2 weeks","Visit 12 vet clinics. Ask who handles their aftercare and whether they're satisfied with turnaround and respect.","4 or more are unhappy or open to switching.","Vets satisfied with a reliable provider is the hardest version of this to break into."]
+};
 const ACQ={
 "Commercial janitorial / office cleaning":["No ad benchmark","Cold contact→opportunity 1–5%","$400–$1,500 in sales time","LOW","Cold email and calls to facility and property managers — 167-day average cycle","Property management companies: one relationship equals dozens of buildings","Municipal and school district bid lists","Build a verified list of 200 facility managers and run a four-touch sequence. Budget for a 167-day cycle and start calling long before you need the revenue."],
 "Residential recurring house cleaning":["$47 — cheapest home-services CPL","15%","~$313","HIGH","Google Ads — 17.65% conversion, the best in home services","GBP and reviews for the Map 3-pack","Door hangers in tight neighborhood clusters","Run Google Ads on 'house cleaning near me.' This vertical has both the cheapest leads and the highest conversion rate in home services."],
@@ -1053,18 +1201,46 @@ const list=document.getElementById('list'),
       cnt=document.getElementById('count');
 let cat="ALL", dayOnly=false, tier="ALL", pile="todo";
 let decisions={};
-const SKEY='lxxv:decisions';
+const SKEY='marks';
 const hasStore = typeof window!=='undefined' && window.storage && typeof window.storage.set==='function';
 let storeOK=null;   // null unknown, true saving, false not saving
+
+// Marks are stored as a compact pure-ASCII string of list indexes, e.g. "y0.3.7|m12|n1.2".
+// Business names contain slashes, ampersands and dashes, so keeping them out of the
+// payload entirely removes any serialization risk.
+function encodeMarks(){
+  const y=[],m=[],n=[];
+  D.forEach((x,i)=>{
+    const v=decisions[x.n];
+    if(v==='yes')y.push(i); else if(v==='maybe')m.push(i); else if(v==='no')n.push(i);
+  });
+  return 'y'+y.join('.')+'|m'+m.join('.')+'|n'+n.join('.');
+}
+function decodeMarks(str){
+  const out={};
+  if(!str||typeof str!=='string')return out;
+  str.split('|').forEach(part=>{
+    const tag=part.charAt(0), rest=part.slice(1);
+    if(!rest)return;
+    const key = tag==='y'?'yes' : tag==='m'?'maybe' : tag==='n'?'no' : null;
+    if(!key)return;
+    rest.split('.').forEach(t=>{
+      const i=parseInt(t,10);
+      if(!isNaN(i)&&D[i])out[D[i].n]=key;
+    });
+  });
+  return out;
+}
 
 async function loadDecisions(){
   if(!hasStore){ storeOK=false; return {}; }
   try{
     const r = await window.storage.get(SKEY, false);
+    const val = r && typeof r.value==='string' ? r.value : '';
     storeOK = true;
-    return (r && r.value) ? JSON.parse(r.value) : {};
+    return decodeMarks(val);
   }catch(e){
-    // A missing key throws on first run, which is normal and not a failure.
+    // A missing key throws on first run, which is normal, not a failure.
     return {};
   }
 }
@@ -1073,27 +1249,64 @@ let saveTimer=null;
 async function saveDecisions(){
   if(!hasStore){ storeOK=false; noteSave(); return; }
   clearTimeout(saveTimer);
-  saveTimer = setTimeout(async ()=>{
-    const payload = JSON.stringify(decisions);
-    for(let attempt=0; attempt<2; attempt++){
-      try{
-        await window.storage.set(SKEY, payload, false);
+  saveTimer = setTimeout(()=>writeMarks(), 200);
+}
+
+async function writeMarks(){
+  const payload = encodeMarks();
+  for(let attempt=0; attempt<3; attempt++){
+    try{
+      await window.storage.set(SKEY, payload, false);
+      // Read it back. A write that "succeeds" but doesn't persist is the
+      // failure mode that silently loses work, so verify rather than assume.
+      const back = await window.storage.get(SKEY, false);
+      if(back && back.value===payload){
         if(storeOK!==true){ storeOK=true; noteSave(); }
-        return;
-      }catch(e){
-        if(attempt===1){ storeOK=false; noteSave(); }
+        return true;
       }
+      throw new Error('write did not verify');
+    }catch(e){
+      if(attempt===2){ storeOK=false; noteSave(); return false; }
+      await new Promise(r=>setTimeout(r,150*(attempt+1)));
     }
-  }, 250);
+  }
+  return false;
 }
 
 function noteSave(){
   const el=document.getElementById('savenote'); if(!el)return;
   if(storeOK===false){
-    el.textContent='Marks are kept for this session only \u2014 saving is unavailable here.';
+    el.innerHTML='Saving is unavailable here \u2014 marks stay for this session only. '
+      +'<button class="linkbtn" id="backupbtn">Back up my marks</button>';
     el.style.display='block';
-  } else { el.style.display='none'; }
+  } else {
+    el.innerHTML='<button class="linkbtn" id="backupbtn">Back up or restore marks</button>';
+    el.style.display=Object.keys(decisions).length?'block':'none';
+  }
 }
+
+function openBackup(){
+  const code=encodeMarks();
+  const box=document.getElementById('backupbox');
+  box.innerHTML='<p>Copy this code somewhere safe. Paste it back here anytime to restore your marks.</p>'
+    +'<textarea id="backupcode" rows="3" spellcheck="false"></textarea>'
+    +'<div class="backuprow"><button class="resetbtn" id="restorebtn">Restore from code</button>'
+    +'<span id="backupmsg"></span></div>';
+  box.style.display='block';
+  const ta=document.getElementById('backupcode');
+  ta.value=code; ta.focus(); ta.select();
+  document.getElementById('restorebtn').onclick=()=>{
+    const v=document.getElementById('backupcode').value.trim();
+    const parsed=decodeMarks(v);
+    if(!Object.keys(parsed).length && v!=='y|m|n'){
+      document.getElementById('backupmsg').textContent='That code didn\'t read.';
+      return;
+    }
+    decisions=parsed; saveDecisions(); renderPiles(); render();
+    document.getElementById('backupmsg').textContent='Restored.';
+  };
+}
+
 function pileCounts(){
   const c={todo:0,yes:0,maybe:0,no:0};
   D.forEach(x=>{ const v=decisions[x.n]; if(v&&c[v]!==undefined) c[v]++; else c.todo++; });
@@ -1124,7 +1337,7 @@ function render(){
   else if(pile!=="all") rows=rows.filter(r=>decisions[r.n]===pile);
   if(term) rows=rows.filter(r=>(r.n+" "+r.note+" "+CATS[r.c]
     +" "+(ACQ[r.n]?ACQ[r.n].join(" "):"")
-    +" "+(SAT[r.n]?SAT[r.n].join(" ")+" "+TIER[SAT[r.n][0]]:"")).toLowerCase().includes(term));
+    +" "+(SAT[r.n]?SAT[r.n].join(" ")+" "+TIER[SAT[r.n][0]]:"")+" "+(TEST[r.n]?TEST[r.n].join(" "):"")).toLowerCase().includes(term));
 
   const pc=pileCounts();
   cnt.textContent = pile==="todo" ? rows.length+" left to review"
@@ -1187,6 +1400,15 @@ function render(){
         +'</div></details>';
     }
     const dv=decisions[r.n]||'';
+    const t=TEST[r.n];
+    if(t){
+      html+='<details class="fold"><summary>Test it before you commit<span class="conf c-MED">'+t[1]+'</span></summary>'
+        +'<div class="fold-body">'
+        +'<div class="frow"><span>The test</span><b>'+t[2]+'</b></div>'
+        +'<div class="passrow"><span>Passes if</span><b>'+t[3]+'</b></div>'
+        +'<div class="frow"><span>If it fails</span><b>'+t[4]+'</b></div>'
+        +'</div></details>';
+    }
     html+='<div class="decide">'
       +'<button class="dbtn y'+(dv==='yes'?' on':'')+'" data-n="'+encodeURIComponent(r.n)+'" data-v="yes">Yes</button>'
       +'<button class="dbtn m'+(dv==='maybe'?' on':'')+'" data-n="'+encodeURIComponent(r.n)+'" data-v="maybe">Maybe</button>'
@@ -1245,7 +1467,8 @@ list.addEventListener('click',e=>{
 });
 
 document.addEventListener('click',e=>{
-  if(!e.target.closest('.resetbtn'))return;
+  if(e.target.id==='backupbtn'){ openBackup(); return; }
+  if(!e.target.closest('.resetbtn') || e.target.id==='restorebtn')return;
   if(!confirm('Clear all your yes, maybe and no marks? This cannot be undone.'))return;
   decisions={}; saveDecisions(); renderPiles(); render();
 });
